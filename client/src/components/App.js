@@ -25,7 +25,7 @@ const App = () => {
         ) : null}
       <Routes>
         <Route exact path="/" element={<HomePage  />} />
-        <Route path="/sign-up" element={<SignUp setAlert={setAlert} setLoading={setLoading} />} />
+        <Route path="/sign-up" element={<SignUp setAlert={setAlert} setLoading={setLoading} setUser={setUser} />} />
         <Route path="/sign-in" element={<Login setAlert={setAlert} />} />
       </Routes>
     </>

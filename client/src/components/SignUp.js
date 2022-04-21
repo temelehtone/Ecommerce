@@ -11,7 +11,9 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-export default function SignUp({ setAlert, setLoading }) {
+import { createAccount } from "../actions/auth";
+
+export default function SignUp({ setAlert, setLoading, setUser }) {
   const theme = createTheme();
 
   const initialState = {
@@ -25,7 +27,13 @@ export default function SignUp({ setAlert, setLoading }) {
   const [formErrors, setFormErrors] = useState({});
 
   const validate = (values) => {
-    const errors = {fname: '', lname: '', email: '', pasword: '', confirmPassword: ''};
+    const errors = {
+      fname: "",
+      lname: "",
+      email: "",
+      pasword: "",
+      confirmPassword: "",
+    };
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     if (!values.firstName) {
       errors.fname = "Firstname is required!";
@@ -46,10 +54,9 @@ export default function SignUp({ setAlert, setLoading }) {
       errors.password = "Password cannot exceed more than 16 characters";
     }
     if (!values.confirmPassword) {
-      errors.confirmPassword = "Password is required"
-    }
-    else if (values.password !== values.confirmPassword) {
-      errors.confirmPassword = "Passwords don't match"
+      errors.confirmPassword = "Password is required";
+    } else if (values.password !== values.confirmPassword) {
+      errors.confirmPassword = "Passwords don't match";
     }
     return errors;
   };
@@ -59,30 +66,29 @@ export default function SignUp({ setAlert, setLoading }) {
   };
 
   const isEmpty = (items) => {
-      for (const key of Object.keys(items)) {
-        if (items[key] !== '') return false
-      }
-      return true
-  }
-  
+    for (const key of Object.keys(items)) {
+      if (items[key] !== "") return false;
+    }
+    return true;
+  };
 
   const handleSubmit = async (e) => {
-    
     e.preventDefault();
-    const errors = validate(formData)
-    setFormErrors(errors)
-    if (!isEmpty(errors)) return
+    const errors = validate(formData);
+    setFormErrors(errors);
+    if (!isEmpty(errors)) return;
     try {
-      
+      setLoading(true);
       const { firstName, lastName, email, password } = formData;
-      const data = { firstName, lastName, email, password }
+      const data = { firstName, lastName, email, password };
 
-      console.log(data)
-      
+      await createAccount(data);
+      setUser(JSON.parse(localStorage.getItem("profile")));
       setAlert({
         variant: "success",
         message: "Your account has been created.",
       });
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -125,7 +131,7 @@ export default function SignUp({ setAlert, setLoading }) {
                   label="First Name"
                   autoFocus
                 />
-                <p style={{color: "red"}}>{formErrors.fname}</p>
+                <p style={{ color: "red" }}>{formErrors.fname}</p>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -137,7 +143,7 @@ export default function SignUp({ setAlert, setLoading }) {
                   name="lastName"
                   autoComplete="family-name"
                 />
-                <p style={{color: "red"}}>{formErrors.lname}</p>
+                <p style={{ color: "red" }}>{formErrors.lname}</p>
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -149,7 +155,7 @@ export default function SignUp({ setAlert, setLoading }) {
                   name="email"
                   autoComplete="email"
                 />
-                <p style={{color: "red"}}>{formErrors.email}</p>
+                <p style={{ color: "red" }}>{formErrors.email}</p>
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -162,7 +168,7 @@ export default function SignUp({ setAlert, setLoading }) {
                   id="password"
                   autoComplete="new-password"
                 />
-                <p style={{color: "red"}}>{formErrors.password}</p>
+                <p style={{ color: "red" }}>{formErrors.password}</p>
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -175,7 +181,7 @@ export default function SignUp({ setAlert, setLoading }) {
                   type="password"
                   id="confirmPassword"
                 />
-                <p style={{color: "red"}}>{formErrors.confirmPassword}</p>
+                <p style={{ color: "red" }}>{formErrors.confirmPassword}</p>
               </Grid>
             </Grid>
             <Button
