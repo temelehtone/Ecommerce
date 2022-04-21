@@ -1,30 +1,91 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import React, { useState } from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+export default function SignUp({ setAlert, setLoading }) {
+  const theme = createTheme();
 
+  const initialState = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  };
+  const [formData, setFormData] = useState(initialState);
+  const [formErrors, setFormErrors] = useState({});
 
-const theme = createTheme();
+  const validate = (values) => {
+    const errors = {fname: '', lname: '', email: '', pasword: '', confirmPassword: ''};
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    if (!values.firstName) {
+      errors.fname = "Firstname is required!";
+    }
+    if (!values.lastName) {
+      errors.lname = "Lastname is required!";
+    }
+    if (!values.email) {
+      errors.email = "Email is required!";
+    } else if (!regex.test(values.email)) {
+      errors.email = "This is not a valid email format!";
+    }
+    if (!values.password) {
+      errors.password = "Password is required";
+    } else if (values.password.length < 6) {
+      errors.password = "Password must be more than 6 characters";
+    } else if (values.password.length > 16) {
+      errors.password = "Password cannot exceed more than 16 characters";
+    }
+    if (!values.confirmPassword) {
+      errors.confirmPassword = "Password is required"
+    }
+    else if (values.password !== values.confirmPassword) {
+      errors.confirmPassword = "Passwords don't match"
+    }
+    return errors;
+  };
 
-export default function SignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const isEmpty = (items) => {
+      for (const key of Object.keys(items)) {
+        if (items[key] !== '') return false
+      }
+      return true
+  }
+  
+
+  const handleSubmit = async (e) => {
+    
+    e.preventDefault();
+    const errors = validate(formData)
+    setFormErrors(errors)
+    if (!isEmpty(errors)) return
+    try {
+      
+      const { firstName, lastName, email, password } = formData;
+      const data = { firstName, lastName, email, password }
+
+      console.log(data)
+      
+      setAlert({
+        variant: "success",
+        message: "Your account has been created.",
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -35,21 +96,27 @@ export default function SignUp() {
           sx={{
             marginTop: 8,
             marginBottom: 6,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleSubmit}
+            sx={{ mt: 3 }}
+          >
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  onChange={handleChange}
                   autoComplete="given-name"
                   name="firstName"
                   required
@@ -58,9 +125,11 @@ export default function SignUp() {
                   label="First Name"
                   autoFocus
                 />
+                <p style={{color: "red"}}>{formErrors.fname}</p>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  onChange={handleChange}
                   required
                   fullWidth
                   id="lastName"
@@ -68,9 +137,11 @@ export default function SignUp() {
                   name="lastName"
                   autoComplete="family-name"
                 />
+                <p style={{color: "red"}}>{formErrors.lname}</p>
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  onChange={handleChange}
                   required
                   fullWidth
                   id="email"
@@ -78,9 +149,11 @@ export default function SignUp() {
                   name="email"
                   autoComplete="email"
                 />
+                <p style={{color: "red"}}>{formErrors.email}</p>
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  onChange={handleChange}
                   required
                   fullWidth
                   name="password"
@@ -89,19 +162,21 @@ export default function SignUp() {
                   id="password"
                   autoComplete="new-password"
                 />
+                <p style={{color: "red"}}>{formErrors.password}</p>
               </Grid>
               <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="confirmPassword"
-                label="Confirm Password"
-                type="password"
-                id="confirmPassword"
-              />
-            </Grid>
-              
+                <TextField
+                  onChange={handleChange}
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="confirmPassword"
+                  label="Confirm Password"
+                  type="password"
+                  id="confirmPassword"
+                />
+                <p style={{color: "red"}}>{formErrors.confirmPassword}</p>
+              </Grid>
             </Grid>
             <Button
               type="submit"
