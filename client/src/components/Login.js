@@ -10,10 +10,11 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { login } from "../actions/auth";
 
 const theme = createTheme();
 
-export default function Login({setAlert}) {
+export default function Login({ setAlert, setLoading, setUser }) {
   const initialState = {
     email: "",
     password: "",
@@ -25,29 +26,26 @@ export default function Login({setAlert}) {
   };
 
   const emptyCheck = (data) => {
-    if (data.email === '' || data.password === '') {
+    if (data.email === "" || data.password === "") {
       setAlert({
         severity: "warning",
-        message: "All fields are required"
-      })
+        message: "All fields are required",
+      });
       return true;
     }
-    return false
-  }
+    return false;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const isEmpty = emptyCheck(formData)
-    if (isEmpty) return
-    try {
-      console.log(formData);
-      setAlert({
-        variant: "success",
-        message: "You logged in successfully!",
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    const isEmpty = emptyCheck(formData);
+    if (isEmpty) return;
+
+    const { email, password } = formData;
+    const data = { email, password };
+    setLoading(true);
+    await login(data, setAlert);
+    setLoading(false);
   };
 
   return (

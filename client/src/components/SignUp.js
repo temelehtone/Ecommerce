@@ -31,7 +31,7 @@ export default function SignUp({ setAlert, setLoading, setUser }) {
       fname: "",
       lname: "",
       email: "",
-      pasword: "",
+      password: "",
       confirmPassword: "",
     };
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;

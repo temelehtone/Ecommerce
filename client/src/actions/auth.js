@@ -4,12 +4,10 @@ export async function createAccount(formData, setAlert) {
   await api
     .createAccount(formData)
     .then((data) => {
-      console.log(data);
       localStorage.setItem(
         "profile",
-        JSON.stringify({ result: data.data.result, token: data.data.token })
+        JSON.stringify({ user: data.data.result, token: data.data.token })
       );
-      console.log(data.message)
       setAlert({
         severity: "success",
         message: data.data.message,
@@ -18,20 +16,27 @@ export async function createAccount(formData, setAlert) {
     .catch((err) => {
     
         setAlert({
-            severity: "error",
+            severity: "warning",
             message: err.response.data.message,
           });
     });
 }
 
-export async function login(formData) {
+export async function login(formData, setAlert) {
   try {
     const { data } = await api.login(formData);
     localStorage.setItem(
       "profile",
-      JSON.stringify({ result: data.result, token: data.token })
+      JSON.stringify({ user: data.result, token: data.token })
     );
-  } catch (error) {
-    console.log(error.message);
+    setAlert({
+      variant: "success",
+      message: "You logged in successfully!",
+    });
+  } catch (err) {
+    setAlert({
+      severity: "warning",
+      message: err.response.data.message,
+    });
   }
 }
