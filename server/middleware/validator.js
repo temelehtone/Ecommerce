@@ -1,7 +1,7 @@
 import { check, validationResult } from "express-validator";
 
 export const signUpValidator = [
-  check("username").not().isEmpty().trim().withMessage("All fields required"),
+  check([ "firstName", "lastName", "email", "password", "confirmPassword"]).not().isEmpty().trim().withMessage("All fields required"),
   check("email").isEmail().normalizeEmail().withMessage("Invalid email"),
   check("password")
     .isLength({ min: 6, max: 16 })
@@ -15,7 +15,7 @@ export const validatorResult = (req, res, next) => {
   if (hasErrors) {
     const firstError = result.array()[0].msg;
     return res.status(400).json({
-      errorMessage: firstError,
+      message: firstError,
     });
   }
   next();

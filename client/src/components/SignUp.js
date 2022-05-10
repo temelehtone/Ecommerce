@@ -79,7 +79,10 @@ export default function SignUp({ setAlert, setLoading, setUser }) {
     if (!isEmpty(errors)) return;
 
     setLoading(true);
-    await createAccount(formData, setAlert);
+    const { firstName, lastName, email, password, confirmPassword } = formData;
+    const data = { firstName, lastName, email, password, confirmPassword };
+
+    await createAccount(data, setAlert);
     setLoading(false);
   };
 
