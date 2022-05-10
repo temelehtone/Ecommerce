@@ -13,7 +13,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { createAccount } from "../actions/auth";
 
-export default function SignUp({ setAlert, setLoading, setUser }) {
+export default function SignUp({ setAlert, setLoading, setUser, navigate }) {
   const theme = createTheme();
 
   const initialState = {
@@ -82,7 +82,7 @@ export default function SignUp({ setAlert, setLoading, setUser }) {
     const { firstName, lastName, email, password, confirmPassword } = formData;
     const data = { firstName, lastName, email, password, confirmPassword };
 
-    await createAccount(data, setAlert);
+    await createAccount(data, setAlert, navigate, setUser);
     setLoading(false);
   };
 

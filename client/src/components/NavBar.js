@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -13,6 +13,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import LoginIcon from "@mui/icons-material/Login";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 
 import logo from "../images/Logo.png";
 import { Container } from "@mui/material";
@@ -24,6 +25,7 @@ const Search = styled("div")(({ theme }) => ({
   "&:hover": {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
+
   marginRight: theme.spacing(2),
   marginLeft: 0,
   width: "100%",
@@ -51,14 +53,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
+
     [theme.breakpoints.up("md")]: {
       width: "20ch",
     },
   },
 }));
 
-export default function NavBar({navigate}) {
-
+export default function NavBar({ navigate, setUser, user, setAlert }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
@@ -72,6 +74,15 @@ export default function NavBar({navigate}) {
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
+  };
+
+  const logout = () => {
+    setUser(null);
+    localStorage.clear();
+    setAlert({
+      severity: "error",
+      message: "Signed out successfully",
+    });
   };
 
   const menuId = "primary-search-account-menu";
@@ -115,7 +126,7 @@ export default function NavBar({navigate}) {
     >
       <MenuItem>
         <IconButton size="large" color="inherit">
-          <LoginIcon />
+          {user ? <LoginIcon /> : <ExitToAppIcon />}
         </IconButton>
         <p>Login</p>
       </MenuItem>
@@ -132,7 +143,7 @@ export default function NavBar({navigate}) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static"   sx={{ bgcolor: "#000" }}>
+      <AppBar position="static" sx={{ bgcolor: "#000" }}>
         <Container maxWidth="xl">
           <Toolbar>
             <IconButton
@@ -165,9 +176,25 @@ export default function NavBar({navigate}) {
             </Search>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: "flex" }}>
-              <IconButton size="large" color="inherit" onClick={() => navigate("/sign-in")}>
-                <LoginIcon />
-              </IconButton>
+              {user ? (
+                <IconButton
+                  size="large"
+                  color="inherit"
+                  onClick={logout}
+                  sx={{ "&:hover": { bgcolor: "blue" } }}
+                >
+                  <ExitToAppIcon />
+                </IconButton>
+              ) : (
+                <IconButton
+                  size="large"
+                  color="inherit"
+                  onClick={() => navigate("/sign-in")}
+                  sx={{ "&:hover": { bgcolor: "blue" } }}
+                >
+                  <LoginIcon />
+                </IconButton>
+              )}
               <IconButton
                 size="large"
                 aria-label="show 17 new notifications"

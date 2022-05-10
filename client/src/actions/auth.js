@@ -1,6 +1,6 @@
 import * as api from "../api";
 
-export async function createAccount(formData, setAlert) {
+export async function createAccount(formData, setAlert, navigate, setUser) {
   await api
     .createAccount(formData)
     .then((data) => {
@@ -12,17 +12,18 @@ export async function createAccount(formData, setAlert) {
         severity: "success",
         message: data.data.message,
       });
+      setUser(JSON.parse(localStorage.getItem("profile")))
+      navigate("/");
     })
     .catch((err) => {
-    
-        setAlert({
-            severity: "warning",
-            message: err.response.data.message,
-          });
+      setAlert({
+        severity: "warning",
+        message: err.response.data.message,
+      });
     });
 }
 
-export async function login(formData, setAlert) {
+export async function login(formData, setAlert, navigate, setUser) {
   try {
     const { data } = await api.login(formData);
     localStorage.setItem(
@@ -33,6 +34,8 @@ export async function login(formData, setAlert) {
       variant: "success",
       message: "You logged in successfully!",
     });
+    setUser(JSON.parse(localStorage.getItem("profile")))
+    navigate("/");
   } catch (err) {
     setAlert({
       severity: "warning",

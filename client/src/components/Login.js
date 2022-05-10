@@ -14,7 +14,7 @@ import { login } from "../actions/auth";
 
 const theme = createTheme();
 
-export default function Login({ setAlert, setLoading, setUser }) {
+export default function Login({ setAlert, setLoading, setUser, navigate }) {
   const initialState = {
     email: "",
     password: "",
@@ -44,7 +44,7 @@ export default function Login({ setAlert, setLoading, setUser }) {
     const { email, password } = formData;
     const data = { email, password };
     setLoading(true);
-    await login(data, setAlert);
+    await login(data, setAlert, navigate, setUser);
     setLoading(false);
   };
 
