@@ -21,7 +21,7 @@ const App = () => {
       <NavBar navigate={navigate}/>
       {loading ? <LinearProgress color="secondary" /> : null}
       {alert ? (
-          <AlertDismissible {...alert} deleteAlert={() => setAlert(null)} />
+          <AlertDismissible {...alert} setAlert={setAlert} />
         ) : null}
       <Routes>
         <Route exact path="/" element={<HomePage  />} />

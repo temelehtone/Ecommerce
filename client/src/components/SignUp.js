@@ -77,21 +77,10 @@ export default function SignUp({ setAlert, setLoading, setUser }) {
     const errors = validate(formData);
     setFormErrors(errors);
     if (!isEmpty(errors)) return;
-    try {
-      setLoading(true);
-      const { firstName, lastName, email, password } = formData;
-      const data = { firstName, lastName, email, password };
 
-      await createAccount(data);
-      setUser(JSON.parse(localStorage.getItem("profile")));
-      setAlert({
-        variant: "success",
-        message: "Your account has been created.",
-      });
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
+    setLoading(true);
+    await createAccount(formData, setAlert);
+    setLoading(false);
   };
 
   return (

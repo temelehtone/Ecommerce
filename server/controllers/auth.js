@@ -8,26 +8,24 @@ import User from "../models/user.js"
 const router = express.Router();
 
 export const createAccount = async (req, res) => {
-    const { email, password, confirmPassword, firstName, lastName} = req.body 
+    const { email, password, firstName, lastName, confirmPassword } = req.body 
 
-    console.log(req.body)
-    res.status(200).json({msg: 'msg'})
-    // try {
-    //     const existingUser = await User.findOne({email})
-    //     if (existingUser) return res.status(400).json({ message: "User already exist." })
+    try {
+        const existingUser = await User.findOne({email})
+        if (existingUser) return res.status(400).json({ message: "User already exist." })
 
-    //     if (password !== confirmPassword) return res.status(400).json({ message: "Passwords don't match" })
+        if (password !== confirmPassword) return res.status(400).json({ message: "Passwords don't match" })
 
-    //     const hashedPassword = await bcrypt.hash(password, 12)
-    //     const result = await User.create({email: email, password: hashedPassword, name: `${firstName} ${lastName}`})
+        const hashedPassword = await bcrypt.hash(password, 12)
+        const result = await User.create({email: email, password: hashedPassword, name: `${firstName} ${lastName}`})
 
-    //     const token = jwt.sign({ email: result.email, id: result._id }, 'test', {expiresIn: "1h" })
+        const token = jwt.sign({ email: result.email, id: result._id }, 'test', {expiresIn: "1h" })
 
-    //     res.status(200).json({result: result, token })
+        res.status(200).json({result: result, token, message: "Signed Up Succesfully!" })
 
-    // } catch (error) {
-    //     res.status(500).json({ message: "Something went wrong." });
-    // }
+    } catch (error) {
+        res.status(500).json({ message: "Something went wrong." });
+    }
     
 }
 export const login = async (req, res) => {

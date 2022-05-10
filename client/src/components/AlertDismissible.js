@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Alert } from "@mui/material";
 
-export default function AlertDismissible({ message, severity, deleteAlert }) {
+export default function AlertDismissible({ message, severity, setAlert }) {
 
   const [show, setShow] = useState(true);
 
@@ -9,6 +9,7 @@ export default function AlertDismissible({ message, severity, deleteAlert }) {
     const timeId = setTimeout(() => {
       // After 3 seconds set the show value to false
       setShow(false)
+      setAlert(null)
     }, 4000)
 
     return () => {
@@ -23,7 +24,7 @@ export default function AlertDismissible({ message, severity, deleteAlert }) {
         severity={severity}
         onClose={() => {
           setShow(false);
-          deleteAlert()
+          setAlert(null)
         }}
       >
         {message}

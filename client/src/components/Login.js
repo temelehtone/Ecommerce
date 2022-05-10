@@ -24,8 +24,21 @@ export default function Login({setAlert}) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const emptyCheck = (data) => {
+    if (data.email === '' || data.password === '') {
+      setAlert({
+        severity: "warning",
+        message: "All fields are required"
+      })
+      return true;
+    }
+    return false
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const isEmpty = emptyCheck(formData)
+    if (isEmpty) return
     try {
       console.log(formData);
       setAlert({
