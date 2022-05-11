@@ -1,5 +1,5 @@
 import * as api from "../api";
-import { setAuthentication } from "../helpers/auth";
+import { setAuthentication, isAuthenticated } from "../helpers/auth";
 import { getLocalStorage } from "../helpers/localStorage";
 
 export async function createAccount(formData, setAlert, navigate, setUser) {
@@ -12,7 +12,12 @@ export async function createAccount(formData, setAlert, navigate, setUser) {
         message: data.data.message + " Welcome " + data.data.result.name + "!",
       });
       setUser(getLocalStorage("user"))
-      navigate("/");
+      if (isAuthenticated() && isAuthenticated().role === 1) {
+        console.log("Redirect to admin dashboard")
+      } else {
+        navigate("/");
+      }
+      
     })
     .catch((err) => {
       setAlert({
@@ -31,7 +36,11 @@ export async function login(formData, setAlert, navigate, setUser) {
       message: "You logged in successfully! Welcome " + data.result.name + "!",
     });
     setUser(getLocalStorage("user"))
-    navigate("/");
+    if (isAuthenticated() && isAuthenticated().role === 1) {
+      console.log("Redirect to admin dashboard")
+    } else {
+      navigate("/");
+    }
   } catch (err) {
     setAlert({
       severity: "warning",

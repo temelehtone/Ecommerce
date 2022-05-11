@@ -7,6 +7,7 @@ import HomePage from "./HomePage";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import AlertDismissible from "./AlertDismissible";
+import NotFound from "./NotFound"
 
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
         <Route exact path="/" element={<HomePage  />} />
         <Route path="/sign-up" element={<SignUp setAlert={setAlert} setLoading={setLoading} setUser={setUser} navigate={navigate} />} />
         <Route path="/sign-in" element={<Login setAlert={setAlert} setLoading={setLoading} setUser={setUser} navigate={navigate} />} />
+        <Route path="*" element={<NotFound navigate={navigate} />} /> 
       </Routes>
     </>
   );
