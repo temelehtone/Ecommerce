@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -12,9 +14,27 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { createAccount } from "../actions/auth";
+import { isAuthenticated } from "../helpers/auth";
 
-export default function SignUp({ setAlert, setLoading, setUser, navigate }) {
+
+export default function SignUp({ setAlert, setLoading }) {
   const theme = createTheme();
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (isAuthenticated()) {
+      if(isAuthenticated().role === 1) {
+        navigate("/admin/dashboard")
+      } else if (isAuthenticated().role === 0) {
+        navigate("/user/dashboard");
+      }
+      setAlert({
+        severity: "warning",
+        message: "Sign out first!"
+      })
+    } 
+    
+  }, [navigate, setAlert])
 
   const initialState = {
     firstName: "",
@@ -82,7 +102,7 @@ export default function SignUp({ setAlert, setLoading, setUser, navigate }) {
     const { firstName, lastName, email, password, confirmPassword } = formData;
     const data = { firstName, lastName, email, password, confirmPassword };
 
-    await createAccount(data, setAlert, navigate, setUser);
+    await createAccount(data, setAlert, navigate);
     setLoading(false);
   };
 

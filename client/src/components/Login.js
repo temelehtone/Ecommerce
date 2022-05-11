@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -10,11 +12,32 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+
 import { login } from "../actions/auth";
+import { isAuthenticated } from "../helpers/auth";
 
 const theme = createTheme();
 
-export default function Login({ setAlert, setLoading, setUser, navigate }) {
+export default function Login({ setAlert, setLoading }) {
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (isAuthenticated()) {
+      if(isAuthenticated().role === 1) {
+        navigate("/admin/dashboard")
+      } else if (isAuthenticated().role === 0) {
+        navigate("/user/dashboard");
+      }
+      setAlert({
+        severity: "warning",
+        message: "Sign out first!"
+      })
+    } 
+    
+  }, [navigate, setAlert])
+
   const initialState = {
     email: "",
     password: "",
@@ -44,7 +67,7 @@ export default function Login({ setAlert, setLoading, setUser, navigate }) {
     const { email, password } = formData;
     const data = { email, password };
     setLoading(true);
-    await login(data, setAlert, navigate, setUser);
+    await login(data, setAlert, navigate);
     setLoading(false);
   };
 

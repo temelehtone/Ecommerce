@@ -1,8 +1,7 @@
 import * as api from "../api";
 import { setAuthentication, isAuthenticated } from "../helpers/auth";
-import { getLocalStorage } from "../helpers/localStorage";
 
-export async function createAccount(formData, setAlert, navigate, setUser) {
+export async function createAccount(formData, setAlert, navigate) {
   await api
     .createAccount(formData)
     .then((data) => {
@@ -11,11 +10,11 @@ export async function createAccount(formData, setAlert, navigate, setUser) {
         severity: "success",
         message: data.data.message + " Welcome " + data.data.result.name + "!",
       });
-      setUser(getLocalStorage("user"))
+
       if (isAuthenticated() && isAuthenticated().role === 1) {
-        console.log("Redirect to admin dashboard")
+        navigate("/admin/dashboard")
       } else {
-        navigate("/");
+        navigate("/user/dashboard");
       }
       
     })
@@ -27,7 +26,7 @@ export async function createAccount(formData, setAlert, navigate, setUser) {
     });
 }
 
-export async function login(formData, setAlert, navigate, setUser) {
+export async function login(formData, setAlert, navigate) {
   try {
     const { data } = await api.login(formData);
     setAuthentication(data.token, data.result)
@@ -35,11 +34,11 @@ export async function login(formData, setAlert, navigate, setUser) {
       variant: "success",
       message: "You logged in successfully! Welcome " + data.result.name + "!",
     });
-    setUser(getLocalStorage("user"))
+
     if (isAuthenticated() && isAuthenticated().role === 1) {
-      console.log("Redirect to admin dashboard")
+      navigate("/admin/dashboard")
     } else {
-      navigate("/");
+      navigate("/user/dashboard");
     }
   } catch (err) {
     setAlert({

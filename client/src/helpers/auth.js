@@ -21,3 +21,12 @@ export const isAuthenticated = () => {
   }
   return false;
 };
+
+export const logout = (navigate, setAlert) => {
+    deleteAuthentication();
+    navigate("/sign-in");
+    setAlert({
+      severity: "error",
+      message: "Signed out successfully!",
+    });
+}

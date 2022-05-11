@@ -1,6 +1,6 @@
 import React from 'react'
 
-const NotFound = ({ navigate }) => {
+const NotFound = () => {
   return (
       <div style={{ textAlign: "center" }}>
         <h1 style={{ fontSize: "100px" }}>404 site not found</h1>

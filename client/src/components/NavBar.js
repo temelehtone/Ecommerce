@@ -1,24 +1,40 @@
 import React, { useState } from "react";
-import { styled, alpha } from "@mui/material/styles";
-import AppBar from "@mui/material/AppBar";
+import { useNavigate, Routes, Route } from "react-router-dom";
+
+import {
+  styled,
+  alpha,
+  createTheme,
+  ThemeProvider,
+} from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import LoginIcon from "@mui/icons-material/Login";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import { Tooltip } from "@mui/material";
+import MuiAppBar from "@mui/material/AppBar";
+import MuiDrawer from "@mui/material/Drawer";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import Container from "@mui/material/Container";
+import LinearProgress from "@mui/material/LinearProgress";
+import { Divider, List, CssBaseline } from "@mui/material";
+
+import HomePage from "./HomePage";
+import Login from "./Login";
+import SignUp from "./SignUp";
+import AlertDismissible from "./AlertDismissible";
+import NotFound from "./NotFound";
+import AdminDashboard from "./AdminDashboard";
+import UserDashboard from "./UserDashboard";
+import SettingPage from "./SettingPage"
 
 import logo from "../images/Logo.png";
-import { Container } from "@mui/material";
-import { deleteAuthentication } from "../helpers/auth";
+import { mainListItems } from "./ListItems";
+
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -62,98 +78,84 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function NavBar({ navigate, setUser, user, setAlert }) {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+const drawerWidth = 240;
 
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== "open",
+})(({ theme, open }) => ({
+  zIndex: theme.zIndex.drawer + 1,
+  transition: theme.transitions.create(["width", "margin"], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(["width", "margin"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
+}));
 
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
+const Drawer = styled(MuiDrawer, {
+  shouldForwardProp: (prop) => prop !== "open",
+})(({ theme, open }) => ({
+  "& .MuiDrawer-paper": {
+    position: "relative",
+    whiteSpace: "nowrap",
+    width: drawerWidth,
+    transition: theme.transitions.create("width", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    boxSizing: "border-box",
+    ...(!open && {
+      overflowX: "hidden",
+      transition: theme.transitions.create("width", {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+      width: theme.spacing(7),
+      [theme.breakpoints.up("sm")]: {
+        width: theme.spacing(9),
+      },
+    }),
+  },
+}));
+
+export const mdTheme = createTheme();
+
+const NavBar = () => {
+  const navigate = useNavigate();
+
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState(null);
+  const toggleDrawer = () => {
+    setOpen(!open);
   };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-
-  const logout = () => {
-    setUser(null);
-    deleteAuthentication()
-    setAlert({
-      severity: "error",
-      message: "Signed out successfully!",
-    });
-    
-  };
-
-  const menuId = "primary-search-account-menu";
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
-
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton size="large" color="inherit">
-        </IconButton>
-        <p>Login</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton size="large" color="inherit">
-          <Badge badgeContent={17} color="error">
-            <ShoppingCartIcon />
-          </Badge>
-        </IconButton>
-        <p>Cart</p>
-      </MenuItem>
-    </Menu>
-  );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ bgcolor: "#000" }}>
-        <Container maxWidth="xl">
-          <Toolbar>
+    <ThemeProvider theme={mdTheme}>
+      <Box sx={{ display: "flex" }}>
+        <CssBaseline />
+        <AppBar position="absolute" open={open}>
+          <Toolbar
+            sx={{
+              pr: "24px", // keep right padding when drawer closed
+            }}
+          >
             <IconButton
               size="large"
               edge="start"
               color="inherit"
               aria-label="open drawer"
-              sx={{ mr: 2 }}
+              onClick={toggleDrawer}
+              sx={{
+                marginRight: "36px",
+                ...(open && { display: "none" }),
+              }}
             >
               <MenuIcon />
             </IconButton>
@@ -164,7 +166,7 @@ export default function NavBar({ navigate, setUser, user, setAlert }) {
               sx={{ display: { xs: "none", sm: "block" } }}
             >
               <a href="/">
-                <img alt="" src={logo} style={{ width: "100px" }} />
+                <img alt="" src={logo} style={{ width: "50px" }} />
               </a>
             </Typography>
             <Search>
@@ -178,29 +180,6 @@ export default function NavBar({ navigate, setUser, user, setAlert }) {
             </Search>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: "flex" }}>
-              {user ? (
-                <Tooltip title="Sign out">
-                <IconButton
-                  size="large"
-                  color="inherit"
-                  onClick={logout}
-                  sx={{ "&:hover": { bgcolor: "blue" } }}
-                >
-                  <ExitToAppIcon />
-                </IconButton>
-                </Tooltip>
-              ) : (
-                <Tooltip title="Sign in">
-                <IconButton
-                  size="large"
-                  color="inherit"
-                  onClick={() => navigate("/sign-in")}
-                  sx={{ "&:hover": { bgcolor: "blue" } }}
-                >
-                  <LoginIcon />
-                </IconButton>
-                </Tooltip>
-              )}
               <IconButton
                 size="large"
                 aria-label="show 17 new notifications"
@@ -212,10 +191,59 @@ export default function NavBar({ navigate, setUser, user, setAlert }) {
               </IconButton>
             </Box>
           </Toolbar>
-        </Container>
-      </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
-    </Box>
+        </AppBar>
+        <Drawer variant="permanent" open={open}>
+          <Toolbar
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-end",
+              px: [1],
+            }}
+          >
+            <IconButton onClick={toggleDrawer}>
+              <ChevronLeftIcon />
+            </IconButton>
+          </Toolbar>
+          <Divider />
+          <List component="nav">{mainListItems(navigate, setAlert)}</List>
+        </Drawer>
+        <Box
+          component="main"
+          sx={{
+            backgroundColor: (theme) =>
+              theme.palette.mode === "light"
+                ? theme.palette.grey[100]
+                : theme.palette.grey[900],
+            flexGrow: 1,
+            height: "100vh",
+            overflow: "auto",
+          }}
+        >
+            <Toolbar />
+          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+            {loading ? <LinearProgress color="secondary" /> : null}
+            {alert ? <AlertDismissible {...alert} setAlert={setAlert} /> : null}
+            <Routes>
+              <Route exact path="/" element={<HomePage />} />
+              <Route
+                path="/sign-up"
+                element={<SignUp setAlert={setAlert} setLoading={setLoading} />}
+              />
+              <Route
+                path="/sign-in"
+                element={<Login setAlert={setAlert} setLoading={setLoading} />}
+              />
+              <Route path="/user/dashboard" element={<UserDashboard />} />
+              <Route path="/admin/dashboard" element={<AdminDashboard />} />
+              <Route path="/settings" element={<SettingPage />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Container>
+        </Box>
+      </Box>
+    </ThemeProvider>
   );
-}
+};
+
+export default NavBar;
