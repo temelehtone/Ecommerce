@@ -120,6 +120,9 @@ const Drawer = styled(MuiDrawer, {
       [theme.breakpoints.up("sm")]: {
         width: theme.spacing(9),
       },
+      [theme.breakpoints.down("sm")]: {
+        display: "none"
+      }
     }),
   },
 }));
