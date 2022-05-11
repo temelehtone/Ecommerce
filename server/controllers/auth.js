@@ -25,7 +25,7 @@ export const createAccount = async (req, res) => {
 
         const token = jwt.sign({ id: result._id }, process.env.JWT_SECRET_KEY, {expiresIn: process.env.JWT_EXPIRE })
 
-        res.status(200).json({result: { _id: result._id, email: result.email, role: result.role }, token, message: "Signed Up Succesfully!" })
+        res.status(200).json({result: { _id: result._id, email: result.email, role: result.role, name: result.name }, token, message: "Signed Up Succesfully!" })
 
     } catch (error) {
         console.log(error.message)
@@ -45,7 +45,7 @@ export const login = async (req, res) => {
 
         const token = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET_KEY, {expiresIn: process.env.JWT_EXPIRE })
 
-        res.status(200).json({result: { _id: existingUser._id, email: existingUser.email, role: existingUser.role }, token })
+        res.status(200).json({result: { _id: existingUser._id, email: existingUser.email, role: existingUser.role, name: existingUser.name }, token })
 
     } catch (error) {
         console.log(error.message)

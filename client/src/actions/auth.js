@@ -1,18 +1,17 @@
 import * as api from "../api";
+import { setAuthentication } from "../helpers/auth";
+import { getLocalStorage } from "../helpers/localStorage";
 
 export async function createAccount(formData, setAlert, navigate, setUser) {
   await api
     .createAccount(formData)
     .then((data) => {
-      localStorage.setItem(
-        "profile",
-        JSON.stringify({ user: data.data.result, token: data.data.token })
-      );
+      setAuthentication(data.data.token, data.data.result)
       setAlert({
         severity: "success",
-        message: data.data.message,
+        message: data.data.message + " Welcome " + data.data.result.name + "!",
       });
-      setUser(JSON.parse(localStorage.getItem("profile")))
+      setUser(getLocalStorage("user"))
       navigate("/");
     })
     .catch((err) => {
@@ -26,15 +25,12 @@ export async function createAccount(formData, setAlert, navigate, setUser) {
 export async function login(formData, setAlert, navigate, setUser) {
   try {
     const { data } = await api.login(formData);
-    localStorage.setItem(
-      "profile",
-      JSON.stringify({ user: data.result, token: data.token })
-    );
+    setAuthentication(data.token, data.result)
     setAlert({
       variant: "success",
-      message: "You logged in successfully!",
+      message: "You logged in successfully! Welcome " + data.result.name + "!",
     });
-    setUser(JSON.parse(localStorage.getItem("profile")))
+    setUser(getLocalStorage("user"))
     navigate("/");
   } catch (err) {
     setAlert({

@@ -15,7 +15,7 @@ export default function AlertDismissible({ message, severity, setAlert }) {
     return () => {
       clearTimeout(timeId)
     }
-  }, []);
+  }, [setAlert]);
 
   if (show) {
     return (

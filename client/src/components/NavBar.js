@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -14,9 +14,11 @@ import SearchIcon from "@mui/icons-material/Search";
 import LoginIcon from "@mui/icons-material/Login";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import { Tooltip } from "@mui/material";
 
 import logo from "../images/Logo.png";
 import { Container } from "@mui/material";
+import { deleteAuthentication } from "../helpers/auth";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -78,11 +80,12 @@ export default function NavBar({ navigate, setUser, user, setAlert }) {
 
   const logout = () => {
     setUser(null);
-    localStorage.clear();
+    deleteAuthentication()
     setAlert({
       severity: "error",
-      message: "Signed out successfully",
+      message: "Signed out successfully!",
     });
+    
   };
 
   const menuId = "primary-search-account-menu";
@@ -126,7 +129,6 @@ export default function NavBar({ navigate, setUser, user, setAlert }) {
     >
       <MenuItem>
         <IconButton size="large" color="inherit">
-          {user ? <LoginIcon /> : <ExitToAppIcon />}
         </IconButton>
         <p>Login</p>
       </MenuItem>
@@ -177,6 +179,7 @@ export default function NavBar({ navigate, setUser, user, setAlert }) {
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: "flex" }}>
               {user ? (
+                <Tooltip title="Sign out">
                 <IconButton
                   size="large"
                   color="inherit"
@@ -185,7 +188,9 @@ export default function NavBar({ navigate, setUser, user, setAlert }) {
                 >
                   <ExitToAppIcon />
                 </IconButton>
+                </Tooltip>
               ) : (
+                <Tooltip title="Sign in">
                 <IconButton
                   size="large"
                   color="inherit"
@@ -194,6 +199,7 @@ export default function NavBar({ navigate, setUser, user, setAlert }) {
                 >
                   <LoginIcon />
                 </IconButton>
+                </Tooltip>
               )}
               <IconButton
                 size="large"
