@@ -9,24 +9,29 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import LayersIcon from "@mui/icons-material/Layers";
 import ExitToApp from "@mui/icons-material/ExitToApp";
 import LoginIcon from "@mui/icons-material/Login";
-import SettingsIcon from '@mui/icons-material/Settings';
+import SettingsIcon from "@mui/icons-material/Settings";
+import HomeIcon from "@mui/icons-material/Home";
 
 import { logout, isAuthenticated } from "../helpers/auth";
 
 export const mainListItems = (navigate, setAlert) => {
-
   const navigateDashboard = () => {
     if (isAuthenticated().role === 1) {
-      navigate("/admin/dashboard")
+      navigate("/admin/dashboard");
     } else if (isAuthenticated().role === 0) {
-      navigate("/user/dashboard")
+      navigate("/user/dashboard");
     }
-    
-  }
+  };
 
   if (isAuthenticated()) {
     return (
       <React.Fragment>
+        <ListItemButton onClick={() => navigate("/")}>
+          <ListItemIcon>
+            <HomeIcon />
+          </ListItemIcon>
+          <ListItemText primary="Home" />
+        </ListItemButton>
         <ListItemButton onClick={navigateDashboard}>
           <ListItemIcon>
             <DashboardIcon />
@@ -78,10 +83,14 @@ export const mainListItems = (navigate, setAlert) => {
   }
   return (
     <>
+      <ListItemButton onClick={() => navigate("/")}>
+        <ListItemIcon>
+          <HomeIcon />
+        </ListItemIcon>
+        <ListItemText primary="Home" />
+      </ListItemButton>
       <ListItemButton
-        onClick={() => {
-          navigate("/sign-in");
-        }}
+        onClick={() => navigate("/sign-in")}
       >
         <ListItemIcon>
           <LoginIcon />

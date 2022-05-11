@@ -30,11 +30,12 @@ import AlertDismissible from "./AlertDismissible";
 import NotFound from "./NotFound";
 import AdminDashboard from "./AdminDashboard";
 import UserDashboard from "./UserDashboard";
-import SettingPage from "./SettingPage"
+import SettingPage from "./SettingPage";
 
 import logo from "../images/Logo.png";
 import { mainListItems } from "./ListItems";
-
+import AdminRoute from "./AdminRoute";
+import UserRoute from "./UserRoute";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -121,8 +122,8 @@ const Drawer = styled(MuiDrawer, {
         width: theme.spacing(9),
       },
       [theme.breakpoints.down("sm")]: {
-        display: "none"
-      }
+        display: "none",
+      },
     }),
   },
 }));
@@ -223,7 +224,7 @@ const NavBar = () => {
             overflow: "auto",
           }}
         >
-            <Toolbar />
+          <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             {loading ? <LinearProgress color="secondary" /> : null}
             {alert ? <AlertDismissible {...alert} setAlert={setAlert} /> : null}
@@ -237,8 +238,22 @@ const NavBar = () => {
                 path="/sign-in"
                 element={<Login setAlert={setAlert} setLoading={setLoading} />}
               />
-              <Route path="/user/dashboard" element={<UserDashboard />} />
-              <Route path="/admin/dashboard" element={<AdminDashboard />} />
+              <Route
+                path="/user/dashboard"
+                element={
+                  <UserRoute>
+                    <UserDashboard />
+                  </UserRoute>
+                }
+              />
+              <Route
+                path="/admin/dashboard"
+                element={
+                  <AdminRoute>
+                    <AdminDashboard />
+                  </AdminRoute>
+                }
+              />
               <Route path="/settings" element={<SettingPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
