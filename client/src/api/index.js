@@ -15,3 +15,6 @@ const API = axios.create({ baseURL: "http://localhost:5000/api" });
 export const createAccount = (formData) =>
   API.post("/auth/createAccount", formData);
 export const login = (formData) => API.post("/auth/login", formData);
+
+// Category
+export const createCategory = (formData) => API.post("/category/createCategory", formData);

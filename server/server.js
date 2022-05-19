@@ -6,6 +6,7 @@ import dotenv from "dotenv"
 import findConfig from "find-config";
 
 import authRoutes from "./routes/auth.js";
+import categoryRoutes from "./routes/category.js";
 
 dotenv.config({ path: findConfig(".env") })
 
@@ -17,6 +18,7 @@ app.use(cors());
 
 
 app.use("/api/auth", authRoutes);
+app.use("/api/category", categoryRoutes);
 
 const CONNECTION_URL = process.env.CONNECTION_URL;
 
