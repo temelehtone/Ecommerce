@@ -6,10 +6,10 @@ export const createCategory = async (formData, setAlert) => {
         
         setAlert({
             severity: "success",
-            message: data.data.category + " category was created successfully.",
+            message: data.data.message
           });
     }).catch(err => {
-        console.log(err.response.data.message);
+        
         setAlert({
             severity: "error",
             message: err.response.data.message,
