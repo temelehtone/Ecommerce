@@ -1,14 +1,12 @@
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 import express from 'express';
-import dotenv from "dotenv"
-import findConfig from "find-config";
 
+import { JWT_SECRET_KEY, JWT_EXPIRE } from '../config/keys.js'
 import User from "../models/user.js"
 
 const router = express.Router();
 
-dotenv.config({ path: findConfig(".env") })
 
 export const createAccount = async (req, res) => {
     const { email, password, firstName, lastName, confirmPassword } = req.body 
@@ -22,7 +20,7 @@ export const createAccount = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 12)
         const result = await User.create({email: email, password: hashedPassword, name: `${firstName} ${lastName}`})
 
-        const token = jwt.sign({ id: result._id }, process.env.JWT_SECRET_KEY, {expiresIn: process.env.JWT_EXPIRE })
+        const token = jwt.sign({ user: {id: result._id} }, JWT_SECRET_KEY, {expiresIn: JWT_EXPIRE })
 
         res.status(200).json({result: { _id: result._id, email: result.email, role: result.role, name: result.name }, token, message: "Signed Up Succesfully!" })
 
@@ -42,7 +40,7 @@ export const login = async (req, res) => {
 
         if (!isPasswordCorrect) return res.status(400).json({message: "Invalid credentials."})
 
-        const token = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET_KEY, {expiresIn: process.env.JWT_EXPIRE })
+        const token = jwt.sign({ user: {id: existingUser._id} }, JWT_SECRET_KEY, {expiresIn: JWT_EXPIRE })
 
         res.status(200).json({result: { _id: existingUser._id, email: existingUser.email, role: existingUser.role, name: existingUser.name }, token })
 
