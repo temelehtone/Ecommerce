@@ -3,7 +3,7 @@ import * as api from "../api"
 
 export const createProduct = async (formData, setAlert) => {
     await api.createProduct(formData).then((response) => {
-        console.log(response.data.newProduct)
+        
         setAlert({
             severity: "success",
             message: response.data.message

@@ -142,6 +142,8 @@ const AdminDashboard = () => {
   };
   const handleProductClose = () => {
     setOpenProduct(false);
+    setAlert(false);
+    setProductData(initialProductValues)
   };
   const handleOpenOrders = () => {
     setOpenOrders(true);
@@ -159,7 +161,6 @@ const AdminDashboard = () => {
   };
 
   const handleProductImageChange = (e) => {
-    console.log(e.target.files);
     setProductData({ ...productData, [e.target.name]: e.target.files[0] });
   };
 
@@ -194,6 +195,7 @@ const AdminDashboard = () => {
     
     await createProduct(formData, setAlert);
     setLoading(false);
+    setProductData(initialProductValues)
   };
 
   const categoryModal = (
