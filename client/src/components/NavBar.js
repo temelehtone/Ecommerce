@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 import {
   styled,
@@ -20,10 +19,12 @@ import MuiDrawer from "@mui/material/Drawer";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { Divider, List, CssBaseline } from "@mui/material";
 
-
-
 import logo from "../images/Logo.png";
-import { mainListItems } from "./ListItems";
+import { MainListItems } from "./ListItems";
+
+// Redux
+import { useSelector } from "react-redux";
+import { showLoading } from "../helpers/loading";
 
 
 const Search = styled("div")(({ theme }) => ({
@@ -120,8 +121,8 @@ const Drawer = styled(MuiDrawer, {
 export const mdTheme = createTheme();
 
 export const NavBar = () => {
-  const navigate = useNavigate();
-  const setAlert = null;
+  
+  const { loading } = useSelector(state => state.loading)
 
   const [open, setOpen] = useState(false);
   const toggleDrawer = () => {
@@ -183,6 +184,7 @@ export const NavBar = () => {
             </Box>
           </Toolbar>
         </AppBar>
+        {loading && showLoading()}
         <Drawer variant="permanent" open={open}>
           <Toolbar
             sx={{
@@ -197,7 +199,7 @@ export const NavBar = () => {
             </IconButton>
           </Toolbar>
           <Divider />
-          <List component="nav">{mainListItems(navigate, setAlert)}</List>
+          <List component="nav">{<MainListItems />}</List>
         </Drawer>
         </>
   );

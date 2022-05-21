@@ -1,4 +1,5 @@
-import * as React from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
@@ -14,7 +15,10 @@ import HomeIcon from "@mui/icons-material/Home";
 
 import { logout, isAuthenticated } from "../helpers/auth";
 
-export const mainListItems = (navigate, setAlert) => {
+
+export const MainListItems = () => {
+  const navigate = useNavigate()
+
   const navigateDashboard = () => {
     if (isAuthenticated().role === 1) {
       navigate("/admin/dashboard");

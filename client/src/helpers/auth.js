@@ -22,8 +22,7 @@ export const isAuthenticated = () => {
   return false;
 };
 
-export const logout = (navigate, setClientsideErrorMsg) => {
+export const logout = (navigate) => {
     deleteAuthentication();
     navigate("/sign-in");
-    setClientsideErrorMsg("Signed out successfully!")
 }
