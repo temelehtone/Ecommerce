@@ -15,7 +15,7 @@ export const createProduct = async (req, res) => {
     if (existingProduct)
       return res
         .status(400)
-        .json({ message: `Product ${productName} already exists.` });
+        .json({ errorMessage: `Product ${productName} already exists.` });
 
     const newProduct = await Product.create({
       fileName: filename,
@@ -30,13 +30,13 @@ export const createProduct = async (req, res) => {
     res
       .status(200)
       .json({
-        message: `Product ${newProduct.productName} created successfully.`,
+        successMessage: `Product ${newProduct.productName} created successfully.`,
         newProduct
       });
   } catch (error) {
     console.log("Product create error:", error);
     res.status(500).json({
-      message: "Something went wrong, please try again later.",
+      errorMessage: "Something went wrong, please try again later.",
     });
   }
 };

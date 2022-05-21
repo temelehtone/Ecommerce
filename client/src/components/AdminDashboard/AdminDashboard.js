@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import isEmpty from "validator/lib/isEmpty";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import AddIcon from "@mui/icons-material/Add";
@@ -8,7 +8,6 @@ import {
   Button,
   Typography,
   TextField,
-  LinearProgress,
   Input,
   Grid,
   Select,
@@ -20,7 +19,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { showErrorMsg, showSuccessMsg } from "../../helpers/message";
 
 import { StyledButton, ButtonBox, CustomModal, CustomProductModal, FlexBox, StyledTextField, theme } from "./styles"
-import { createCategory } from "../../actions/category";
+import { createCategory } from "../../redux/actions/categoryActions";
 import { createProduct } from "../../actions/product";
 import { productFormValidator } from "../../helpers/productFormValidator";
 
@@ -97,7 +96,7 @@ const AdminDashboard = () => {
       return;
     }
     const data = { category };
-    await createCategory(data);
+    dispatch(createCategory(data));
   };
 
   const handleProductSubmit = async (e) => {
