@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Routes, Route } from "react-router-dom";
 
 import {
   styled,
   alpha,
   createTheme,
+  ThemeProvider,
 } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -18,13 +19,23 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import MuiAppBar from "@mui/material/AppBar";
 import MuiDrawer from "@mui/material/Drawer";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import Container from "@mui/material/Container";
+import LinearProgress from "@mui/material/LinearProgress";
 import { Divider, List, CssBaseline } from "@mui/material";
 
-
+import HomePage from "./HomePage";
+import Login from "./Login";
+import SignUp from "./SignUp";
+import AlertDismissible from "./AlertDismissible";
+import NotFound from "./NotFound";
+import AdminDashboard from "./AdminDashboard/AdminDashboard";
+import UserDashboard from "./UserDashboard";
+import SettingPage from "./SettingPage";
 
 import logo from "../images/Logo.png";
 import { mainListItems } from "./ListItems";
-
+import AdminRoute from "./AdminRoute";
+import UserRoute from "./UserRoute";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -119,17 +130,19 @@ const Drawer = styled(MuiDrawer, {
 
 export const mdTheme = createTheme();
 
-export const NavBar = () => {
+const NavBar = () => {
   const navigate = useNavigate();
-  const setAlert = null;
 
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState(null);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
   return (
-      <>
+    <ThemeProvider theme={mdTheme}>
+      <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar position="absolute" open={open}>
           <Toolbar
@@ -199,6 +212,56 @@ export const NavBar = () => {
           <Divider />
           <List component="nav">{mainListItems(navigate, setAlert)}</List>
         </Drawer>
-        </>
+        <Box
+          component="main"
+          sx={{
+            backgroundColor: (theme) =>
+              theme.palette.mode === "light"
+                ? theme.palette.grey[100]
+                : theme.palette.grey[900],
+            flexGrow: 1,
+            height: "100vh",
+            overflow: "auto",
+          }}
+        >
+          <Toolbar />
+          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+            {loading ? <LinearProgress color="secondary" /> : null}
+            {alert ? <AlertDismissible {...alert} setAlert={setAlert} /> : null}
+            <Routes>
+              <Route exact path="/" element={<HomePage />} />
+              <Route
+                path="/sign-up"
+                element={<SignUp setAlert={setAlert} setLoading={setLoading} />}
+              />
+              <Route
+                path="/sign-in"
+                element={<Login setAlert={setAlert} setLoading={setLoading} />}
+              />
+              <Route
+                path="/user/dashboard"
+                element={
+                  <UserRoute>
+                    <UserDashboard />
+                  </UserRoute>
+                }
+              />
+              <Route
+                path="/admin/dashboard"
+                element={
+                  <AdminRoute>
+                    <AdminDashboard setAlert={setAlert} setLoading={setLoading} />
+                  </AdminRoute>
+                }
+              />
+              <Route path="/settings" element={<SettingPage />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Container>
+        </Box>
+      </Box>
+    </ThemeProvider>
   );
 };
+
+export default NavBar;

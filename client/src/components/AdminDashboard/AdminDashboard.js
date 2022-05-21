@@ -17,12 +17,15 @@ import {
 } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 
-import AlertDismissible from "../AlertDismissible";
+import { ShowErrorMsg, ShowSuccessMsg } from "../../helpers/message";
 
 import { StyledButton, ButtonBox, CustomModal, CustomProductModal, FlexBox, StyledTextField, theme } from "./styles"
-import { createCategory, getCategories } from "../../actions/category";
+import { createCategory } from "../../actions/category";
 import { createProduct } from "../../actions/product";
 import { productFormValidator } from "../../helpers/productFormValidator";
+
+// Redux
+import { useSelector, useDispatch } from "react-redux";
 
 
 
@@ -37,24 +40,19 @@ const AdminDashboard = () => {
     productQuantity: "0",
   };
 
-  const [alert, setAlert] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const { successMsg, errorMsg } = useSelector(state => state.messages);
+  const { loading } = useSelector(state => state.loading);
 
   const [category, setCategory] = useState("");
   const [productData, setProductData] = useState(initialProductValues);
-  const [categories, setCategories] = useState(null);
+  const { categories } = useSelector(state => state.categories)
 
   const [openCategory, setOpenCategory] = useState(false);
   const [openProduct, setOpenProduct] = useState(false);
   const [openOrders, setOpenOrders] = useState(false);
 
-  useEffect(() => {
-    loadCategories();
-  }, [loading]);
+  const [clientSideErrorMsg, setClientSideErrorMsg] = useState('');
 
-  const loadCategories = async () => {
-    await getCategories(setAlert, setCategories);
-  };
 
   const handleOpenCategory = () => {
     setOpenCategory(true);
@@ -62,14 +60,12 @@ const AdminDashboard = () => {
   const handleCategoryClose = () => {
     setOpenCategory(false);
     setCategory("");
-    setAlert(false);
   };
   const handleOpenProduct = () => {
     setOpenProduct(true);
   };
   const handleProductClose = () => {
     setOpenProduct(false);
-    setAlert(false);
     setProductData(initialProductValues)
   };
   const handleOpenOrders = () => {
@@ -94,22 +90,17 @@ const AdminDashboard = () => {
   const handleCategorySubmit = async (e) => {
     e.preventDefault();
     if (isEmpty(category)) {
-      setAlert({
-        severity: "error",
-        message: "Category can't be empty.",
-      });
+      setClientSideErrorMsg("Category can't be empty.")
       return;
     }
     const data = { category };
-    setLoading(true);
-    await createCategory(data, setAlert);
-    setLoading(false);
+    await createCategory(data);
   };
 
   const handleProductSubmit = async (e) => {
     e.preventDefault();
     
-    if (!productFormValidator(productData, setAlert)) return;
+    if (!productFormValidator(productData, setClientSideErrorMsg)) return;
     var formData = new FormData();
     formData.append("productImage", productData.productImage)
     formData.append("productName", productData.productName)
@@ -118,10 +109,8 @@ const AdminDashboard = () => {
     formData.append("productCategory", productData.productCategory)
     formData.append("productQuantity", productData.productQuantity)
 
-    setLoading(true);
     
-    await createProduct(formData, setAlert);
-    setLoading(false);
+    await createProduct(formData);
     setProductData(initialProductValues)
   };
 
@@ -142,9 +131,6 @@ const AdminDashboard = () => {
         onSubmit={handleCategorySubmit}
         component="form"
       >
-        {alert ? (
-          <AlertDismissible {...alert} setAlert={setAlert} />
-        ) : (
           <Box
             sx={{
               bgcolor: "secondary.green",
@@ -163,7 +149,10 @@ const AdminDashboard = () => {
               Add Category
             </Typography>
           </Box>
-        )}
+        {clientSideErrorMsg && ShowErrorMsg(clientSideErrorMsg)}
+        {errorMsg && ShowErrorMsg(errorMsg)}
+        {successMsg && ShowSuccessMsg(successMsg)}
+
         {loading ? (
           <LinearProgress color="primary" />
         ) : (
@@ -221,9 +210,7 @@ const AdminDashboard = () => {
           flexDirection: "column",
         }}
       >
-        {alert ? (
-          <AlertDismissible {...alert} setAlert={setAlert} />
-        ) : (
+        
           <Box
             sx={{
               bgcolor: "secondary.blue",
@@ -242,7 +229,10 @@ const AdminDashboard = () => {
               Add Product
             </Typography>
           </Box>
-        )}
+          {clientSideErrorMsg && ShowErrorMsg(clientSideErrorMsg)}
+        {errorMsg && ShowErrorMsg(errorMsg)}
+        {successMsg && ShowSuccessMsg(successMsg)}
+
         {loading ? (
           <LinearProgress color="primary" />
         ) : (
@@ -363,7 +353,9 @@ const AdminDashboard = () => {
               </Grid>
             </Grid>
 
-            {alert ? <AlertDismissible {...alert} setAlert={setAlert} /> : null}
+            {clientSideErrorMsg && ShowErrorMsg(clientSideErrorMsg)}
+            {errorMsg && ShowErrorMsg(errorMsg)}
+            {successMsg && ShowSuccessMsg(successMsg)}
 
             <ButtonBox component="form" onSubmit={handleProductSubmit}>
               <Button

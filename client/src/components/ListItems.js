@@ -70,7 +70,7 @@ export const mainListItems = (navigate, setAlert) => {
         </ListItemButton>
         <ListItemButton
           onClick={() => {
-            logout(navigate, setAlert);
+            logout(navigate);
           }}
         >
           <ListItemIcon>

@@ -7,6 +7,6 @@ const router = express.Router();
 
 
 router.post("/createCategory", authenticateJWT, createCategory);
-router.get("/getCategories", authenticateJWT, getCategories);
+router.get("/getCategories", getCategories);
 
 export default router

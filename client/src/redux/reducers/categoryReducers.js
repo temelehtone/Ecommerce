@@ -4,7 +4,7 @@ const INITIAL_STATE = {
     categories: []
 }
 
-export const categoryReducer = (state=INITIAL_STATE, action) => {
+const categoryReducer = (state=INITIAL_STATE, action) => {
     switch (action.type) {
         case GET_CATEGORIES:
             return {
@@ -15,3 +15,5 @@ export const categoryReducer = (state=INITIAL_STATE, action) => {
             return state;
     }
 }
+
+export default categoryReducer

@@ -12,14 +12,16 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import isEmpty from "validator/lib/isEmpty";
 
 
 import { login } from "../actions/auth";
 import { isAuthenticated } from "../helpers/auth";
+import { ShowSuccessMsg, ShowErrorMsg } from "../helpers/message";
 
 const theme = createTheme();
 
-export default function Login({ setAlert, setLoading }) {
+export default function Login() {
 
   const navigate = useNavigate()
 
@@ -30,13 +32,10 @@ export default function Login({ setAlert, setLoading }) {
       } else if (isAuthenticated().role === 0) {
         navigate("/user/dashboard");
       }
-      setAlert({
-        severity: "warning",
-        message: "Sign out first!"
-      })
+      ShowSuccessMsg("Sign out first.")
     } 
     
-  }, [navigate, setAlert])
+  }, [navigate])
 
   const initialState = {
     email: "",
@@ -49,11 +48,8 @@ export default function Login({ setAlert, setLoading }) {
   };
 
   const emptyCheck = (data) => {
-    if (data.email === "" || data.password === "") {
-      setAlert({
-        severity: "warning",
-        message: "All fields are required",
-      });
+    if (isEmpty(data.email) || isEmpty(data.password)) {
+      ShowErrorMsg("All fields are required.")
       return true;
     }
     return false;
@@ -61,14 +57,12 @@ export default function Login({ setAlert, setLoading }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const isEmpty = emptyCheck(formData);
-    if (isEmpty) return;
+    const check = emptyCheck(formData);
+    if (check) return;
 
     const { email, password } = formData;
     const data = { email, password };
-    setLoading(true);
-    await login(data, setAlert, navigate);
-    setLoading(false);
+    await login(data, navigate);
   };
 
   return (

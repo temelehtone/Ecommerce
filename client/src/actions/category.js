@@ -16,14 +16,3 @@ export const createCategory = async (formData, setAlert) => {
         });
     })
 }
-
-export const getCategories = async (setAlert, setCategories) => {
-    await api.getCategories().then((response) => {
-        setCategories(response.data.categories)
-    }).catch(err => {
-        setAlert({
-            severity: "error",
-            message: err.response.data.message,
-        });
-    })
-}
