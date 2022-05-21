@@ -17,11 +17,11 @@ import {
   MenuItem,
 } from "@mui/material";
 import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
-
 import { red, blue, green } from "@mui/material/colors";
+import AlertDismissible from "./AlertDismissible";
 
 import { createCategory, getCategories } from "../actions/category";
-import AlertDismissible from "./AlertDismissible";
+import { createProduct } from "../actions/product";
 import { productFormValidator } from "../helpers/productFormValidator";
 
 const StyledButton = styled(Button)(({ theme }) => ({
@@ -182,7 +182,18 @@ const AdminDashboard = () => {
     e.preventDefault();
     
     if (!productFormValidator(productData, setAlert)) return;
-    console.log("k")
+    var formData = new FormData();
+    formData.append("image", productData.productImage)
+    formData.append("name", productData.productName)
+    formData.append("description", productData.productDescription)
+    formData.append("price", productData.productPrice)
+    formData.append("category", productData.productCategory)
+    formData.append("quantity", productData.productQuantity)
+
+    setLoading(true);
+    console.log(formData);
+    await createProduct(formData, setAlert);
+    setLoading(false);
   };
 
   const categoryModal = (
