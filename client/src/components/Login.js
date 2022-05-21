@@ -11,19 +11,28 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 import isEmpty from "validator/lib/isEmpty";
 
 
 import { login } from "../actions/auth";
 import { isAuthenticated } from "../helpers/auth";
-import { ShowSuccessMsg, ShowErrorMsg } from "../helpers/message";
-
-const theme = createTheme();
+import { showSuccessMsg, showErrorMsg } from "../helpers/message";
+import { showLoading } from "../helpers/loading";
+import { useSelector } from "react-redux";
 
 export default function Login() {
 
   const navigate = useNavigate()
+  const initialState = {
+    email: "",
+    password: "",
+  };
+  const [formData, setFormData] = useState(initialState);
+  const [clientSideErrorMsg, setClientsideErrorMsg] = useState('')
+
+  const { errorMsg, successMsg } = useSelector(state => state.messages)
+  const { loading } = useSelector(state => state.loading);
 
   useEffect(() => {
     if (isAuthenticated()) {
@@ -32,16 +41,12 @@ export default function Login() {
       } else if (isAuthenticated().role === 0) {
         navigate("/user/dashboard");
       }
-      ShowSuccessMsg("Sign out first.")
+      setClientsideErrorMsg("Sign out first.")
     } 
     
   }, [navigate])
 
-  const initialState = {
-    email: "",
-    password: "",
-  };
-  const [formData, setFormData] = useState(initialState);
+  
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -49,7 +54,7 @@ export default function Login() {
 
   const emptyCheck = (data) => {
     if (isEmpty(data.email) || isEmpty(data.password)) {
-      ShowErrorMsg("All fields are required.")
+      setClientsideErrorMsg("All fields are required.")
       return true;
     }
     return false;
@@ -66,8 +71,11 @@ export default function Login() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
+        {loading && showLoading()}
+        {clientSideErrorMsg && showErrorMsg(clientSideErrorMsg)}
+        {successMsg && showSuccessMsg(successMsg)}
+        {errorMsg && showErrorMsg(errorMsg)}
         <CssBaseline />
         <Box
           sx={{
@@ -132,6 +140,5 @@ export default function Login() {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
   );
 }

@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 
-import { ShowErrorMsg, ShowSuccessMsg } from "../../helpers/message";
+import { showErrorMsg, showSuccessMsg } from "../../helpers/message";
 
 import { StyledButton, ButtonBox, CustomModal, CustomProductModal, FlexBox, StyledTextField, theme } from "./styles"
 import { createCategory } from "../../actions/category";
@@ -26,6 +26,7 @@ import { productFormValidator } from "../../helpers/productFormValidator";
 
 // Redux
 import { useSelector, useDispatch } from "react-redux";
+import { showLoading } from "../../helpers/loading";
 
 
 
@@ -39,6 +40,8 @@ const AdminDashboard = () => {
     productCategory: "Choose One...",
     productQuantity: "0",
   };
+
+  const dispatch = useDispatch()
 
   const { successMsg, errorMsg } = useSelector(state => state.messages);
   const { loading } = useSelector(state => state.loading);
@@ -149,12 +152,12 @@ const AdminDashboard = () => {
               Add Category
             </Typography>
           </Box>
-        {clientSideErrorMsg && ShowErrorMsg(clientSideErrorMsg)}
-        {errorMsg && ShowErrorMsg(errorMsg)}
-        {successMsg && ShowSuccessMsg(successMsg)}
+        {clientSideErrorMsg && showErrorMsg(clientSideErrorMsg)}
+        {errorMsg && showErrorMsg(errorMsg)}
+        {successMsg && showSuccessMsg(successMsg)}
 
         {loading ? (
-          <LinearProgress color="primary" />
+          showLoading()
         ) : (
           <>
             <Typography sx={{ ml: 3, mt: 3 }}>Category</Typography>
@@ -229,12 +232,12 @@ const AdminDashboard = () => {
               Add Product
             </Typography>
           </Box>
-          {clientSideErrorMsg && ShowErrorMsg(clientSideErrorMsg)}
-        {errorMsg && ShowErrorMsg(errorMsg)}
-        {successMsg && ShowSuccessMsg(successMsg)}
+          {clientSideErrorMsg && showErrorMsg(clientSideErrorMsg)}
+        {errorMsg && showErrorMsg(errorMsg)}
+        {successMsg && showSuccessMsg(successMsg)}
 
         {loading ? (
-          <LinearProgress color="primary" />
+          showLoading()
         ) : (
           <>
             <Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
@@ -353,9 +356,9 @@ const AdminDashboard = () => {
               </Grid>
             </Grid>
 
-            {clientSideErrorMsg && ShowErrorMsg(clientSideErrorMsg)}
-            {errorMsg && ShowErrorMsg(errorMsg)}
-            {successMsg && ShowSuccessMsg(successMsg)}
+            {clientSideErrorMsg && showErrorMsg(clientSideErrorMsg)}
+            {errorMsg && showErrorMsg(errorMsg)}
+            {successMsg && showSuccessMsg(successMsg)}
 
             <ButtonBox component="form" onSubmit={handleProductSubmit}>
               <Button

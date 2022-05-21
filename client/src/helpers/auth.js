@@ -4,7 +4,6 @@ import {
   setLocalStorage,
   getLocalStorage,
 } from "./localStorage";
-import { ShowErrorMsg } from "./message";
 
 export const setAuthentication = (token, user) => {
   setCookie("token", token);
@@ -23,8 +22,8 @@ export const isAuthenticated = () => {
   return false;
 };
 
-export const logout = (navigate) => {
+export const logout = (navigate, setClientsideErrorMsg) => {
     deleteAuthentication();
     navigate("/sign-in");
-    ShowErrorMsg("Signed out successfully!")
+    setClientsideErrorMsg("Signed out successfully!")
 }

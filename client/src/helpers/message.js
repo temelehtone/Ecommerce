@@ -1,58 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Alert } from "@mui/material";
 
-export const ShowErrorMsg = (msg) => {
-  const [show, setShow] = useState(true);
+export const showErrorMsg = (msg) => (
 
-  useEffect(() => {
-    const timeId = setTimeout(() => {
-      // After 3 seconds set the show value to false
-      setShow(false);
-    }, 4000);
+  <Alert
+    variant="filled"
+    severity="error"
+  >
+    {msg}
+  </Alert>
+);
 
-    return () => {
-      clearTimeout(timeId);
-    };
-  }, [msg]);
-  if (show) {
-    return (
-      <Alert
-        variant="filled"
-        severity="error"
-        onClose={() => {
-          setShow(false);
-        }}
-      >
-        {msg}
-      </Alert>
-    );
-  }
-};
+export const showSuccessMsg = (msg) => (
 
-export const ShowSuccessMsg = (msg) => {
-  const [show, setShow] = useState(true);
-
-  useEffect(() => {
-    const timeId = setTimeout(() => {
-      // After 3 seconds set the show value to false
-      setShow(false);
-    }, 4000);
-
-    return () => {
-      clearTimeout(timeId);
-    };
-  }, [msg]);
-  if (show) {
-    return (
       <Alert
         variant="filled"
         severity="success"
-        onClose={() => {
-          setShow(false);
-        }}
       >
         {msg}
       </Alert>
-    );
-  }
-};
+);

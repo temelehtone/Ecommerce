@@ -12,7 +12,7 @@ import SettingPage from "./SettingPage";
 
 import AdminRoute from "./AdminRoute";
 import UserRoute from "./UserRoute";
-import { ShowSuccessMsg, ShowErrorMsg } from "../helpers/message";
+import { showSuccessMsg, showErrorMsg } from "../helpers/message";
 
 // Redux
 import { useSelector } from "react-redux"
@@ -38,8 +38,8 @@ export const RouteComponents = () => {
       <Toolbar />
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         {loading && <LinearProgress color="secondary" />}
-        {successMsg && ShowSuccessMsg(successMsg)}
-        {errorMsg && ShowErrorMsg(errorMsg)}
+        {successMsg && showSuccessMsg(successMsg)}
+        {errorMsg && showErrorMsg(errorMsg)}
         <Routes>
           <Route exact path="/" element={<HomePage />} />
           <Route
