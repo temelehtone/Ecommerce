@@ -22,6 +22,7 @@ import { red, blue, green } from "@mui/material/colors";
 
 import { createCategory, getCategories } from "../actions/category";
 import AlertDismissible from "./AlertDismissible";
+import { productFormValidator } from "../helpers/productFormValidator";
 
 const StyledButton = styled(Button)(({ theme }) => ({
   margin: "5px",
@@ -101,35 +102,32 @@ const AdminDashboard = () => {
     },
   });
   const initialProductValues = {
-    image: "",
-    name: "",
-    description: "",
-    price: "",
+    productImage: null,
+    productName: "",
+    productDescription: "",
+    productPrice: "",
     productCategory: "Choose One...",
-    quantity: 0,
-  }
+    productQuantity: "0",
+  };
 
   const [alert, setAlert] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const [category, setCategory] = useState("");
   const [productData, setProductData] = useState(initialProductValues);
-  const [categories, setCategories] = useState(null)
+  const [categories, setCategories] = useState(null);
 
   const [openCategory, setOpenCategory] = useState(false);
   const [openProduct, setOpenProduct] = useState(false);
   const [openOrders, setOpenOrders] = useState(false);
 
-
   useEffect(() => {
-    loadCategories()
-  }, [loading])
+    loadCategories();
+  }, [loading]);
 
   const loadCategories = async () => {
-    await getCategories(setAlert, setCategories)
-  }
-
-
+    await getCategories(setAlert, setCategories);
+  };
 
   const handleOpenCategory = () => {
     setOpenCategory(true);
@@ -160,6 +158,11 @@ const AdminDashboard = () => {
     setProductData({ ...productData, [e.target.name]: e.target.value });
   };
 
+  const handleProductImageChange = (e) => {
+    console.log(e.target.files);
+    setProductData({ ...productData, [e.target.name]: e.target.files[0] });
+  };
+
   const handleCategorySubmit = async (e) => {
     e.preventDefault();
     if (isEmpty(category)) {
@@ -177,9 +180,10 @@ const AdminDashboard = () => {
 
   const handleProductSubmit = async (e) => {
     e.preventDefault();
-    console.log(productData);
-  }
-
+    
+    if (!productFormValidator(productData, setAlert)) return;
+    console.log("k")
+  };
 
   const categoryModal = (
     <CustomModal
@@ -304,24 +308,28 @@ const AdminDashboard = () => {
         ) : (
           <>
             <Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
-              <Grid item xs={11} sm={11} sx={{ ml: 1}}>
-              <InputLabel htmlFor="image" >Image</InputLabel>
+              <Grid item xs={11} sm={11} sx={{ ml: 1 }}>
+                <InputLabel htmlFor="productImage">Image</InputLabel>
                 <Input
                   accept="image/*"
                   style={{ display: "none" }}
-                  id="image"
-                  multiple
+                  id="productImage"
+                  name="productImage"
+                  onChange={handleProductImageChange}
                   type="file"
                 />
                 <label
-                  htmlFor="image"
+                  htmlFor="productImage"
                   style={{
                     display: "flex",
-                    justifyContent: "flex-end",
+                    justifyContent: "space-between",
                     border: "1px solid",
                     backgroundColor: "#F2F2F2",
                   }}
                 >
+                  <p style={{ fontSize: "12px" }}>
+                    {productData.productImage && productData.productImage.name}
+                  </p>
                   <Button
                     variant="raised"
                     component="span"
@@ -334,13 +342,13 @@ const AdminDashboard = () => {
                   </Button>
                 </label>
               </Grid>
-              <Grid item xs={11} sx={{ ml: 1}}>
-              <InputLabel htmlFor="name" >Name</InputLabel>
+              <Grid item xs={11} sx={{ ml: 1 }}>
+                <InputLabel htmlFor="productName">Name</InputLabel>
                 <TextField
                   onChange={handleProductChange}
                   fullWidth
-                  id="name"
-                  name="name"
+                  id="productName"
+                  name="productName"
                 />
               </Grid>
               <Grid
@@ -348,26 +356,28 @@ const AdminDashboard = () => {
                 xs={11}
                 sx={{ display: "flex", flexDirection: "column", ml: 1 }}
               >
-                <InputLabel htmlFor="description" >Description</InputLabel>
+                <InputLabel htmlFor="productDescription">
+                  Description
+                </InputLabel>
                 <textarea
                   onChange={handleProductChange}
-                  id="description"
-                  name="description"
-                  style={{ width: "100%", resize: "vertical", height: 100}}
+                  id="productDescription"
+                  name="productDescription"
+                  style={{ width: "100%", resize: "vertical", height: 100 }}
                 />
               </Grid>
-              <Grid item xs={11} sx={{ ml: 1}}>
-              <InputLabel htmlFor="price" >Price</InputLabel>
+              <Grid item xs={11} sx={{ ml: 1 }}>
+                <InputLabel htmlFor="productPrice">Price</InputLabel>
                 <TextField
                   onChange={handleProductChange}
                   fullWidth
-                  name="price"
+                  name="productPrice"
                   type="price"
-                  id="price"
+                  id="productPrice"
                 />
               </Grid>
-              <Grid item xs={11} sm={6} sx={{ ml: 1}}>
-                <InputLabel htmlFor="productCategory" >Category</InputLabel>
+              <Grid item xs={11} sm={6} sx={{ ml: 1 }}>
+                <InputLabel htmlFor="productCategory">Category</InputLabel>
                 <Select
                   labelId="productCategory"
                   id="productCategory"
@@ -377,35 +387,43 @@ const AdminDashboard = () => {
                   name="productCategory"
                   displayEmpty
                 >
-                  <MenuItem disabled value="Choose One...">Choose One...</MenuItem>
-                  {categories && categories.map((c) => (
-                    <MenuItem 
-                    key={c._id }
-                    value={c._id}>
-                      {c.category}
+                  <MenuItem disabled value="Choose One...">
+                    Choose One...
+                  </MenuItem>
+                  {categories &&
+                    categories.map((c) => (
+                      <MenuItem key={c._id} value={c._id}>
+                        {c.category}
                       </MenuItem>
-                  ))}
-  
+                    ))}
                 </Select>
               </Grid>
-              <Grid item xs={11} sm={5} sx={[ (theme) => ({
-                [theme.breakpoints.down("sm")]: {
-                  ml: 1,
-                }
-              }) ]}>
-              <InputLabel htmlFor="quantity" >Quantity</InputLabel>
+              <Grid
+                item
+                xs={11}
+                sm={5}
+                sx={[
+                  (theme) => ({
+                    [theme.breakpoints.down("sm")]: {
+                      ml: 1,
+                    },
+                  }),
+                ]}
+              >
+                <InputLabel htmlFor="productQuantity">Quantity</InputLabel>
                 <TextField
                   onChange={handleProductChange}
-                  id="quantity"
-                  name="quantity"
+                  id="productQuantity"
+                  name="productQuantity"
                   type="number"
                   fullWidth
-                  InputProps={{ inputProps: { min: 0, max: 1000 }}}
-                  value={productData.quantity}
-                  
+                  InputProps={{ inputProps: { min: 0, max: 1000 } }}
+                  value={productData.productQuantity}
                 />
               </Grid>
             </Grid>
+
+            {alert ? <AlertDismissible {...alert} setAlert={setAlert} /> : null}
 
             <ButtonBox component="form" onSubmit={handleProductSubmit}>
               <Button
