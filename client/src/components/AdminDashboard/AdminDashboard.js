@@ -6,7 +6,6 @@ import CreditCardIcon from "@mui/icons-material/CreditCard";
 import {
   Box,
   Button,
-  Modal,
   Typography,
   TextField,
   LinearProgress,
@@ -16,91 +15,19 @@ import {
   InputLabel,
   MenuItem,
 } from "@mui/material";
-import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
-import { red, blue, green } from "@mui/material/colors";
-import AlertDismissible from "./AlertDismissible";
+import { ThemeProvider } from "@mui/material/styles";
 
-import { createCategory, getCategories } from "../actions/category";
-import { createProduct } from "../actions/product";
-import { productFormValidator } from "../helpers/productFormValidator";
+import AlertDismissible from "../AlertDismissible";
 
-const StyledButton = styled(Button)(({ theme }) => ({
-  margin: "5px",
-  width: "200px",
-  [theme.breakpoints.down("sm")]: {
-    width: "50%",
-  },
-  border: "1px solid",
-}));
+import { StyledButton, ButtonBox, CustomModal, CustomProductModal, FlexBox, StyledTextField, theme } from "./styles"
+import { createCategory, getCategories } from "../../actions/category";
+import { createProduct } from "../../actions/product";
+import { productFormValidator } from "../../helpers/productFormValidator";
 
-const FlexBox = styled(Box)(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  flexGrow: 1,
-  padding: "5px",
-  [theme.breakpoints.down("sm")]: {
-    flexDirection: "column",
-  },
-}));
 
-const ButtonBox = styled(Box)(({ theme }) => ({
-  display: "flex",
-  width: "100%",
-  justifyContent: "space-between",
-  paddingInline: "20px",
-  borderTop: "1px solid #777",
-  [theme.breakpoints.down("sm")]: {
-    paddingInline: 10,
-  },
-}));
-
-const CustomModal = styled(Modal)(({ theme }) => ({
-  width: "50%",
-  height: 300,
-  display: "flex",
-  justifyContent: "center",
-  border: "2px solid #000",
-  left: "50%",
-  top: "50%",
-  transform: `translate(-${50}%, -${50}%)`,
-  [theme.breakpoints.down("sm")]: {
-    width: "70%",
-  },
-}));
-const CustomProductModal = styled(Modal)(({ theme }) => ({
-  width: "50%",
-  display: "flex",
-  justifyContent: "center",
-  border: "2px solid #000",
-  left: "50%",
-  top: "50%",
-  transform: `translate(-${50}%, -${50}%)`,
-  overflowY: "auto",
-  backgroundColor: "#fff",
-  [theme.breakpoints.down("sm")]: {
-    width: "70%",
-  },
-}));
-
-const StyledTextField = styled(TextField)(({ theme }) => ({
-  margin: "20px",
-}));
 
 const AdminDashboard = () => {
-  const theme = createTheme({
-    palette: {
-      secondary: {
-        main: red[100],
-        red: red[500],
-        redHover: red[100],
-        blue: blue[500],
-        blueHover: blue[100],
-        green: green[500],
-        greenHover: green[100],
-      },
-    },
-  });
+  
   const initialProductValues = {
     productImage: null,
     productName: "",

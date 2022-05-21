@@ -28,7 +28,7 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 import AlertDismissible from "./AlertDismissible";
 import NotFound from "./NotFound";
-import AdminDashboard from "./AdminDashboard";
+import AdminDashboard from "./AdminDashboard/AdminDashboard";
 import UserDashboard from "./UserDashboard";
 import SettingPage from "./SettingPage";
 
