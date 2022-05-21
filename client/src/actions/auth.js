@@ -4,11 +4,11 @@ import { setAuthentication, isAuthenticated } from "../helpers/auth";
 export async function createAccount(formData, setAlert, navigate) {
   await api
     .createAccount(formData)
-    .then((data) => {
-      setAuthentication(data.data.token, data.data.result)
+    .then((response) => {
+      setAuthentication(response.data.token, response.data.result)
       setAlert({
         severity: "success",
-        message: data.data.message + " Welcome " + data.data.result.name + "!",
+        message: response.data.message + " Welcome " + response.data.result.name + "!",
       });
 
       if (isAuthenticated() && isAuthenticated().role === 1) {

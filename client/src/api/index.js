@@ -21,3 +21,4 @@ export const login = (formData) => API.post("/auth/login", formData);
 
 // Category
 export const createCategory = (formData) => API.post("/category/createCategory", formData);
+export const getCategories = () => API.get("/category/getCategories");

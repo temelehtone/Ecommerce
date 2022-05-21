@@ -7,7 +7,7 @@ export const createCategory = async (req, res) => {
     try {
         const existingCategory = await Category.findOne({category})
 
-        if (existingCategory) return res.status(400).json({ message: 'Category already exists.' })
+        if (existingCategory) return res.status(400).json({ message: `Category ${category} already exists.` })
 
         const newCategory = await Category.create({ category });
 
@@ -20,4 +20,17 @@ export const createCategory = async (req, res) => {
         })
     }
     
+}
+
+export const getCategories = async (req, res) => {
+    try {
+        const categories = await Category.find({})
+        const categoriesNames = categories
+        res.status(200).json({ categories: categoriesNames, message: 'Categories loaded successfully.' })
+    } catch (error) {
+        console.log("Category get error:", error);
+        res.status(500).json({
+            message: "Something went wrong, please try again later."
+        })
+    }
 }

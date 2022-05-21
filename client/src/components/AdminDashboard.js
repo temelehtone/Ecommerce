@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import isEmpty from "validator/lib/isEmpty";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import AddIcon from "@mui/icons-material/Add";
@@ -20,7 +20,7 @@ import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
 
 import { red, blue, green } from "@mui/material/colors";
 
-import { createCategory } from "../actions/category";
+import { createCategory, getCategories } from "../actions/category";
 import AlertDismissible from "./AlertDismissible";
 
 const StyledButton = styled(Button)(({ theme }) => ({
@@ -100,7 +100,6 @@ const AdminDashboard = () => {
       },
     },
   });
-
   const initialProductValues = {
     image: "",
     name: "",
@@ -115,12 +114,22 @@ const AdminDashboard = () => {
 
   const [category, setCategory] = useState("");
   const [productData, setProductData] = useState(initialProductValues);
+  const [categories, setCategories] = useState(null)
 
   const [openCategory, setOpenCategory] = useState(false);
   const [openProduct, setOpenProduct] = useState(false);
   const [openOrders, setOpenOrders] = useState(false);
 
-  
+
+  useEffect(() => {
+    loadCategories()
+  }, [loading])
+
+  const loadCategories = async () => {
+    await getCategories(setAlert, setCategories)
+  }
+
+
 
   const handleOpenCategory = () => {
     setOpenCategory(true);
@@ -253,8 +262,6 @@ const AdminDashboard = () => {
     </CustomModal>
   );
 
- const categories = ["Drinks", "Meat", "Desserts"]
-
   const productModal = (
     <CustomProductModal
       open={openProduct}
@@ -371,11 +378,11 @@ const AdminDashboard = () => {
                   displayEmpty
                 >
                   <MenuItem disabled value="Choose One...">Choose One...</MenuItem>
-                  {categories.map((cat) => (
+                  {categories && categories.map((c) => (
                     <MenuItem 
-                    key={cat}
-                    value={cat}>
-                      {cat}
+                    key={c._id }
+                    value={c._id}>
+                      {c.category}
                       </MenuItem>
                   ))}
   
