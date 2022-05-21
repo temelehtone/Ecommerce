@@ -183,12 +183,12 @@ const AdminDashboard = () => {
     
     if (!productFormValidator(productData, setAlert)) return;
     var formData = new FormData();
-    formData.append("image", productData.productImage)
-    formData.append("name", productData.productName)
-    formData.append("description", productData.productDescription)
-    formData.append("price", productData.productPrice)
-    formData.append("category", productData.productCategory)
-    formData.append("quantity", productData.productQuantity)
+    formData.append("productImage", productData.productImage)
+    formData.append("productName", productData.productName)
+    formData.append("productDescription", productData.productDescription)
+    formData.append("productPrice", productData.productPrice)
+    formData.append("productCategory", productData.productCategory)
+    formData.append("productQuantity", productData.productQuantity)
 
     setLoading(true);
     console.log(formData);

@@ -1,10 +1,13 @@
 import Product from "../models/Product.js"
 
 export const createProduct = async (req, res) => {
-    const { image, name, description, price, category, quantity } = req.body;
+    const { productName, productDescription, productPrice, productCategory, productQuantity } = req.body;
+    const productImage = req.file;
+
     
+
     try {
-        console.log(name, description, price, category, quantity)
+        
         res.status(200).json({ message: 'Product created successfully.'})
     } catch (error) {
         console.log("Product create error:", error);
