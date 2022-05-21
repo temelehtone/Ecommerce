@@ -191,7 +191,7 @@ const AdminDashboard = () => {
     formData.append("productQuantity", productData.productQuantity)
 
     setLoading(true);
-    console.log(formData);
+    
     await createProduct(formData, setAlert);
     setLoading(false);
   };
