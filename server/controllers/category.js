@@ -10,7 +10,7 @@ export const createCategory = async (req, res) => {
 
         const newCategory = await Category.create({ category });
 
-        res.status(200).json({ successMessage: `Category ${newCategory.category} created successfully.`})
+        res.status(200).json({ successMessage: `Category ${newCategory.category} created successfully.`, category })
 
     } catch (error) {
         console.log("Category create error:", error);

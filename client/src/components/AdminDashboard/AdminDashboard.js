@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import isEmpty from "validator/lib/isEmpty";
+// Styles
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import AddIcon from "@mui/icons-material/Add";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
@@ -15,17 +16,19 @@ import {
   MenuItem,
 } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
-
-import { showErrorMsg, showSuccessMsg } from "../../helpers/message";
-
 import { StyledButton, ButtonBox, CustomModal, CustomProductModal, FlexBox, StyledTextField, theme } from "./styles"
-import { createCategory } from "../../redux/actions/categoryActions";
-import { createProduct } from "../../actions/product";
+// Helpers
+import { showErrorMsg, showSuccessMsg } from "../../helpers/message";
 import { productFormValidator } from "../../helpers/productFormValidator";
+// Actions
+import { createProduct } from "../../actions/product";
+
 
 // Redux
 import { useSelector, useDispatch } from "react-redux";
 import { showLoading } from "../../helpers/loading";
+import { createCategory, loadCategories } from "../../redux/actions/categoryActions";
+import { clearMessages } from "../../redux/actions/messageActions";
 
 
 
@@ -42,6 +45,10 @@ const AdminDashboard = () => {
 
   const dispatch = useDispatch()
 
+  useEffect(() => {
+		dispatch(loadCategories());
+	}, [dispatch]);
+
   const { successMsg, errorMsg } = useSelector(state => state.messages);
   const { loading } = useSelector(state => state.loading);
 
@@ -55,6 +62,11 @@ const AdminDashboard = () => {
 
   const [clientSideErrorMsg, setClientSideErrorMsg] = useState('');
 
+
+  const handleMessages = () => {
+    dispatch(clearMessages());
+    setClientSideErrorMsg("")
+  }
 
   const handleOpenCategory = () => {
     setOpenCategory(true);
@@ -78,6 +90,7 @@ const AdminDashboard = () => {
   };
 
   const handleCategoryChange = (e) => {
+    dispatch(clearMessages());
     setCategory(e.target.value);
   };
 
@@ -97,6 +110,7 @@ const AdminDashboard = () => {
     }
     const data = { category };
     dispatch(createCategory(data));
+    setCategory("")
   };
 
   const handleProductSubmit = async (e) => {
@@ -122,6 +136,7 @@ const AdminDashboard = () => {
       onClose={handleCategoryClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
+      onClick={handleMessages}
     >
       <Box
         sx={{
@@ -457,7 +472,7 @@ const AdminDashboard = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <FlexBox sx={{ bgcolor: "#353535" }}>
+      <FlexBox sx={{ bgcolor: "#353535" }} >
         <DashboardIcon sx={{ mr: 3, color: "white", fontSize: 50 }} />
         <h1 style={{ color: "white" }}>Dashboard</h1>
       </FlexBox>

@@ -31,6 +31,7 @@ export const createAccount = async (req, res) => {
     
 }
 export const login = async (req, res) => {
+    
     const { password, email } = req.body;
     try {
         const existingUser = await User.findOne({email})

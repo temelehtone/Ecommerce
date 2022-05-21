@@ -1,6 +1,6 @@
-import { LinearProgress } from '@mui/material';
+import { LinearProgress, Alert } from '@mui/material';
 import React from 'react';
 
-export const showLoading = () => {
+export const showLoading = () => (
     <LinearProgress color='secondary' />
-}
+)
