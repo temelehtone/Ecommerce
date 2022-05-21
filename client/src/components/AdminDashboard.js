@@ -266,7 +266,7 @@ const AdminDashboard = () => {
                   color: "white",
                   width: "100px",
                   my: 2,
-                  "&:hover": { bgcolor: "secondary.blue" },
+                  "&:hover": { bgcolor: "secondary.greenHover" },
                 }}
                 type="submit"
               >
