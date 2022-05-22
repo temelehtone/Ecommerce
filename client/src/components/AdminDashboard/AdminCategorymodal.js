@@ -1,0 +1,125 @@
+import React, { useState } from 'react'
+import isEmpty from "validator/lib/isEmpty";
+// Styles
+import { Box, Typography, Button } from "@mui/material"
+import { CustomModal, ButtonBox, StyledTextField } from './styles'
+// Helpers
+import { ErrorAlert, SuccessAlert } from '../../helpers/message'
+import { showLoading } from "../../helpers/loading";
+// Actions
+import { createCategory } from "../../redux/actions/categoryActions"
+// Redux
+import { useSelector, useDispatch } from "react-redux";
+import { clearMessages } from "../../redux/actions/messageActions";
+
+
+
+const AdminCategorymodal = ({ openCategory, setOpenCategory }) => {
+    const { errorMsg, successMsg } = useSelector(state => state.messages)
+    const { loading } = useSelector(state => state.loading)
+    const [category, setCategory] = useState("")
+    const dispatch = useDispatch();
+
+    const [clientSideErrorMsg, setClientSideErrorMsg] = useState('')
+
+    const handleCategoryClose = () => {
+        setOpenCategory(false);
+        setCategory("");
+      };
+    const handleCategoryChange = (e) => {
+        dispatch(clearMessages());
+        setCategory(e.target.value);
+      };
+      const handleCategorySubmit = async (e) => {
+        e.preventDefault();
+        if (isEmpty(category)) {
+          setClientSideErrorMsg("Category can't be empty.")
+          return;
+        }
+        const data = { category };
+        dispatch(createCategory(data));
+        setCategory("")
+      };
+  return (
+    <CustomModal
+      open={openCategory}
+      onClose={handleCategoryClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <Box
+        sx={{
+          display: "flex",
+          width: "100%",
+          bgcolor: "white",
+          flexDirection: "column",
+        }}
+        onSubmit={handleCategorySubmit}
+        component="form"
+      >
+          <Box
+            sx={{
+              bgcolor: "secondary.green",
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              height: "100px",
+            }}
+          >
+            <Typography
+              id="modal-modal-title"
+              variant="h6"
+              component="h4"
+              sx={{ ml: 3, color: "#fff" }}
+            >
+              Add Category
+            </Typography>
+          </Box>
+        {clientSideErrorMsg && <ErrorAlert message={clientSideErrorMsg}/>}
+        {errorMsg && <ErrorAlert message={errorMsg}/>}
+        {successMsg && <SuccessAlert message={successMsg}/>}
+
+        {loading ? (
+          showLoading()
+        ) : (
+          <>
+            <Typography sx={{ ml: 3, mt: 3 }}>Category</Typography>
+            <StyledTextField
+              onChange={handleCategoryChange}
+              name="category"
+              value={category}
+            />
+            <ButtonBox>
+              <Button
+                sx={{
+                  bgcolor: "#8E8E8E",
+                  color: "white",
+                  width: "100px",
+                  my: 2,
+                  "&:hover": { bgcolor: "red" },
+                }}
+                onClick={handleCategoryClose}
+              >
+                Close
+              </Button>
+              <Button
+                sx={{
+                  bgcolor: "secondary.green",
+                  color: "white",
+                  width: "100px",
+                  my: 2,
+                  "&:hover": { bgcolor: "secondary.greenHover" },
+                }}
+                type="submit"
+              >
+                Submit
+              </Button>
+            </ButtonBox>
+          </>
+        )}
+      </Box>
+    </CustomModal>
+  )
+}
+
+export default AdminCategorymodal

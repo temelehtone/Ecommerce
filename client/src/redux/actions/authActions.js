@@ -39,5 +39,5 @@ export const login = (formData, navigate) => async dispatch => {
 export const logout = (navigate) => async dispatch => {
     deleteAuthentication();
     navigate("/sign-in");
-    dispatch({ type: "SHOW_SUCCESS_MESSAGE", payload: "Logged out successfully."})
+    dispatch({ type: "SHOW_ERROR_MESSAGE", payload: "Logged out successfully."})
 }
