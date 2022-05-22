@@ -13,13 +13,23 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import { createAccount } from "../actions/auth";
+import { createAccount } from "../redux/actions/authActions";
 import { isAuthenticated } from "../helpers/auth";
+import { ErrorAlert, SuccessAlert } from "../helpers/message";
+
+// Redux
+import { useDispatch, useSelector } from "react-redux"
+import { showLoading } from "../helpers/loading";
 
 
-export default function SignUp({ setAlert, setLoading }) {
+export default function SignUp() {
   const theme = createTheme();
   const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const { loading } = useSelector(state => state.loading)
+  const { errorMsg, successMsg } = useSelector(state => state.messages)
+
+  const [clientSideErrorMsg, setClientsideErrorMsg] = useState('');
 
   useEffect(() => {
     if (isAuthenticated()) {
@@ -28,13 +38,10 @@ export default function SignUp({ setAlert, setLoading }) {
       } else if (isAuthenticated().role === 0) {
         navigate("/user/dashboard");
       }
-      setAlert({
-        severity: "warning",
-        message: "Sign out first!"
-      })
+      setClientsideErrorMsg("Sign out first!")
     } 
     
-  }, [navigate, setAlert])
+  }, [navigate])
 
   const initialState = {
     firstName: "",
@@ -98,17 +105,19 @@ export default function SignUp({ setAlert, setLoading }) {
     setFormErrors(errors);
     if (!isEmpty(errors)) return;
 
-    setLoading(true);
     const { firstName, lastName, email, password, confirmPassword } = formData;
     const data = { firstName, lastName, email, password, confirmPassword };
 
-    await createAccount(data, setAlert, navigate);
-    setLoading(false);
+    dispatch(createAccount(data, navigate));
   };
 
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
+      {loading && showLoading()}
+        {successMsg && <SuccessAlert message={successMsg}/>}
+        {errorMsg && <ErrorAlert message={errorMsg}/>}
+        {clientSideErrorMsg && <ErrorAlert message={clientSideErrorMsg}/>}
         <CssBaseline />
         <Box
           sx={{

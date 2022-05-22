@@ -18,7 +18,7 @@ import {
 import { ThemeProvider } from "@mui/material/styles";
 import { StyledButton, ButtonBox, CustomModal, CustomProductModal, FlexBox, StyledTextField, theme } from "./styles"
 // Helpers
-import { showErrorMsg, showSuccessMsg } from "../../helpers/message";
+import { SuccessAlert, ErrorAlert } from "../../helpers/message";
 import { productFormValidator } from "../../helpers/productFormValidator";
 // Actions
 import { createProduct } from "../../actions/product";
@@ -166,9 +166,9 @@ const AdminDashboard = () => {
               Add Category
             </Typography>
           </Box>
-        {clientSideErrorMsg && showErrorMsg(clientSideErrorMsg)}
-        {errorMsg && showErrorMsg(errorMsg)}
-        {successMsg && showSuccessMsg(successMsg)}
+        {clientSideErrorMsg && <ErrorAlert message={clientSideErrorMsg}/>}
+        {errorMsg && <ErrorAlert message={errorMsg}/>}
+        {successMsg && <SuccessAlert message={successMsg}/>}
 
         {loading ? (
           showLoading()
@@ -246,9 +246,9 @@ const AdminDashboard = () => {
               Add Product
             </Typography>
           </Box>
-          {clientSideErrorMsg && showErrorMsg(clientSideErrorMsg)}
-        {errorMsg && showErrorMsg(errorMsg)}
-        {successMsg && showSuccessMsg(successMsg)}
+          {clientSideErrorMsg && <ErrorAlert message={clientSideErrorMsg}/>}
+        {errorMsg && <ErrorAlert message={errorMsg}/>}
+        {successMsg && <SuccessAlert message={successMsg}/>}
 
         {loading ? (
           showLoading()
@@ -370,9 +370,9 @@ const AdminDashboard = () => {
               </Grid>
             </Grid>
 
-            {clientSideErrorMsg && showErrorMsg(clientSideErrorMsg)}
-            {errorMsg && showErrorMsg(errorMsg)}
-            {successMsg && showSuccessMsg(successMsg)}
+            {clientSideErrorMsg && <ErrorAlert message={clientSideErrorMsg}/>}
+        {errorMsg && <ErrorAlert message={errorMsg}/>}
+        {successMsg && <SuccessAlert message={successMsg}/>}
 
             <ButtonBox component="form" onSubmit={handleProductSubmit}>
               <Button

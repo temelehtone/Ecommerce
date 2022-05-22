@@ -14,14 +14,15 @@ import Container from "@mui/material/Container";
 import isEmpty from "validator/lib/isEmpty";
 
 
-import { login } from "../actions/auth";
+import { login } from "../redux/actions/authActions"
 import { isAuthenticated } from "../helpers/auth";
-import { showSuccessMsg, showErrorMsg } from "../helpers/message";
+import { ErrorAlert, SuccessAlert } from "../helpers/message";
 import { showLoading } from "../helpers/loading";
-import { useSelector } from "react-redux";
+// Redux
+import { useSelector, useDispatch } from "react-redux";
 
 export default function Login() {
-
+  const dispatch = useDispatch();
   const navigate = useNavigate()
   const initialState = {
     email: "",
@@ -66,15 +67,15 @@ export default function Login() {
 
     const { email, password } = formData;
     const data = { email, password };
-    await login(data, navigate);
+    dispatch(login(data, navigate));
   };
 
   return (
       <Container component="main" maxWidth="xs">
         {loading && showLoading()}
-        {clientSideErrorMsg && showErrorMsg(clientSideErrorMsg)}
-        {successMsg && showSuccessMsg(successMsg)}
-        {errorMsg && showErrorMsg(errorMsg)}
+        {clientSideErrorMsg && <ErrorAlert message={clientSideErrorMsg}/>}
+        {successMsg && <SuccessAlert message={successMsg}/>}
+        {errorMsg && <ErrorAlert message={errorMsg}/>}
         <CssBaseline />
         <Box
           sx={{
