@@ -12,24 +12,24 @@ import {
     MenuItem,
   } from "@mui/material";
 import { CustomProductModal, ButtonBox } from './styles';
-
-import { createProduct } from "../../actions/product";
-
 // Helpers
 import { SuccessAlert, ErrorAlert } from "../../helpers/message";
 import { productFormValidator } from "../../helpers/productFormValidator";
 import { showLoading } from "../../helpers/loading";
 // Redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { createProduct } from '../../redux/actions/productActions';
 
 
 const AdminProductmodal = ({openProduct, setOpenProduct}) => {
-    const { errorMsg, successMsg } = useSelector(state => state.messages)
     const { categories } = useSelector(state => state.categories);
     const { loading } = useSelector(state => state.loading)
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     const [clientSideErrorMsg, setClientSideErrorMsg] = useState('')
+    const [errorMessage, setErrorMessage] = useState("")
+    const [successMessage, setSuccessMessage] = useState("")
+
     const initialProductValues = {
         productImage: null,
         productName: "",
@@ -65,7 +65,7 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
         formData.append("productQuantity", productData.productQuantity)
     
         
-        await createProduct(formData);
+        dispatch(createProduct(formData, setErrorMessage, setSuccessMessage));
         setProductData(initialProductValues)
       };
 
@@ -104,8 +104,8 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
             </Typography>
           </Box>
           {clientSideErrorMsg && <ErrorAlert message={clientSideErrorMsg}/>}
-        {errorMsg && <ErrorAlert message={errorMsg}/>}
-        {successMsg && <SuccessAlert message={successMsg}/>}
+          {errorMessage && <ErrorAlert message={errorMessage}/>}
+          {successMessage && <SuccessAlert message={successMessage}/>}
 
         {loading ? (
           showLoading()
@@ -228,8 +228,8 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
             </Grid>
 
             {clientSideErrorMsg && <ErrorAlert message={clientSideErrorMsg}/>}
-        {errorMsg && <ErrorAlert message={errorMsg}/>}
-        {successMsg && <SuccessAlert message={successMsg}/>}
+        {errorMessage && <ErrorAlert message={errorMessage}/>}
+        {successMessage && <SuccessAlert message={successMessage}/>}
 
             <ButtonBox component="form" onSubmit={handleProductSubmit}>
               <Button

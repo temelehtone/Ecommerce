@@ -24,11 +24,11 @@ export const createCategory = async (req, res) => {
 export const getCategories = async (req, res) => {
     try {
         const categories = await Category.find({})
-        res.status(200).json({ categories: categories, errorMessage: 'Categories loaded successfully.' })
+        res.status(200).json({ categories: categories, successMessage: 'Categories loaded successfully.' })
     } catch (error) {
         console.log("Category get error:", error);
         res.status(500).json({
-            successMessage: "Something went wrong, please try again later."
+            errorMessage: "Something went wrong, please try again later."
         })
     }
 }

@@ -4,12 +4,14 @@ import { configureStore } from "@reduxjs/toolkit"
 import loadingReducer from "./reducers/loadingReducers"
 import categoryReducer from "./reducers/categoryReducers"
 import messageReducer from "./reducers/messageReducers"
+import productReducer from "./reducers/productReducers"
 
 
 const reducer = combineReducers({
     loading: loadingReducer,
     categories: categoryReducer,
     messages: messageReducer,
+    products: productReducer,
 })
 
 const initialState = {}

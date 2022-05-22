@@ -16,3 +16,4 @@ export const getCategories = () => API.get("/category/getCategories");
 
 // Product
 export const createProduct = (formData) => API.post("/product/createProduct", formData);
+export const getProducts = () => API.get("/product/getProducts");

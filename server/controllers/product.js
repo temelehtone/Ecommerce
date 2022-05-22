@@ -31,7 +31,7 @@ export const createProduct = async (req, res) => {
       .status(200)
       .json({
         successMessage: `Product ${newProduct.productName} created successfully.`,
-        newProduct
+        product: newProduct
       });
   } catch (error) {
     console.log("Product create error:", error);
@@ -40,3 +40,15 @@ export const createProduct = async (req, res) => {
     });
   }
 };
+
+export const getProducts = async (req, res) => {
+  try {
+      const products = await Product.find({})
+      res.status(200).json({ products, successMessage: 'Categories loaded successfully.' })
+  } catch (error) {
+      console.log("Product get error:", error);
+      res.status(500).json({
+          errorMessage: "Something went wrong, please try again later."
+      })
+  }
+}
