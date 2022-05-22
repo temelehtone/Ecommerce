@@ -35,6 +35,18 @@ export const FlexBox = styled(Box)(({ theme }) => ({
     flexDirection: "column",
   },
 }));
+export const GridBox = styled(Box)(({ theme }) => ({
+  display: "grid",
+  gap: 10,
+  gridTemplateColumns: 'repeat(3, 1fr)',
+  
+  [theme.breakpoints.down("md")]: {
+    gridTemplateColumns: 'repeat(2, 2fr)',
+  },
+  [theme.breakpoints.down("sm")]: {
+    gridTemplateColumns: 'repeat(1, 1fr)',
+  },
+}));
 
 export const ButtonBox = styled(Box)(({ theme }) => ({
   display: "flex",

@@ -17,13 +17,14 @@ const app = express();
 // Middleware
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+app.use(cors({credentials: true, origin: "http://localhost:3000"}));
 app.use(cookieParser());
+app.use('/uploads', express.static('uploads'))
 
 // Routes
-app.use("/api/auth", authRoutes);
-app.use("/api/category", categoryRoutes);
-app.use("/api/product", productRoutes);
+app.use("/auth", authRoutes);
+app.use("/category", categoryRoutes);
+app.use("/product", productRoutes);
 
 mongoose
   .connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })

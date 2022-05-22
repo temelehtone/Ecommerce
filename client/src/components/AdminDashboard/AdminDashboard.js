@@ -7,7 +7,7 @@ import { theme } from "./styles"
 import AdminHeader from "./AdminHeader";
 import AdminCategorymodal from "./AdminCategorymodal";
 import AdminProductmodal from "./AdminProductmodal";
-
+import AdminBody from "./AdminBody";
 // Redux
 import { useDispatch } from "react-redux";
 import { loadCategories } from "../../redux/actions/categoryActions";
@@ -47,7 +47,7 @@ const AdminDashboard = () => {
       <AdminCategorymodal openCategory={openCategory} setOpenCategory={setOpenCategory}/>
       <AdminProductmodal openProduct={openProduct} setOpenProduct={setOpenProduct} />
       <AdminOrdersModal openOrders={openOrders} setOpenOrders={setOpenOrders} />
-      
+      <AdminBody />
     </ThemeProvider>
   );
 };
