@@ -1,13 +1,13 @@
 import { START_LOADING, STOP_LOADING } from "../constants/loadingConstants";
 import { CREATE_CATEGORY, GET_CATEGORIES } from "../constants/categoryConstants";
-import { getCategories, createCat } from "../../api/index";
+import * as api from "../../api";
 import { SHOW_ERROR_MESSAGE } from "../constants/messageConstants";
 
 
 export const loadCategories = () => async dispatch => {
     try {
         dispatch({ type: START_LOADING })
-        const response = await getCategories()
+        const response = await api.getCategories()
         
         dispatch({ type: STOP_LOADING })
         dispatch({ type: GET_CATEGORIES, payload: response.data.categories })
@@ -21,7 +21,7 @@ export const loadCategories = () => async dispatch => {
 export const createCategory = (formData, setErrorMessage, setSuccessMessage) => async dispatch => {
     try {
         dispatch({ type: START_LOADING })
-        const response = await createCat(formData)
+        const response = await api.createCategory(formData)
         dispatch({ type: STOP_LOADING })
         dispatch({ type: CREATE_CATEGORY, payload: response.data.category })
         setSuccessMessage(response.data.successMessage)
