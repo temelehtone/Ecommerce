@@ -1,5 +1,5 @@
 import { styled, createTheme } from "@mui/material/styles";
-import { Modal, Button, Box, TextField } from "@mui/material";
+import { Modal, Button, Box, TextField, IconButton } from "@mui/material";
 import { red, blue, green } from "@mui/material/colors";
 
 export const theme = createTheme({
@@ -22,6 +22,11 @@ export const StyledButton = styled(Button)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     width: "50%",
   },
+  border: "1px solid",
+}));
+export const StyledCardButton = styled(Button)(({ theme }) => ({
+  
+
   border: "1px solid",
 }));
 
@@ -89,4 +94,15 @@ export const CustomProductModal = styled(Modal)(({ theme }) => ({
 
 export const StyledTextField = styled(TextField)(({ theme }) => ({
   margin: "20px",
+}));
+
+export const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  marginLeft: 'auto',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest,
+  }),
 }));

@@ -1,19 +1,85 @@
 import React from "react";
 // Styles
-import { Card, Box } from "@mui/material";
+import {
+  Card,
+  CardHeader,
+  CardMedia,
+  CardActions,
+  Button,
+  CardContent,
+  Typography,
+  Collapse,
+} from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { ExpandMore } from "./styles";
 
 const AdminProductCard = ({ p }) => {
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
+
   return (
     <>
-      <Card key={p._id} sx={{ display: "flex", flexDirection: "column" }}>
-        <Box sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
-          <img
-            src={`http://localhost:5000/uploads/${p.fileName}`}
-            alt="product-img"
-            style={{ height: 300 }}
-          />
-          <h1>{p.productName}</h1>
-        </Box>
+      <Card key={p._id} sx={{ maxWidth: 345, textAlign: "center" }}>
+        <CardMedia
+          component="img"
+          height="400"
+          image={`http://localhost:5000/uploads/${p.fileName}`}
+          alt="product-img"
+        />
+        <CardHeader
+          sx={{ textAlign: "center" }}
+          title={p.productName}
+          subheader={p.productPrice.toLocaleString("en-US", {
+            style: "currency",
+            currency: "USD",
+          })}
+        />
+        <hr />
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <CardContent>
+            <Typography variant="body2">{p.productDescription}</Typography>
+          </CardContent>
+        </Collapse>
+        <CardContent>
+          {p.productDescription.length < 100 ? (
+            <Typography variant="body2">{p.productDescription}</Typography>
+          ) : (
+            <>
+              {expanded ? (
+                null
+              ) : (
+                <Typography variant="body2">{p.productDescription.substring(0, 100)}</Typography>
+              )}
+              <CardActions>
+                  <ExpandMore
+                    expand={expanded}
+                    onClick={handleExpandClick}
+                    aria-expanded={expanded}
+                    aria-label="show more"
+                  >
+                    <ExpandMoreIcon />
+                  </ExpandMore>
+                </CardActions>
+            </>
+          )}
+        </CardContent>
+        
+        <hr />
+        <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Button>
+            <EditIcon />
+            Edit
+          </Button>
+          <Button sx={{ color: "red" }}>
+            <DeleteIcon />
+            Delete
+          </Button>
+        </CardActions>
       </Card>
     </>
   );
