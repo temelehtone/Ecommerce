@@ -43,6 +43,8 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
     const handleProductClose = () => {
         setOpenProduct(false);
         setProductData(initialProductValues)
+        setErrorMessage("")
+        setSuccessMessage("")
       };
 
     const handleProductChange = (e) => {

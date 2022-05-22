@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // Styles
 import {
   Card,
@@ -15,8 +15,13 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { ExpandMore } from "./styles";
 
+// Redux
+import { useDispatch } from "react-redux"
+import { deleteProduct } from "../../redux/actions/productActions";
+
 const AdminProductCard = ({ p }) => {
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const dispatch = useDispatch()
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -75,7 +80,7 @@ const AdminProductCard = ({ p }) => {
             <EditIcon />
             Edit
           </Button>
-          <Button sx={{ color: "red" }}>
+          <Button sx={{ color: "red" }} onClick={() =>dispatch(deleteProduct(p._id))}>
             <DeleteIcon />
             Delete
           </Button>

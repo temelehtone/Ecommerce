@@ -1,4 +1,5 @@
 import Product from "../models/Product.js";
+import fs from "fs";
 
 export const createProduct = async (req, res) => {
   const {
@@ -27,12 +28,10 @@ export const createProduct = async (req, res) => {
       productQuantity: productQuantity,
     });
 
-    res
-      .status(200)
-      .json({
-        successMessage: `Product ${newProduct.productName} created successfully.`,
-        product: newProduct
-      });
+    res.status(200).json({
+      successMessage: `Product ${newProduct.productName} created successfully.`,
+      product: newProduct,
+    });
   } catch (error) {
     console.log("Product create error:", error);
     res.status(500).json({
@@ -43,12 +42,43 @@ export const createProduct = async (req, res) => {
 
 export const getProducts = async (req, res) => {
   try {
-      const products = await Product.find({}).populate('productCategory', 'category');
-      res.status(200).json({ products, successMessage: 'Categories loaded successfully.' })
+    const products = await Product.find({}).populate(
+      "productCategory",
+      "category"
+    );
+    res
+      .status(200)
+      .json({ products, successMessage: "Categories loaded successfully." });
   } catch (error) {
-      console.log("Product get error:", error);
-      res.status(500).json({
-          errorMessage: "Something went wrong, please try again later."
-      })
+    console.log("Product get error:", error);
+    res.status(500).json({
+      errorMessage: "Something went wrong, please try again later.",
+    });
   }
-}
+};
+
+export const deleteProduct = async (req, res) => {
+  try {
+    const productId = req.params.productId;
+
+    const deletedProduct = await Product.findByIdAndDelete(productId);
+
+    fs.unlink(`uploads/${deletedProduct.fileName}`, (err) => {
+      if (err) throw err;
+      console.log(
+        "Image deleted successfully from filesystem: ",
+        deletedProduct.fileName
+      );
+    });
+
+    res.status(200).json({
+      deletedProduct,
+      successMessage: "Product deleted successfully.",
+    });
+  } catch (error) {
+    console.log("Delete product error:", error);
+    res.status(500).json({
+      errorMessage: "Something went wrong, please try again later.",
+    });
+  }
+};

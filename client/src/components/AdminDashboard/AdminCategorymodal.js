@@ -23,6 +23,8 @@ const AdminCategorymodal = ({ openCategory, setOpenCategory }) => {
     const handleCategoryClose = () => {
         setOpenCategory(false);
         setCategory("");
+        setSuccessMessage("")
+        setErrorMessage("")
       };
     const handleCategoryChange = (e) => {
         setErrorMessage("")
