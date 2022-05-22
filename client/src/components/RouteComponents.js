@@ -1,6 +1,6 @@
 import React from "react";
 import {Routes, Route} from "react-router-dom"
-import { Box, Toolbar, Container, LinearProgress } from "@mui/material"
+import { Box, Toolbar, Container } from "@mui/material"
 
 import HomePage from "./HomePage";
 import Login from "./Login";
@@ -12,15 +12,8 @@ import SettingPage from "./SettingPage";
 
 import AdminRoute from "./AdminRoute";
 import UserRoute from "./UserRoute";
-import { ErrorAlert, SuccessAlert } from "../helpers/message";
-
-// Redux
-import { useSelector } from "react-redux"
 
 export const RouteComponents = () => {
-
-    const { loading } = useSelector(state => state.loading);
-    const { successMsg, errorMsg } = useSelector(state => state.messages);
 
   return (
     <Box
@@ -37,9 +30,6 @@ export const RouteComponents = () => {
     >
       <Toolbar />
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-        {loading && <LinearProgress color="secondary" />}
-        {successMsg && <SuccessAlert message={successMsg}/>}
-        {errorMsg && <ErrorAlert message={errorMsg}/>}
         <Routes>
           <Route exact path="/" element={<HomePage />} />
           <Route

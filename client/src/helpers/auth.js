@@ -21,8 +21,3 @@ export const isAuthenticated = () => {
   }
   return false;
 };
-
-export const logout = (navigate) => {
-    deleteAuthentication();
-    navigate("/sign-in");
-}

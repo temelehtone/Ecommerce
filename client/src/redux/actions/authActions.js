@@ -1,5 +1,5 @@
 import * as api from "../../api";
-import { setAuthentication, isAuthenticated } from "../../helpers/auth"
+import { setAuthentication, isAuthenticated, deleteAuthentication } from "../../helpers/auth"
 
 export const createAccount = (formData, navigate) => async dispatch => {
   await api
@@ -34,4 +34,10 @@ export const login = (formData, navigate) => async dispatch => {
   } catch (err) {
     dispatch({  type: "SHOW_ERROR_MESSAGE", payload: err.response.data.errorMessage })
   }
+}
+
+export const logout = (navigate) => async dispatch => {
+    deleteAuthentication();
+    navigate("/sign-in");
+    dispatch({ type: "SHOW_SUCCESS_MESSAGE", payload: "Logged out successfully."})
 }

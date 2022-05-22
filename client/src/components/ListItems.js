@@ -13,11 +13,15 @@ import LoginIcon from "@mui/icons-material/Login";
 import SettingsIcon from "@mui/icons-material/Settings";
 import HomeIcon from "@mui/icons-material/Home";
 
-import { logout, isAuthenticated } from "../helpers/auth";
+import { isAuthenticated } from "../helpers/auth";
+import { logout } from "../redux/actions/authActions"
+// Redux
+import { useDispatch } from "react-redux";
 
 
 export const MainListItems = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch();
 
   const navigateDashboard = () => {
     if (isAuthenticated().role === 1) {
@@ -74,7 +78,7 @@ export const MainListItems = () => {
         </ListItemButton>
         <ListItemButton
           onClick={() => {
-            logout(navigate);
+            dispatch(logout(navigate));
           }}
         >
           <ListItemIcon>
