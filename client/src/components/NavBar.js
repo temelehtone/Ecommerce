@@ -183,8 +183,9 @@ export const NavBar = () => {
               </IconButton>
             </Box>
           </Toolbar>
+          {loading && showLoading()}
         </AppBar>
-        {loading && showLoading()}
+        
         <Drawer variant="permanent" open={open}>
           <Toolbar
             sx={{

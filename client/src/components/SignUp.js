@@ -15,19 +15,17 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { createAccount } from "../redux/actions/authActions";
 import { isAuthenticated } from "../helpers/auth";
-import { ErrorAlert, SuccessAlert } from "../helpers/message";
+import { ErrorAlert } from "../helpers/message";
 
 // Redux
-import { useDispatch, useSelector } from "react-redux"
-import { showLoading } from "../helpers/loading";
+import { useDispatch } from "react-redux"
+
 
 
 export default function SignUp() {
   const theme = createTheme();
   const navigate = useNavigate()
   const dispatch = useDispatch();
-  const { loading } = useSelector(state => state.loading)
-  const { errorMsg, successMsg } = useSelector(state => state.messages)
 
   const [clientSideErrorMsg, setClientsideErrorMsg] = useState('');
 
@@ -114,9 +112,6 @@ export default function SignUp() {
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
-      {loading && showLoading()}
-        {successMsg && <SuccessAlert message={successMsg}/>}
-        {errorMsg && <ErrorAlert message={errorMsg}/>}
         {clientSideErrorMsg && <ErrorAlert message={clientSideErrorMsg}/>}
         <CssBaseline />
         <Box

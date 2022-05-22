@@ -1,7 +1,8 @@
 import React from "react";
 import {Routes, Route} from "react-router-dom"
+// Styles
 import { Box, Toolbar, Container } from "@mui/material"
-
+// Components
 import HomePage from "./HomePage";
 import Login from "./Login";
 import SignUp from "./SignUp";
@@ -9,11 +10,15 @@ import NotFound from "./NotFound";
 import AdminDashboard from "./AdminDashboard/AdminDashboard";
 import UserDashboard from "./UserDashboard";
 import SettingPage from "./SettingPage";
-
 import AdminRoute from "./AdminRoute";
 import UserRoute from "./UserRoute";
+import { ErrorAlert, SuccessAlert } from "../helpers/message";
+// Redux
+import { useSelector } from "react-redux"
 
 export const RouteComponents = () => {
+
+    const { successMsg, errorMsg } = useSelector(state => state.messages);
 
   return (
     <Box
@@ -30,6 +35,9 @@ export const RouteComponents = () => {
     >
       <Toolbar />
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+        
+        {successMsg && <SuccessAlert message={successMsg}/>}
+        {errorMsg && <ErrorAlert message={errorMsg}/>}
         <Routes>
           <Route exact path="/" element={<HomePage />} />
           <Route

@@ -16,10 +16,10 @@ import isEmpty from "validator/lib/isEmpty";
 
 import { login } from "../redux/actions/authActions"
 import { isAuthenticated } from "../helpers/auth";
-import { ErrorAlert, SuccessAlert } from "../helpers/message";
-import { showLoading } from "../helpers/loading";
+import { ErrorAlert } from "../helpers/message";
+
 // Redux
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -30,9 +30,6 @@ export default function Login() {
   };
   const [formData, setFormData] = useState(initialState);
   const [clientSideErrorMsg, setClientsideErrorMsg] = useState('')
-
-  const { errorMsg, successMsg } = useSelector(state => state.messages)
-  const { loading } = useSelector(state => state.loading);
 
   useEffect(() => {
     if (isAuthenticated()) {
@@ -72,10 +69,7 @@ export default function Login() {
 
   return (
       <Container component="main" maxWidth="xs">
-        {loading && showLoading()}
         {clientSideErrorMsg && <ErrorAlert message={clientSideErrorMsg}/>}
-        {successMsg && <SuccessAlert message={successMsg}/>}
-        {errorMsg && <ErrorAlert message={errorMsg}/>}
         <CssBaseline />
         <Box
           sx={{

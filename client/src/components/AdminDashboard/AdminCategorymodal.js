@@ -10,24 +10,22 @@ import { showLoading } from "../../helpers/loading";
 import { createCategory } from "../../redux/actions/categoryActions"
 // Redux
 import { useSelector, useDispatch } from "react-redux";
-import { clearMessages } from "../../redux/actions/messageActions";
-
-
 
 const AdminCategorymodal = ({ openCategory, setOpenCategory }) => {
-    const { errorMsg, successMsg } = useSelector(state => state.messages)
     const { loading } = useSelector(state => state.loading)
     const [category, setCategory] = useState("")
     const dispatch = useDispatch();
 
     const [clientSideErrorMsg, setClientSideErrorMsg] = useState('')
+    const [errorMessage, setErrorMessage] = useState("")
+    const [successMessage, setSuccessMessage] = useState("")
 
     const handleCategoryClose = () => {
         setOpenCategory(false);
         setCategory("");
       };
     const handleCategoryChange = (e) => {
-        dispatch(clearMessages());
+        setErrorMessage("")
         setCategory(e.target.value);
       };
       const handleCategorySubmit = async (e) => {
@@ -37,7 +35,7 @@ const AdminCategorymodal = ({ openCategory, setOpenCategory }) => {
           return;
         }
         const data = { category };
-        dispatch(createCategory(data));
+        dispatch(createCategory(data, setErrorMessage, setSuccessMessage));
         setCategory("")
       };
   return (
@@ -76,8 +74,8 @@ const AdminCategorymodal = ({ openCategory, setOpenCategory }) => {
             </Typography>
           </Box>
         {clientSideErrorMsg && <ErrorAlert message={clientSideErrorMsg}/>}
-        {errorMsg && <ErrorAlert message={errorMsg}/>}
-        {successMsg && <SuccessAlert message={successMsg}/>}
+        {errorMessage && <ErrorAlert message={errorMessage}/>}
+        {successMessage && <SuccessAlert message={successMessage}/>}
 
         {loading ? (
           showLoading()
