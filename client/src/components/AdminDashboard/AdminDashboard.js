@@ -12,6 +12,7 @@ import AdminProductmodal from "./AdminProductmodal";
 import { useDispatch } from "react-redux";
 import { loadCategories } from "../../redux/actions/categoryActions";
 import AdminOrdersModal from "./AdminOrdersModal";
+import { getProducts } from "../../redux/actions/productActions";
 
 const AdminDashboard = () => {
   
@@ -19,6 +20,9 @@ const AdminDashboard = () => {
 
   useEffect(() => {
 		dispatch(loadCategories());
+	}, [dispatch]);
+  useEffect(() => {
+		dispatch(getProducts());
 	}, [dispatch]);
 
   const [openCategory, setOpenCategory] = useState(false);

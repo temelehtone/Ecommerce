@@ -43,7 +43,7 @@ export const createProduct = async (req, res) => {
 
 export const getProducts = async (req, res) => {
   try {
-      const products = await Product.find({})
+      const products = await Product.find({}).populate('productCategory', 'category');
       res.status(200).json({ products, successMessage: 'Categories loaded successfully.' })
   } catch (error) {
       console.log("Product get error:", error);
