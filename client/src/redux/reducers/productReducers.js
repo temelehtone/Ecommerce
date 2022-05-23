@@ -1,4 +1,4 @@
-import { GET_PRODUCTS, CREATE_PRODUCT, DELETE_PRODUCT } from "../constants/productConstants"
+import { GET_PRODUCTS, CREATE_PRODUCT, DELETE_PRODUCT, GET_PRODUCT } from "../constants/productConstants"
 
 const INITIAL_STATE = {
     products: []
@@ -10,6 +10,11 @@ const productReducer = (state=INITIAL_STATE, action) => {
             return {
                 ...state,
                 products: action.payload
+            }
+        case GET_PRODUCT:
+            return {
+                ...state,
+                product: action.payload
             }
         case CREATE_PRODUCT:
             return {

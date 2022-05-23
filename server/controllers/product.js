@@ -57,6 +57,26 @@ export const getProducts = async (req, res) => {
   }
 };
 
+export const getProduct = async (req, res) => {
+  try {
+    
+    const productId = req.params.productId;
+    console.log(productId)
+    const product = await Product.findById(productId).populate(
+      "productCategory",
+      "category"
+    );
+    res
+      .status(200)
+      .json({ product });
+  } catch (error) {
+    console.log("Product get error:", error);
+    res.status(500).json({
+      errorMessage: "Something went wrong, please try again later.",
+    });
+  }
+};
+
 export const deleteProduct = async (req, res) => {
   try {
     const productId = req.params.productId;

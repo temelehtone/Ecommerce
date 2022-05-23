@@ -1,7 +1,7 @@
 import * as api from "../../api";
 import { START_LOADING, STOP_LOADING } from "../constants/loadingConstants";
 import { SHOW_ERROR_MESSAGE, SHOW_SUCCESS_MESSAGE } from "../constants/messageConstants";
-import { CREATE_PRODUCT, GET_PRODUCTS, DELETE_PRODUCT } from "../constants/productConstants";
+import { CREATE_PRODUCT, GET_PRODUCTS, DELETE_PRODUCT, GET_PRODUCT } from "../constants/productConstants";
 
 export const createProduct =
   (formData, setErrorMessage, setSuccessMessage) => async (dispatch) => {
@@ -26,6 +26,21 @@ export const getProducts = () => async (dispatch) => {
     dispatch({ type: STOP_LOADING });
   } catch (error) {
     console.log("getProducts api error:", error)
+    dispatch({
+      type: SHOW_ERROR_MESSAGE,
+      payload: error.response.data.errorMessage,
+    });
+    dispatch({ type: STOP_LOADING });
+  }
+};
+export const getProduct = (productId) => async dispatch => {
+  try {
+    dispatch({ type: START_LOADING });
+    const response = await api.getProduct(productId);
+    dispatch({ type: GET_PRODUCT, payload: response.data.product });
+    dispatch({ type: STOP_LOADING });
+  } catch (error) {
+    console.log("getProduct api error:", error)
     dispatch({
       type: SHOW_ERROR_MESSAGE,
       payload: error.response.data.errorMessage,
