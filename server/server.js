@@ -7,7 +7,7 @@ import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.js";
 import categoryRoutes from "./routes/category.js";
 import productRoutes from "./routes/product.js";
-import { CONNECTION_URL } from "./config/keys.js"
+import { MONGODB_URI } from "./config/keys.js"
 import { PORT } from "./config/dev.js"
 
 
@@ -26,8 +26,13 @@ app.use("/auth", authRoutes);
 app.use("/category", categoryRoutes);
 app.use("/product", productRoutes);
 
+// For production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('../client/build'))
+}
+
 mongoose
-  .connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() =>
     app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
   )
