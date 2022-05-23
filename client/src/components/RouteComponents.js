@@ -7,10 +7,11 @@ import HomePage from "./HomePage";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import NotFound from "./NotFound";
-import AdminDashboard from "./AdminDashboard/AdminDashboard";
+import AdminDashboard from "./Admin/AdminDashboard";
 import UserDashboard from "./UserDashboard";
 import SettingPage from "./SettingPage";
-import AdminRoute from "./AdminRoute";
+import AdminRoute from "./Admin/AdminRoute";
+import AdminEditProduct from "./Admin/AdminEditProduct";
 import UserRoute from "./UserRoute";
 import { ErrorAlert, SuccessAlert } from "../helpers/message";
 // Redux
@@ -61,6 +62,14 @@ export const RouteComponents = () => {
             element={
               <AdminRoute>
                 <AdminDashboard />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/edit/product/:productId"
+            element={
+              <AdminRoute>
+                <AdminEditProduct />
               </AdminRoute>
             }
           />

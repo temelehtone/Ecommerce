@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"
 // Styles
 import {
   Card,
@@ -22,6 +23,7 @@ import { deleteProduct } from "../../redux/actions/productActions";
 const AdminProductCard = ({ p }) => {
   const [expanded, setExpanded] = useState(false);
   const dispatch = useDispatch()
+  const navigate = useNavigate();
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -76,7 +78,7 @@ const AdminProductCard = ({ p }) => {
         
         <hr />
         <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Button>
+          <Button onClick={() => navigate(`/admin/edit/product/${p._id}`)}>
             <EditIcon />
             Edit
           </Button>

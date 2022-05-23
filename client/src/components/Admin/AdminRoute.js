@@ -1,6 +1,6 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
-import { isAuthenticated } from '../helpers/auth'
+import { isAuthenticated } from '../../helpers/auth'
 
 const AdminRoute = ({ children }) => {
   
