@@ -19,7 +19,6 @@ import MuiDrawer from "@mui/material/Drawer";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { Divider, List, CssBaseline } from "@mui/material";
 
-import logo from "../images/Logo.png";
 import { MainListItems } from "./ListItems";
 
 // Redux
@@ -69,7 +68,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   
 }));
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -107,7 +106,6 @@ const Drawer = styled(MuiDrawer, {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
-      width: theme.spacing(7),
       [theme.breakpoints.up("sm")]: {
         width: theme.spacing(9),
       },
@@ -145,7 +143,7 @@ export const NavBar = () => {
               aria-label="open drawer"
               onClick={toggleDrawer}
               sx={{
-                marginRight: "36px",
+                marginRight: "10px",
                 ...(open && { display: "none" }),
               }}
             >
@@ -158,7 +156,7 @@ export const NavBar = () => {
               sx={{ display: { xs: "none", sm: "block" } }}
             >
               <a href="/">
-                <img alt="" src={logo} style={{ width: "50px" }} />
+                <img alt="" src={"/images/Logo.png"} style={{ width: "50px" }} />
               </a>
             </Typography>
             <Search>

@@ -35,7 +35,7 @@ export const RouteComponents = () => {
       }}
     >
       <Toolbar />
-      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+      <Container sx={{ mt: 4, mb: 4 }}>
         
         {successMsg && <SuccessAlert message={successMsg}/>}
         {errorMsg && <ErrorAlert message={errorMsg}/>}
