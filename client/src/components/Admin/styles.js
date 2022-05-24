@@ -56,7 +56,7 @@ export const GridBox = styled(Box)(({ theme }) => ({
 export const ButtonBox = styled(Box)(({ theme }) => ({
   display: "flex",
   width: "100%",
-  justifyContent: "space-between",
+  justifyContent: "center",
   paddingInline: "20px",
   borderTop: "1px solid #777",
   [theme.breakpoints.down("sm")]: {

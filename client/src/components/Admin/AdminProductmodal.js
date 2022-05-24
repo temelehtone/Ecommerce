@@ -113,7 +113,7 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
           showLoading()
         ) : (
           <>
-            <Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
+            <Grid container spacing={2} sx={{ mb: 2, mt: 1, justifyContent: "center" }} >
               <Grid item xs={11} sm={11} sx={{ ml: 1 }}>
                 <InputLabel htmlFor="productImage">Image</InputLabel>
                 <Input
