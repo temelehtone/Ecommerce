@@ -18,3 +18,4 @@ export const createProduct = (formData) => API.post("/product/createProduct", fo
 export const getProduct = (productId) => API.get(`/product/getProduct/${productId}`);
 export const getProducts = () => API.get("/product/getProducts");
 export const deleteProduct = (productId) => API.delete(`/product/deleteProduct/${productId}`);
+export const editProduct = (productId, formData) => API.put(`/product/editProduct/${productId}`, formData)

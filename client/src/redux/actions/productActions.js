@@ -69,3 +69,25 @@ export const deleteProduct = (productId) => async dispatch => {
     dispatch({ type: STOP_LOADING });
   }
 }
+
+export const editProduct = (productId, formData, navigate) => async dispatch => {
+  try {
+    dispatch({ type: START_LOADING });
+    
+    const response = await api.editProduct(productId, formData);
+    
+    dispatch({
+      type: SHOW_SUCCESS_MESSAGE,
+      payload: response.data.successMessage,
+    });
+    navigate("/admin/dashboard");
+    dispatch({ type: STOP_LOADING });
+  } catch (error) {
+    console.log("editProduct api error:", error)
+    dispatch({
+      type: SHOW_ERROR_MESSAGE,
+      payload: error.response.data.errorMessage,
+    });
+    dispatch({ type: STOP_LOADING });
+  }
+}

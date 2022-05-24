@@ -1,6 +1,6 @@
 import express from "express";
 
-import { createProduct, getProducts, deleteProduct, getProduct } from "../controllers/product.js"
+import { createProduct, getProducts, deleteProduct, getProduct, editProduct } from "../controllers/product.js"
 import { authenticateJWT } from "../middleware/authenticator.js";
 import { upload } from "../middleware/multer.js"
 
@@ -11,5 +11,6 @@ router.post("/createProduct", authenticateJWT, upload.single('productImage'), cr
 router.get("/getProducts", getProducts);
 router.get("/getProduct/:productId", getProduct);
 router.delete("/deleteProduct/:productId", authenticateJWT, deleteProduct);
+router.put("/editProduct/:productId", authenticateJWT, upload.single('productImage'), editProduct);
 
 export default router

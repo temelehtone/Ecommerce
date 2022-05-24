@@ -19,10 +19,9 @@ import { ErrorAlert } from "../../helpers/message";
 
 // Redux
 import { useDispatch, useSelector } from "react-redux";
-import { getProduct } from "../../redux/actions/productActions";
+import { editProduct, getProduct } from "../../redux/actions/productActions";
 import {
   loadCategories,
-  loadGategories,
 } from "../../redux/actions/categoryActions";
 
 const AdminEditProduct = () => {
@@ -77,7 +76,8 @@ const AdminEditProduct = () => {
     formData.append("productCategory", productData.productCategory);
     formData.append("productQuantity", productData.productQuantity);
 
-    setProductData(initialProductValues);
+    dispatch(editProduct(productId, formData, navigate))
+
   };
 
   return (

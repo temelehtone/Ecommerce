@@ -82,10 +82,6 @@ export const deleteProduct = async (req, res) => {
 
     fs.unlink(`uploads/${deletedProduct.fileName}`, (err) => {
       if (err) throw err;
-      console.log(
-        "Image deleted successfully from filesystem: ",
-        deletedProduct.fileName
-      );
     });
 
     res.status(200).json({
@@ -99,3 +95,26 @@ export const deleteProduct = async (req, res) => {
     });
   }
 };
+
+export const editProduct = async (req, res) => {
+  try {
+    
+    const productId = req.params.productId;
+    req.body.fileName = req.file.filename;
+    const oldProduct = await Product.findByIdAndUpdate(productId, req.body)
+    fs.unlink(`uploads/${oldProduct.fileName}`, (err) => {
+      if (err) throw err;
+      
+    })
+       
+    res
+      .status(200)
+      .json({ successMessage: "Product edited successfully." });
+
+  } catch (error) {
+    console.log("Product edit error:", error);
+    res.status(500).json({
+      errorMessage: "Something went wrong, please try again later.",
+    });
+  }
+}

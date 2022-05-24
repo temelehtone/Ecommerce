@@ -8,17 +8,18 @@ export const productFormValidator = (productData, setClientsideErrorMsg) => {
   if (
     isEmpty(productData.productName) ||
     isEmpty(productData.productDescription) ||
-    isEmpty(productData.productPrice)
+    isEmpty(productData.productPrice.toString())
   ) {
     setClientsideErrorMsg("All fields are required.");
     return false;
   }
-  const price = parseFloat(productData.productPrice);
+
+  const price = parseFloat(productData.productPrice.toString());
 
   if (
     isNaN(price) ||
-    productData.productPrice.split(",").length > 1 ||
-    productData.productPrice.split(" ").length > 1
+    productData.productPrice.toString().split(",").length > 1 ||
+    productData.productPrice.toString().split(" ").length > 1
   ) {
     setClientsideErrorMsg(
       "Price must be a number. Type should be something like 12.4"
@@ -33,7 +34,7 @@ export const productFormValidator = (productData, setClientsideErrorMsg) => {
     setClientsideErrorMsg("Please select a category.");
     return false;
   }
-  if (isEmpty(productData.productQuantity)) {
+  if (isEmpty(productData.productQuantity.toString())) {
     setClientsideErrorMsg("Please select a quantity.");
     return false;
   }

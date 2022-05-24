@@ -52,15 +52,15 @@ const AdminProductCard = ({ p }) => {
             <Typography variant="body2">{p.productDescription}</Typography>
           </CardContent>
         </Collapse>
-        <CardContent>
-          {p.productDescription.length < 100 ? (
+        <CardContent sx={{ height: 100}}>
+          {p.productDescription.length < 90 ? (
             <Typography variant="body2">{p.productDescription}</Typography>
           ) : (
             <>
               {expanded ? (
                 null
               ) : (
-                <Typography variant="body2">{p.productDescription.substring(0, 100)}</Typography>
+                <Typography variant="body2">{p.productDescription.substring(0, 90)}</Typography>
               )}
               <CardActions>
                   <ExpandMore
