@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
-// Styles
-import { ThemeProvider } from "@mui/material/styles";
-import { theme } from "./styles"
 
-// Components 
+// Components
 import AdminHeader from "./AdminHeader";
 import AdminCategorymodal from "./AdminCategorymodal";
 import AdminProductmodal from "./AdminProductmodal";
@@ -15,15 +12,14 @@ import AdminOrdersModal from "./AdminOrdersModal";
 import { getProducts } from "../../redux/actions/productActions";
 
 const AdminDashboard = () => {
-  
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
-		dispatch(loadCategories());
-	}, [dispatch]);
+    dispatch(loadCategories());
+  }, [dispatch]);
   useEffect(() => {
-		dispatch(getProducts());
-	}, [dispatch]);
+    dispatch(getProducts());
+  }, [dispatch]);
 
   const [openCategory, setOpenCategory] = useState(false);
   const [openProduct, setOpenProduct] = useState(false);
@@ -32,7 +28,7 @@ const AdminDashboard = () => {
   const handleOpenCategory = () => {
     setOpenCategory(true);
   };
-  
+
   const handleOpenProduct = () => {
     setOpenProduct(true);
   };
@@ -41,14 +37,23 @@ const AdminDashboard = () => {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      
-      <AdminHeader handleOpenCategory={handleOpenCategory} handleOpenProduct={handleOpenProduct} handleOpenOrders={handleOpenOrders}/>
-      <AdminCategorymodal openCategory={openCategory} setOpenCategory={setOpenCategory}/>
-      <AdminProductmodal openProduct={openProduct} setOpenProduct={setOpenProduct} />
+    <>
+      <AdminHeader
+        handleOpenCategory={handleOpenCategory}
+        handleOpenProduct={handleOpenProduct}
+        handleOpenOrders={handleOpenOrders}
+      />
+      <AdminCategorymodal
+        openCategory={openCategory}
+        setOpenCategory={setOpenCategory}
+      />
+      <AdminProductmodal
+        openProduct={openProduct}
+        setOpenProduct={setOpenProduct}
+      />
       <AdminOrdersModal openOrders={openOrders} setOpenOrders={setOpenOrders} />
       <AdminBody />
-    </ThemeProvider>
+    </>
   );
 };
 

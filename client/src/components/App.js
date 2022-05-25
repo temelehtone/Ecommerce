@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { NavBar, mdTheme } from "./NavBar";
+import { NavBar } from "./NavBar";
 import { ThemeProvider } from "@emotion/react";
 import { RouteComponents } from "./RouteComponents";
+import { theme } from "./styles";
 import Box from "@mui/material/Box";
 // Redux imports
 import { useDispatch } from "react-redux";
@@ -15,7 +16,7 @@ const App = () => {
   }, [dispatch]);
 
   return (
-    <ThemeProvider theme={mdTheme}>
+    <ThemeProvider theme={theme}>
       <Box sx={{ display: "flex" }}>
         <NavBar />
         <RouteComponents />

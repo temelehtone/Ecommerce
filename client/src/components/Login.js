@@ -21,7 +21,7 @@ import { ErrorAlert } from "../helpers/message";
 // Redux
 import { useDispatch } from "react-redux";
 
-export default function Login() {
+const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const initialState = {
@@ -136,3 +136,5 @@ export default function Login() {
       </Container>
   );
 }
+
+export default Login;

@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react'
-
+// Styles
+import { FlexBox, GridBox } from './styles'
+// Components
+import ProductCard from './ProductCard'
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
 import { getNewArrivals } from '../redux/actions/filterActions'
@@ -17,7 +20,14 @@ const HomePage = () => {
     <section style={{ height: '100vh' }}>
       <div style={{ backgroundImage: "url(/images/canaria2.jpg)", height: '60%', backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }}></div>
       <hr />
-      {JSON.stringify(newArrivals)}
+      <FlexBox sx={{mt: 2}}>
+        <GridBox>
+            {/* {newArrivals && newArrivals.map(p => (
+                <ProductCard p={p} key={p._id}/>
+
+            ))} */}
+        </GridBox>
+        </FlexBox>
     </section>
   ) 
 }

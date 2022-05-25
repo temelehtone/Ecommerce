@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import isEmpty from "validator/lib/isEmpty";
 // Styles
 import { Box, Typography, Button } from "@mui/material"
-import { CustomModal, ButtonBox, StyledTextField } from './styles'
+import { CustomModal, ButtonBox, StyledTextField } from '../styles'
 // Helpers
 import { ErrorAlert, SuccessAlert } from '../../helpers/message'
 import { showLoading } from "../../helpers/loading";
@@ -54,10 +54,9 @@ const AdminCategorymodal = ({ openCategory, setOpenCategory }) => {
           bgcolor: "white",
           flexDirection: "column",
         }}
-        onSubmit={handleCategorySubmit}
-        component="form"
+        
       >
-          <Box
+          <ButtonBox
             sx={{
               bgcolor: "secondary.green",
               width: "100%",
@@ -74,7 +73,7 @@ const AdminCategorymodal = ({ openCategory, setOpenCategory }) => {
             >
               Add Category
             </Typography>
-          </Box>
+          </ButtonBox>
         {clientSideErrorMsg && <ErrorAlert message={clientSideErrorMsg}/>}
         {errorMessage && <ErrorAlert message={errorMessage}/>}
         {successMessage && <SuccessAlert message={successMessage}/>}
@@ -89,7 +88,8 @@ const AdminCategorymodal = ({ openCategory, setOpenCategory }) => {
               name="category"
               value={category}
             />
-            <ButtonBox>
+            <ButtonBox onSubmit={handleCategorySubmit}
+        component="form">
               <Button
                 sx={{
                   bgcolor: "#8E8E8E",

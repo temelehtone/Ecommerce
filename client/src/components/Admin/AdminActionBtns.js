@@ -1,6 +1,6 @@
 import React from 'react'
 // Styles
-import { StyledButton } from "./styles"
+import { StyledButton } from "../styles"
 import AddIcon from "@mui/icons-material/Add";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 

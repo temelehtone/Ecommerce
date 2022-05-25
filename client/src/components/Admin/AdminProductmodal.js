@@ -11,7 +11,7 @@ import {
     InputLabel,
     MenuItem,
   } from "@mui/material";
-import { CustomProductModal, ButtonBox } from './styles';
+import { CustomProductModal, ButtonBox } from '../styles';
 // Helpers
 import { SuccessAlert, ErrorAlert } from "../../helpers/message";
 import { productFormValidator } from "../../helpers/productFormValidator";
@@ -87,13 +87,12 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
         }}
       >
         
-          <Box
+          <ButtonBox
             sx={{
               bgcolor: "secondary.blue",
               width: "100%",
               display: "flex",
               alignItems: "center",
-              height: "200px",
             }}
           >
             <Typography
@@ -104,7 +103,7 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
             >
               Add Product
             </Typography>
-          </Box>
+          </ButtonBox>
           {clientSideErrorMsg && <ErrorAlert message={clientSideErrorMsg}/>}
           {errorMessage && <ErrorAlert message={errorMessage}/>}
           {successMessage && <SuccessAlert message={successMessage}/>}

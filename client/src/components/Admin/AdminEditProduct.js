@@ -12,7 +12,7 @@ import {
   Typography,
   Input,
 } from "@mui/material";
-import { ButtonBox } from "./styles";
+import { ButtonBox } from "../styles";
 // Helpers
 import { productFormValidator } from "../../helpers/productFormValidator";
 import { ErrorAlert } from "../../helpers/message";

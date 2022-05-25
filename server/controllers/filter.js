@@ -3,7 +3,7 @@ import Product from "../models/Product.js";
 export const getNewArrivals = async (req, res) => {
 
     const sortBy = req.query.sortBy ? req.query.sortBy : 'desc';
-    const limit = req.query.limit ? parseInt(req.query.limit) : 3;
+    const limit = req.query.limit ? parseInt(req.query.limit) : parseInt(3);
 
     console.log(limit)
 

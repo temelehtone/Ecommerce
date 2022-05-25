@@ -14,7 +14,7 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { ExpandMore } from "./styles";
+import { ExpandMore } from "../styles";
 
 // Redux
 import { useDispatch } from "react-redux"

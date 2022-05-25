@@ -11,7 +11,6 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { createAccount } from "../redux/actions/authActions";
 import { isAuthenticated } from "../helpers/auth";
@@ -23,7 +22,6 @@ import { useDispatch } from "react-redux"
 
 
 export default function SignUp() {
-  const theme = createTheme();
   const navigate = useNavigate()
   const dispatch = useDispatch();
 
@@ -110,7 +108,6 @@ export default function SignUp() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         {clientSideErrorMsg && <ErrorAlert message={clientSideErrorMsg}/>}
         <CssBaseline />
@@ -218,6 +215,5 @@ export default function SignUp() {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
   );
 }
