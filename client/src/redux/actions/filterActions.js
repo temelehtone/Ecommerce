@@ -1,6 +1,5 @@
 import * as api from "../../api";
 import { START_LOADING, STOP_LOADING } from "../constants/loadingConstants";
-import { SHOW_ERROR_MESSAGE, SHOW_SUCCESS_MESSAGE } from "../constants/messageConstants";
 import { GET_NEW_ARRIVALS } from "../constants/filterConstants"
 
 

@@ -20,12 +20,14 @@ const HomePage = () => {
     <section style={{ height: '100vh' }}>
       <div style={{ backgroundImage: "url(/images/canaria2.jpg)", height: '60%', backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }}></div>
       <hr />
+      
+      <h1>New Arrivals</h1>
       <FlexBox sx={{mt: 2}}>
+      
         <GridBox>
-            {/* {newArrivals && newArrivals.map(p => (
+            {newArrivals && newArrivals.map(p => (
                 <ProductCard p={p} key={p._id}/>
-
-            ))} */}
+            ))}
         </GridBox>
         </FlexBox>
     </section>

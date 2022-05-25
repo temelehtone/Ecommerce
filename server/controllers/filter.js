@@ -5,8 +5,6 @@ export const getNewArrivals = async (req, res) => {
     const sortBy = req.query.sortBy ? req.query.sortBy : 'desc';
     const limit = req.query.limit ? parseInt(req.query.limit) : parseInt(3);
 
-    console.log(limit)
-
     try {
     
         const newArrivals = await Product.find({}).sort({ createdAt: sortBy }).limit(limit)

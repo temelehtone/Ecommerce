@@ -13,6 +13,7 @@ export const theme = createTheme({
         blueHover: blue[100],
         green: green[500],
         greenHover: green[100],
+        addToCartHover: blue[700],
       },
     },
   });
