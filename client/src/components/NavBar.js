@@ -116,7 +116,9 @@ const Drawer = styled(MuiDrawer, {
   },
 }));
 
-export const mdTheme = createTheme();
+export const mdTheme = createTheme({
+
+});
 
 export const NavBar = () => {
   
