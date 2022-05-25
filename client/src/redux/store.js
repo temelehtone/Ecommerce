@@ -12,7 +12,7 @@ const reducer = combineReducers({
   categories: categoryReducer,
   messages: messageReducer,
   products: productReducer,
-  newArrivals: filterReducer,
+  filters: filterReducer,
 });
 
 const initialState = {};

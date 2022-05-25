@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.js";
 import categoryRoutes from "./routes/category.js";
 import productRoutes from "./routes/product.js";
+import filterRoutes from "./routes/filter.js";
 import { MONGODB_URI } from "./config/keys.js"
 import { PORT } from "./config/dev.js"
 
@@ -25,6 +26,7 @@ app.use('/uploads', express.static('uploads'))
 app.use("/auth", authRoutes);
 app.use("/category", categoryRoutes);
 app.use("/product", productRoutes);
+app.use("/filter", filterRoutes);
 
 // For production
 if (process.env.NODE_ENV === 'production') {
