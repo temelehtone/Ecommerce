@@ -64,7 +64,7 @@ export const MainListItems = () => {
           </ListItemIcon>
           <ListItemText primary="Reports" />
         </ListItemButton>
-        <ListItemButton>
+        <ListItemButton onClick={() => navigate("/shop")}>
           <ListItemIcon>
             <LayersIcon />
           </ListItemIcon>

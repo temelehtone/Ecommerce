@@ -9,7 +9,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { Divider, List, CssBaseline } from "@mui/material";
+import { Divider, List } from "@mui/material";
 import { StyledDrawer, StyledAppBar, Search, SearchIconWrapper, StyledInputBase } from "./styles";
 // Components
 import { MainListItems } from "./ListItems";
@@ -33,7 +33,6 @@ export const NavBar = () => {
 
   return (
       <>
-        <CssBaseline />
         <StyledAppBar position="absolute" open={open}>
           <Toolbar
             sx={{

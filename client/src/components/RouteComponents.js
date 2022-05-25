@@ -16,6 +16,7 @@ import UserRoute from "./UserRoute";
 import { ErrorAlert, SuccessAlert } from "../helpers/message";
 // Redux
 import { useSelector } from "react-redux"
+import Shop from "./Shop";
 
 export const RouteComponents = () => {
 
@@ -74,6 +75,7 @@ export const RouteComponents = () => {
             }
           />
           <Route path="/settings" element={<SettingPage />} />
+          <Route path="/shop" element={<Shop />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Container>

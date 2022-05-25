@@ -42,9 +42,9 @@ export const FlexBox = styled(Box)(({ theme }) => ({
 }));
 export const GridBox = styled(Box)(({ theme }) => ({
   display: "grid",
-  gap: 10,
+  marginBottom: 15,
+  gap: 20,
   gridTemplateColumns: 'repeat(3, 1fr)',
-  
   [theme.breakpoints.down("md")]: {
     gridTemplateColumns: 'repeat(2, 2fr)',
   },
@@ -55,7 +55,6 @@ export const GridBox = styled(Box)(({ theme }) => ({
 
 export const ButtonBox = styled(Box)(({ theme }) => ({
   display: "flex",
-  width: "100%",
   justifyContent: "center",
   paddingInline: "20px",
   borderTop: "1px solid #777",
