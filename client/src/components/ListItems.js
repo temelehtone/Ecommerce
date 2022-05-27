@@ -12,6 +12,8 @@ import ExitToApp from "@mui/icons-material/ExitToApp";
 import LoginIcon from "@mui/icons-material/Login";
 import SettingsIcon from "@mui/icons-material/Settings";
 import HomeIcon from "@mui/icons-material/Home";
+import CategoryIcon from '@mui/icons-material/Category';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
 import { isAuthenticated } from "../helpers/auth";
 import { logout } from "../redux/actions/authActions"
@@ -33,7 +35,14 @@ export const MainListItems = () => {
 
   if (isAuthenticated()) {
     return (
-      <React.Fragment>
+      <>
+        <ListItemButton>
+          <ListItemIcon>
+            <CategoryIcon />
+          </ListItemIcon>    
+          <ListItemText primary="Categories" />
+          <ArrowRightIcon />
+        </ListItemButton>
         <ListItemButton onClick={() => navigate("/")}>
           <ListItemIcon>
             <HomeIcon />
@@ -86,11 +95,18 @@ export const MainListItems = () => {
           </ListItemIcon>
           <ListItemText primary="Sign out" />
         </ListItemButton>
-      </React.Fragment>
+      </>
     );
   }
   return (
     <>
+    <ListItemButton>
+          <ListItemIcon>
+            <CategoryIcon />     
+          </ListItemIcon>
+          <ListItemText primary="Categories" />
+          <ArrowRightIcon />
+        </ListItemButton>
       <ListItemButton onClick={() => navigate("/")}>
         <ListItemIcon>
           <HomeIcon />

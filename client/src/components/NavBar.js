@@ -3,14 +3,13 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import Badge from "@mui/material/Badge";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { Divider, List } from "@mui/material";
-import { StyledDrawer, StyledAppBar, Search, SearchIconWrapper, StyledInputBase } from "./styles";
+import { StyledDrawer, StyledAppBar, Search, SearchIconWrapper, StyledInputBase, FlexBox } from "./styles";
 // Components
 import { MainListItems } from "./ListItems";
 
@@ -52,16 +51,15 @@ export const NavBar = () => {
             >
               <MenuIcon />
             </IconButton>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ display: { xs: "none", sm: "block" } }}
+            
+            <FlexBox
+              
             >
+              <Box sx={{ display: { xs: "none", sm: "flex" }, justifyContent: "center"   }}>
               <a href="/">
                 <img alt="" src={"/images/Logo.png"} style={{ width: "50px" }} />
               </a>
-            </Typography>
+              </Box>
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />
@@ -71,7 +69,8 @@ export const NavBar = () => {
                 inputProps={{ "aria-label": "search" }}
               />
             </Search>
-            <Box sx={{ flexGrow: 1 }} />
+            </FlexBox>
+            
             <Box sx={{ display: "flex" }}>
               <IconButton
                 size="large"
