@@ -18,6 +18,8 @@ import { ErrorAlert } from "../helpers/message";
 
 // Redux
 import { useDispatch } from "react-redux"
+// Translations
+import { getTranslatedText as t } from "../translations";
 
 
 
@@ -34,7 +36,7 @@ export default function SignUp() {
       } else if (isAuthenticated().role === 0) {
         navigate("/user/dashboard");
       }
-      setClientsideErrorMsg("Sign out first!")
+      setClientsideErrorMsg(t("SIGN_OUT_FIRST"))
     } 
     
   }, [navigate])
@@ -59,27 +61,27 @@ export default function SignUp() {
     };
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     if (!values.firstName) {
-      errors.fname = "Firstname is required!";
+      errors.fname = t('FIRSTNAME_REQUIRED');
     }
     if (!values.lastName) {
-      errors.lname = "Lastname is required!";
+      errors.lname = t('LASTNAME_REQUIRED');
     }
     if (!values.email) {
-      errors.email = "Email is required!";
+      errors.email = t('EMAIL_REQUIRED');
     } else if (!regex.test(values.email)) {
-      errors.email = "This is not a valid email format!";
+      errors.email = t('INVALID_EMAIL');
     }
     if (!values.password) {
-      errors.password = "Password is required";
+      errors.password = t('PASSWORD_REQUIRED');
     } else if (values.password.length < 6) {
-      errors.password = "Password must be more than 6 characters";
+      errors.password = t('TOO_SHORT_PASSWORD');
     } else if (values.password.length > 16) {
-      errors.password = "Password cannot exceed more than 16 characters";
+      errors.password = t('TOO_LONG_PASSWORD');
     }
     if (!values.confirmPassword) {
-      errors.confirmPassword = "Password is required";
+      errors.confirmPassword = t('PASSWORD_REQUIRED');
     } else if (values.password !== values.confirmPassword) {
-      errors.confirmPassword = "Passwords don't match";
+      errors.confirmPassword = t('PASSWORD_DONT_MATCH');
     }
     return errors;
   };
@@ -124,7 +126,7 @@ export default function SignUp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            {t('SIGN_UP')}
           </Typography>
           <Box
             component="form"
@@ -141,7 +143,7 @@ export default function SignUp() {
                   required
                   fullWidth
                   id="firstName"
-                  label="First Name"
+                  label={t('FIRSTNAME')}
                   autoFocus
                 />
                 <p style={{ color: "red" }}>{formErrors.fname}</p>
@@ -152,7 +154,7 @@ export default function SignUp() {
                   required
                   fullWidth
                   id="lastName"
-                  label="Last Name"
+                  label={t('LASTNAME')}
                   name="lastName"
                   autoComplete="family-name"
                 />
@@ -164,7 +166,7 @@ export default function SignUp() {
                   required
                   fullWidth
                   id="email"
-                  label="Email Address"
+                  label={t('EMAIL_ADDRESS')}
                   name="email"
                   autoComplete="email"
                 />
@@ -176,7 +178,7 @@ export default function SignUp() {
                   required
                   fullWidth
                   name="password"
-                  label="Password"
+                  label={t('PASSWORD')}
                   type="password"
                   id="password"
                   autoComplete="new-password"
@@ -190,7 +192,7 @@ export default function SignUp() {
                   required
                   fullWidth
                   name="confirmPassword"
-                  label="Confirm Password"
+                  label={t('CONFIRM_PASSWORD')}
                   type="password"
                   id="confirmPassword"
                 />
@@ -203,12 +205,12 @@ export default function SignUp() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              {t('SIGN_UP')}
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="/sign-in" variant="body2">
-                  Already have an account? Sign in
+                {t('ALREADY_ACCOUNT')}
                 </Link>
               </Grid>
             </Grid>

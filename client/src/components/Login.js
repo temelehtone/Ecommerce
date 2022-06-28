@@ -20,6 +20,8 @@ import { ErrorAlert } from "../helpers/message";
 
 // Redux
 import { useDispatch } from "react-redux";
+// Translations
+import { getTranslatedText as t } from "../translations";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -83,7 +85,7 @@ const Login = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            {t('LOGIN')}
           </Typography>
           <Box
             component="form"
@@ -98,7 +100,7 @@ const Login = () => {
                   required
                   fullWidth
                   id="email"
-                  label="Email Address"
+                  label={t('EMAIL_ADDRESS')}
                   name="email"
                   autoComplete="email"
                 />
@@ -109,7 +111,7 @@ const Login = () => {
                   required
                   fullWidth
                   name="password"
-                  label="Password"
+                  label={t('PASSWORD')}
                   type="password"
                   id="password"
                   autoComplete="new-password"
@@ -122,12 +124,13 @@ const Login = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2, bgcolor: "primary.main" }}
             >
-              Sign In
+              {t('LOGIN')}
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="/sign-up" variant="body2">
-                  Don't have an account? Sign up
+                  {t('DONT_HAVE_ACCOUNT')}
+                  
                 </Link>
               </Grid>
             </Grid>
