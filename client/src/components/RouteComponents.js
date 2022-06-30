@@ -15,6 +15,7 @@ import AdminEditProduct from "./Admin/AdminEditProduct";
 import CategoryProductsPage from "./CategoryProductsPage";
 import UserRoute from "./UserRoute";
 import { ErrorAlert, SuccessAlert } from "../helpers/message";
+import Footer from "./Footer";
 
 // Redux
 import { useSelector } from "react-redux"
@@ -28,13 +29,7 @@ export const RouteComponents = () => {
     <Box
       component="main"
       sx={{
-        backgroundColor: (theme) =>
-          theme.palette.mode === "light"
-            ? theme.palette.grey[100]
-            : theme.palette.grey[900],
         flexGrow: 1,
-        height: "100vh",
-        overflow: "auto",
       }}
     >
       <Toolbar />
@@ -82,7 +77,9 @@ export const RouteComponents = () => {
           <Route path="/shop" element={<Shop />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        
       </Container>
+     
     </Box>
   );
 };

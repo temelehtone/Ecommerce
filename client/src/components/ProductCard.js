@@ -15,7 +15,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 const ProductCard = ({ p }) => {
   return (
     <>
-      <Card key={p._id} sx={{ maxWidth: 345, textAlign: "center", transition: "box-shadow 125ms ease-in-out 0s", "&:hover": { boxShadow: "rgba(0, 0, 0, 0.36) 0px 6px 16px" } }}>
+      <Card key={p._id} sx={{ maxWidth: 345, textAlign: "center", transition: "box-shadow 125ms ease-in-out 0s", "&:hover": { boxShadow: "rgba(0, 0, 0, 0.36) 0px 8px 16px", transform: "scale(1.03)"  } }}>
         <a href="#!" style={{ all: "unset", cursor: "pointer" }}>
           <CardMedia
             component="img"

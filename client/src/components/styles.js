@@ -14,6 +14,8 @@ export const theme = createTheme({
         green: green[500],
         greenHover: green[100],
         addToCartHover: blue[700],
+        footerBg: "#5C5C5C",
+        sideBarBg: "#A9A9A9",
       },
     },
   });
@@ -169,12 +171,13 @@ export const StyledAppBar = styled(AppBar, {
   }),
 }));
 
-export const StyledDrawer = styled(Drawer, {
+export const MenuDrawer = styled(Drawer, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
   "& .MuiDrawer-paper": {
     position: "relative",
     whiteSpace: "nowrap",
+    backgroundColor: theme.palette.secondary.sideBarBg,
     width: drawerWidth,
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,

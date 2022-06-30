@@ -4,6 +4,7 @@ import { ThemeProvider } from "@emotion/react";
 import { RouteComponents } from "./RouteComponents";
 import { theme } from "./styles";
 import Box from "@mui/material/Box";
+import Footer from "./Footer";
 
 // Redux imports
 import { useDispatch } from "react-redux";
@@ -24,6 +25,7 @@ const App = () => {
         <RouteComponents />
         
       </Box>
+      <Footer />
     </ThemeProvider>
   );
 };
