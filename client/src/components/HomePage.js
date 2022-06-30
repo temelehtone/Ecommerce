@@ -24,7 +24,7 @@ const HomePage = () => {
   
   return (
     <section style={{ textAlign: 'center' }}>
-      <div style={{ backgroundImage: "url(/images/canaria2.jpg)", height: '60%', backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }}></div>
+      <div style={{ backgroundImage: "url(/images/canaria2.jpg)", height: '500px', backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }}></div>
       <hr />
       <>
       <h1>New Products</h1>

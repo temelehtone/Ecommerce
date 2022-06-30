@@ -15,7 +15,7 @@ import AdminEditProduct from "./Admin/AdminEditProduct";
 import CategoryProductsPage from "./CategoryProductsPage";
 import UserRoute from "./UserRoute";
 import { ErrorAlert, SuccessAlert } from "../helpers/message";
-import Footer from "./Footer";
+import ProductPage from "./ProductPage";
 
 // Redux
 import { useSelector } from "react-redux"
@@ -72,6 +72,7 @@ export const RouteComponents = () => {
               </AdminRoute>
             }
           />
+          <Route path="/shop/product/:productId" element={<ProductPage />} />
           <Route path="/shop/category/:categoryId" element={<CategoryProductsPage />} />
           <Route path="/settings" element={<SettingPage />} />
           <Route path="/shop" element={<Shop />} />
