@@ -1,5 +1,7 @@
 import Product from "../models/Product.js";
+import Category from "../models/Category.js";
 import fs from "fs";
+import { getCategory } from "./category.js"
 
 export const createProduct = async (req, res) => {
   const {
@@ -68,6 +70,24 @@ export const getProduct = async (req, res) => {
       .json({ product });
   } catch (error) {
     console.log("Product get error:", error);
+    res.status(500).json({
+      errorMessage: "Something went wrong, please try again later.",
+    });
+  }
+};
+
+export const getProductsByCategory = async (req, res) => {
+  try {
+    
+    const categoryId = req.params.categoryId;
+
+
+    const products = await Product.find({ productCategory: categoryId })
+    res
+      .status(200)
+      .json({ products });
+  } catch (error) {
+    console.log("Product getProductsByCategory error:", error);
     res.status(500).json({
       errorMessage: "Something went wrong, please try again later.",
     });

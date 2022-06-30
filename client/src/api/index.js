@@ -18,6 +18,7 @@ export const getCategory = (categoryId) => API.get(`/category/getCategory/${cate
 export const createProduct = (formData) => API.post("/product/createProduct", formData);
 export const getProduct = (productId) => API.get(`/product/getProduct/${productId}`);
 export const getProducts = () => API.get("/product/getProducts");
+export const getProductsByCategory = (categoryId) => API.get(`/product/getProductsByCategory/${categoryId}`);
 export const deleteProduct = (productId) => API.delete(`/product/deleteProduct/${productId}`);
 export const editProduct = (productId, formData) => API.put(`/product/editProduct/${productId}`, formData)
 // New Arrivals

@@ -1,7 +1,7 @@
 import * as api from "../../api";
 import { START_LOADING, STOP_LOADING } from "../constants/loadingConstants";
 import { SHOW_ERROR_MESSAGE, SHOW_SUCCESS_MESSAGE } from "../constants/messageConstants";
-import { CREATE_PRODUCT, GET_PRODUCTS, DELETE_PRODUCT, GET_PRODUCT } from "../constants/productConstants";
+import { CREATE_PRODUCT, GET_PRODUCTS, DELETE_PRODUCT, GET_PRODUCT, GET_PRODUCT_BY_CATEGORY } from "../constants/productConstants";
 
 export const createProduct =
   (formData, setErrorMessage, setSuccessMessage) => async (dispatch) => {
@@ -33,6 +33,24 @@ export const getProducts = () => async (dispatch) => {
     dispatch({ type: STOP_LOADING });
   }
 };
+
+export const getProductsByCategory = (categoryId) => async (dispatch) => {
+  try {
+    dispatch({ type: START_LOADING });
+    const response = await api.getProductsByCategory(categoryId);
+    console.log(response)
+    dispatch({ type: STOP_LOADING });
+    dispatch({ type: GET_PRODUCT_BY_CATEGORY, payload: response.data.products });
+  } catch (err) {
+    console.log("getProductsByCategory api error: ", err);
+    dispatch({ type: STOP_LOADING });
+    dispatch({
+      type: SHOW_ERROR_MESSAGE,
+      payload: err.response.data.errorMessage,
+    });
+  }
+};
+
 export const getProduct = (productId) => async dispatch => {
   try {
     dispatch({ type: START_LOADING });
