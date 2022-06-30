@@ -12,6 +12,7 @@ export const login = (formData) => API.post("/auth/login", formData);
 // Category
 export const createCategory = (formData) => API.post("/category/createCategory", formData);
 export const getCategories = () => API.get("/category/getCategories");
+export const getCategory = (categoryId) => API.get(`/category/getCategory/${categoryId}`);
 
 // Product
 export const createProduct = (formData) => API.post("/product/createProduct", formData);

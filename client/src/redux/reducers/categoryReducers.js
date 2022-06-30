@@ -1,24 +1,33 @@
-import { GET_CATEGORIES, CREATE_CATEGORY } from "../constants/categoryConstants"
+import {
+  GET_CATEGORIES,
+  CREATE_CATEGORY,
+  GET_CATEGORY,
+} from "../constants/categoryConstants";
 
 const INITIAL_STATE = {
-    categories: []
-}
+  categories: [],
+};
 
-const categoryReducer = (state=INITIAL_STATE, action) => {
-    switch (action.type) {
-        case GET_CATEGORIES:
-            return {
-                ...state,
-                categories: action.payload
-            }
-        case CREATE_CATEGORY:
-            return {
-                ...state,
-                categories: [...state.categories, action.payload] 
-            }
-        default:
-            return state;
-    }
-}
+const categoryReducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case GET_CATEGORIES:
+      return {
+        ...state,
+        categories: action.payload,
+      };
+    case CREATE_CATEGORY:
+      return {
+        ...state,
+        categories: [...state.categories, action.payload],
+      };
+    case GET_CATEGORY:
+      return {
+        ...state,
+        category: action.payload,
+      };
+    default:
+      return state;
+  }
+};
 
-export default categoryReducer
+export default categoryReducer;

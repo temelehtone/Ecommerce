@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 // Styles
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
@@ -8,31 +9,42 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { Divider, List } from "@mui/material";
-import { StyledDrawer, StyledAppBar, Search, SearchIconWrapper, StyledInputBase, FlexBox } from "./styles";
+import { Divider, List, ListItemText } from "@mui/material";
+import {
+  StyledDrawer,
+  StyledAppBar,
+  Search,
+  SearchIconWrapper,
+  StyledInputBase,
+  FlexBox,
+} from "./styles";
 // Components
 import { MainListItems } from "./ListItems";
 
 // Redux
 import { useSelector } from "react-redux";
 import { showLoading } from "../helpers/loading";
-
-
-
-
+import CategoriesDiv from "./CategoriesDiv";
 
 export const NavBar = () => {
-  
-  const { loading } = useSelector(state => state.loading)
+  const { loading } = useSelector((state) => state.loading);
 
   const [open, setOpen] = useState(false);
+  const [categoryOpen, setCategoryOpen] = useState(true);
+
   const toggleDrawer = () => {
+    if (open) {
+      setCategoryOpen(false);
+    }
     setOpen(!open);
+    
+    
   };
 
   return (
-      <>
-        <StyledAppBar position="absolute" open={open}>
+    <>
+    
+    <StyledAppBar position="absolute" open={open}>
           <Toolbar
             sx={{
               pr: "24px", // keep right padding when drawer closed
@@ -85,23 +97,28 @@ export const NavBar = () => {
           </Toolbar>
           {loading && showLoading()}
         </StyledAppBar>
+      
+      <StyledDrawer variant="permanent" open={open}>
+        <Toolbar
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "flex-end",
+            px: [1],
+          }}
+        >
+          
+          <IconButton onClick={toggleDrawer}>
+            <ChevronLeftIcon />
+          </IconButton>
+        </Toolbar>
+       
+        <List component="nav">{<MainListItems categoryOpen={categoryOpen} setCategoryOpen={setCategoryOpen} />}</List>
         
-        <StyledDrawer variant="permanent" open={open}>
-          <Toolbar
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-end",
-              px: [1],
-            }}
-          >
-            <IconButton onClick={toggleDrawer}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </Toolbar>
-          <Divider />
-          <List component="nav">{<MainListItems />}</List>
-        </StyledDrawer>
-        </>
+      </StyledDrawer>
+      <CategoriesDiv categoryOpen={categoryOpen} setCategoryOpen={setCategoryOpen} />
+      
+      
+    </>
   );
 };

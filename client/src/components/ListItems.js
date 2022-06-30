@@ -14,6 +14,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import HomeIcon from "@mui/icons-material/Home";
 import CategoryIcon from '@mui/icons-material/Category';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 
 import { isAuthenticated } from "../helpers/auth";
 import { logout } from "../redux/actions/authActions"
@@ -21,7 +22,7 @@ import { logout } from "../redux/actions/authActions"
 import { useDispatch } from "react-redux";
 
 
-export const MainListItems = () => {
+export const MainListItems = ({ setCategoryOpen, categoryOpen }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch();
 
@@ -33,15 +34,19 @@ export const MainListItems = () => {
     }
   };
 
+  const handleCategoriesClick = () => {
+    setCategoryOpen(!categoryOpen)
+  }
+
   if (isAuthenticated()) {
     return (
       <>
-        <ListItemButton>
+        <ListItemButton onClick={handleCategoriesClick}>
           <ListItemIcon>
             <CategoryIcon />
           </ListItemIcon>    
           <ListItemText primary="Categories" />
-          <ArrowRightIcon />
+          {categoryOpen ? <ArrowLeftIcon /> : <ArrowRightIcon />}
         </ListItemButton>
         <ListItemButton onClick={() => navigate("/")}>
           <ListItemIcon>
@@ -95,12 +100,13 @@ export const MainListItems = () => {
           </ListItemIcon>
           <ListItemText primary="Sign out" />
         </ListItemButton>
+        
       </>
     );
   }
   return (
     <>
-    <ListItemButton>
+    <ListItemButton onClick={() => console.log("k")}>
           <ListItemIcon>
             <CategoryIcon />     
           </ListItemIcon>

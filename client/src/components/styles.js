@@ -196,3 +196,31 @@ export const StyledDrawer = styled(Drawer, {
     }),
   },
 }));
+
+export const CategoryDrawer = styled(Drawer, {
+  shouldForwardProp: (prop) => prop !== "open",
+})(({ theme, open }) => ({
+  "& .MuiDrawer-paper": {
+    position: "relative",
+    width: drawerWidth,
+    overflow: "hidden",
+    marginTop: "60px",
+    [theme.breakpoints.down("sm")]: {
+      marginTop: "50px",
+    },
+    backgroundColor: "grey",
+    transition: theme.transitions.create("width", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    boxSizing: "border-box",
+    ...(!open && {
+      overflowX: "hidden",
+      transition: theme.transitions.create("width", {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+      display: "none",
+    }),
+  },
+}));

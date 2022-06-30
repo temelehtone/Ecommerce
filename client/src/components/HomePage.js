@@ -21,6 +21,7 @@ const HomePage = () => {
     dispatch(getProducts())
   }, [dispatch])
 
+  
   return (
     <section style={{ height: '100vh', textAlign: 'center' }}>
       <div style={{ backgroundImage: "url(/images/canaria2.jpg)", height: '60%', backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }}></div>

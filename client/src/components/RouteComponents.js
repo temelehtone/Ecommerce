@@ -12,8 +12,10 @@ import UserDashboard from "./UserDashboard";
 import SettingPage from "./SettingPage";
 import AdminRoute from "./Admin/AdminRoute";
 import AdminEditProduct from "./Admin/AdminEditProduct";
+import CategoryProductsPage from "./CategoryProductsPage";
 import UserRoute from "./UserRoute";
 import { ErrorAlert, SuccessAlert } from "../helpers/message";
+
 // Redux
 import { useSelector } from "react-redux"
 import Shop from "./Shop";
@@ -40,6 +42,7 @@ export const RouteComponents = () => {
         
         {successMsg && <SuccessAlert message={successMsg}/>}
         {errorMsg && <ErrorAlert message={errorMsg}/>}
+        
         <Routes>
           <Route exact path="/" element={<HomePage />} />
           <Route
@@ -74,6 +77,7 @@ export const RouteComponents = () => {
               </AdminRoute>
             }
           />
+          <Route path="/shop/category/:categoryId" element={<CategoryProductsPage />} />
           <Route path="/settings" element={<SettingPage />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="*" element={<NotFound />} />
