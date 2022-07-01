@@ -1,7 +1,7 @@
 palette: {
     primary: {
       light: "#35C37D",
-      main: "#35C37D",
+      main: "#039c50",
       dark: "#0d8248",
       // contrastText: will be calculated to contrast with palette.primary.main
     },

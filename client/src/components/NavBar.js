@@ -108,7 +108,7 @@ export const NavBar = () => {
         >
           
           <IconButton onClick={toggleDrawer}>
-            <ChevronLeftIcon />
+            <ChevronLeftIcon sx={{ color: "white" }}/>
           </IconButton>
         </Toolbar>
        

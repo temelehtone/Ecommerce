@@ -1,4 +1,4 @@
-import { styled, createMuiTheme, alpha } from "@mui/material/styles";
+import { styled, createTheme, alpha } from "@mui/material/styles";
 import {
   Modal,
   Button,
@@ -9,20 +9,38 @@ import {
   Drawer,
   AppBar,
 } from "@mui/material";
+import { purple, blue } from "@mui/material/colors";
 
-export const theme = createMuiTheme({
+export const theme = createTheme({
   palette: {
     primary: {
-      light: "#35C37D",
-      main: "#039c50",
-      dark: "#0d8248",
-      // contrastText: will be calculated to contrast with palette.primary.main
+      light: "#0808d4",
+      main: "#1E5162",
+      dark: "#075df2",
+      color1: purple[100],
+      color2: purple[200],
+      color3: purple[300],
+      color4: purple[400],
+      color5: purple[500],
+      color6: purple[600],
+      color7: purple[700],
+      color8: purple[800],
+      color9: purple[900],
+      
     },
     secondary: {
-      light: "#35C37D",
-      main: "#35C37D",
-      // dark: will be calculated from palette.secondary.main,
-      contrastText: "#35C37D",
+      light: "#8AC7DB",
+      main: "#338BA8",
+      contrastText: "#0808d4",
+      color1: blue[100],
+      color2: blue[200],
+      color3: blue[300],
+      color4: blue[400],
+      color5: blue[500],
+      color6: blue[600],
+      color7: blue[700],
+      color8: blue[800],
+      color9: blue[900],
     },
     // error: will use the default color
   },
@@ -45,7 +63,7 @@ export const theme = createMuiTheme({
       styleOverrides: {
         root: {
           // Some CSS
-          background: "rgba(53, 195, 125, 100)",
+          background: "#0808d4",
           borderRadius: 0,
           border: "1px solid",
           colorInherit: "#fff",
@@ -55,11 +73,11 @@ export const theme = createMuiTheme({
           boxShadow: "4px 9px 26px 0 rgba(16,124,71,0.10)",
           "&:hover": {
             textDecoration: "none",
-            backgroundColor: "#35C37D",
+            backgroundColor: "#0808d4",
             transform: "scale(1.08)",
             // Reset on touch devices, it doesn't add specificity
             "@media (hover: none)": {
-              backgroundColor: "#35C37D",
+              backgroundColor: "#0808d4",
             },
           },
         },
@@ -67,6 +85,8 @@ export const theme = createMuiTheme({
     },
   },
 });
+
+
 
 export const StyledButton = styled(Button)(({ theme }) => ({
   margin: "5px",
@@ -210,6 +230,7 @@ export const StyledAppBar = styled(AppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
+  backgroundColor: theme.palette.primary.color7,
   transition: theme.transitions.create(["width", "margin"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -231,7 +252,7 @@ export const MenuDrawer = styled(Drawer, {
     position: "relative",
     whiteSpace: "nowrap",
     width: drawerWidth,
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.primary.color4,
     color: "white",
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
@@ -267,7 +288,7 @@ export const CategoryDrawer = styled(Drawer, {
     [theme.breakpoints.down("sm")]: {
       marginTop: "50px",
     },
-    backgroundColor: theme.palette.primary.dark,
+    backgroundColor: theme.palette.primary.color3,
     color: "white",
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,

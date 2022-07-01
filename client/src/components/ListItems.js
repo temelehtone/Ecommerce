@@ -20,6 +20,7 @@ import { isAuthenticated } from "../helpers/auth";
 import { logout } from "../redux/actions/authActions"
 // Redux
 import { useDispatch } from "react-redux";
+import { theme } from "./styles";
 
 
 export const MainListItems = ({ setCategoryOpen, categoryOpen }) => {
@@ -41,52 +42,52 @@ export const MainListItems = ({ setCategoryOpen, categoryOpen }) => {
   if (isAuthenticated()) {
     return (
       <>
-        <ListItemButton onClick={handleCategoriesClick}>
+        <ListItemButton onClick={handleCategoriesClick} >
           <ListItemIcon>
-            <CategoryIcon />
+            <CategoryIcon sx={{ color: "white" }}/>
           </ListItemIcon>    
           <ListItemText primary="Categories" />
-          {categoryOpen ? <ArrowLeftIcon/> : <ArrowRightIcon/>}
+          {categoryOpen ? <ArrowLeftIcon sx={{ color: "white" }}/> : <ArrowRightIcon sx={{ color: "white" }}/>}
         </ListItemButton>
         <ListItemButton onClick={() => navigate("/")}>
           <ListItemIcon>
-            <HomeIcon/>
+            <HomeIcon sx={{ color: "white" }}/>
           </ListItemIcon>
           <ListItemText primary="Home" />
         </ListItemButton>
         <ListItemButton onClick={navigateDashboard}>
           <ListItemIcon>
-            <DashboardIcon />
+            <DashboardIcon sx={{ color: "white" }}/>
           </ListItemIcon>
           <ListItemText primary="Dashboard" />
         </ListItemButton>
         <ListItemButton>
           <ListItemIcon>
-            <ShoppingCartIcon />
+            <ShoppingCartIcon sx={{ color: "white" }}/>
           </ListItemIcon>
           <ListItemText primary="Orders" />
         </ListItemButton>
         <ListItemButton>
           <ListItemIcon>
-            <PeopleIcon />
+            <PeopleIcon sx={{ color: "white" }}/>
           </ListItemIcon>
           <ListItemText primary="Customers" />
         </ListItemButton>
         <ListItemButton>
           <ListItemIcon>
-            <BarChartIcon />
+            <BarChartIcon sx={{ color: "white" }}/>
           </ListItemIcon>
           <ListItemText primary="Reports" />
         </ListItemButton>
         <ListItemButton onClick={() => navigate("/shop")}>
           <ListItemIcon>
-            <LayersIcon />
+            <LayersIcon sx={{ color: "white" }}/>
           </ListItemIcon>
           <ListItemText primary="Integrations" />
         </ListItemButton>
         <ListItemButton onClick={() => navigate("/settings")}>
           <ListItemIcon>
-            <SettingsIcon />
+            <SettingsIcon sx={{ color: "white" }}/>
           </ListItemIcon>
           <ListItemText primary="Settings" />
         </ListItemButton>
@@ -96,7 +97,7 @@ export const MainListItems = ({ setCategoryOpen, categoryOpen }) => {
           }}
         >
           <ListItemIcon>
-            <ExitToApp />
+            <ExitToApp sx={{ color: "white" }}/>
           </ListItemIcon>
           <ListItemText primary="Sign out" />
         </ListItemButton>
@@ -106,16 +107,16 @@ export const MainListItems = ({ setCategoryOpen, categoryOpen }) => {
   }
   return (
     <>
-    <ListItemButton onClick={handleCategoriesClick}>
+    <ListItemButton onClick={handleCategoriesClick} sx={{ color: "white" }}>
           <ListItemIcon>
-            <CategoryIcon />
+            <CategoryIcon sx={{ color: "white" }}/>
           </ListItemIcon>    
           <ListItemText primary="Categories" />
           {categoryOpen ? <ArrowLeftIcon/> : <ArrowRightIcon/>}
         </ListItemButton>
       <ListItemButton onClick={() => navigate("/")}>
         <ListItemIcon>
-          <HomeIcon />
+          <HomeIcon sx={{ color: "white" }}/>
         </ListItemIcon>
         <ListItemText primary="Home" />
       </ListItemButton>
@@ -123,7 +124,7 @@ export const MainListItems = ({ setCategoryOpen, categoryOpen }) => {
         onClick={() => navigate("/sign-in")}
       >
         <ListItemIcon>
-          <LoginIcon />
+          <LoginIcon sx={{ color: "white" }}/>
         </ListItemIcon>
         <ListItemText primary="Sign in" />
       </ListItemButton>
