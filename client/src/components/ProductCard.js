@@ -25,7 +25,6 @@ const ProductCard = ({ p }) => {
           transition: "box-shadow 125ms ease-in-out 0s",
           "&:hover": {
             boxShadow: "rgba(0, 0, 0, 0.36) 0px 8px 16px",
-            transform: "scale(1.03)",
           },
         }}
         onClick={() => navigate(`/shop/product/${p._id}`)}

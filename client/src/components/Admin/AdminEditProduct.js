@@ -11,8 +11,9 @@ import {
   TextField,
   Typography,
   Input,
+  TextareaAutosize,
 } from "@mui/material";
-import { ButtonBox } from "../styles";
+import { ButtonBox, theme } from "../styles";
 // Helpers
 import { productFormValidator } from "../../helpers/productFormValidator";
 import { ErrorAlert } from "../../helpers/message";
@@ -93,17 +94,18 @@ const AdminEditProduct = () => {
 
       <Box
         sx={{
-          width: "100%",
           display: "flex",
           alignItems: "center",
+          textAlign: "center",
           height: "200px",
+          backgroundColor: theme.palette.primary.main,
         }}
       >
         <Typography
           id="modal-modal-title"
-          variant="h6"
+          variant="h4"
           component="h4"
-          sx={{ ml: 3 }}
+          sx={{ ml: 3, width: "100%",}}
         >
           Edit Product
         </Typography>
@@ -171,7 +173,7 @@ const AdminEditProduct = () => {
             sx={{ display: "flex", flexDirection: "column", ml: 1 }}
           >
             <InputLabel htmlFor="productDescription">Description</InputLabel>
-            <textarea
+            <TextareaAutosize
               onChange={handleProductChange}
               id="productDescription"
               name="productDescription"
@@ -240,7 +242,7 @@ const AdminEditProduct = () => {
         <ButtonBox component="form" onSubmit={handleProductEditSubmit} >
           <Button
             sx={{
-              width: "100px",
+      
               my: 2,
             }}
             onClick={() => navigate("/admin/dashboard")}
@@ -249,8 +251,6 @@ const AdminEditProduct = () => {
           </Button>
           <Button
             sx={{
-
-              width: "100px",
               mx: 4,
               my: 2,
             }}

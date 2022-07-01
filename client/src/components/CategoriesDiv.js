@@ -14,7 +14,7 @@ const CategoriesDiv = ({ categoryOpen, setCategoryOpen }) => {
 
   return (
     <CategoryDrawer variant="permanent" open={categoryOpen} >
-      <List component="nav" sx={{paddingTop: "6px"}}>
+      <List component="nav" sx={{padding: 0, border: '1px solid black'}}>
         {categories &&
           categories.map((c) => (
             <ListItemButton key={c._id} value={c._id} sx={{ borderTop: '1px solid black', borderBottom: '1px solid black' }} onClick={() => navigate(`/shop/category/${c._id}`)}>

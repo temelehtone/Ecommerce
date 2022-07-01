@@ -1,0 +1,15 @@
+palette: {
+    primary: {
+      light: "#35C37D",
+      main: "#35C37D",
+      dark: "#0d8248",
+      // contrastText: will be calculated to contrast with palette.primary.main
+    },
+    secondary: {
+      light: "#35C37D",
+      main: "#35C37D",
+      // dark: will be calculated from palette.secondary.main,
+      contrastText: "#35C37D",
+    },
+    // error: will use the default color
+  },

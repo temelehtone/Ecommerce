@@ -31,7 +31,7 @@ const AdminProductCard = ({ p }) => {
 
   return (
     <>
-      <Card key={p._id} sx={{ maxWidth: 345, textAlign: "center" }}>
+      <Card key={p._id} sx={{ maxWidth: 345, textAlign: "center", boxShadow: "0px 8px 16px black"}}>
         <CardMedia
           component="img"
           height="400"
