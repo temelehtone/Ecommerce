@@ -21,9 +21,9 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <Box sx={{ display: "flex" }}>
         <NavBar />
-  
+        <ThemeProvider theme={theme}>
         <RouteComponents />
-        
+        </ThemeProvider>
       </Box>
       <Footer />
     </ThemeProvider>

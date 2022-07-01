@@ -51,6 +51,7 @@ const AdminEditProduct = () => {
       dispatch(getProduct(productId));
       dispatch(loadCategories());
     } else {
+      
       setProductData({ ...product, productImage: product.fileName });
     }
   }, [dispatch, productId, product]);
@@ -85,7 +86,6 @@ const AdminEditProduct = () => {
       sx={{
         display: "flex",
         width: "100%",
-        bgcolor: "white",
         flexDirection: "column",
       }}
     >
@@ -93,7 +93,6 @@ const AdminEditProduct = () => {
 
       <Box
         sx={{
-          bgcolor: "secondary.main",
           width: "100%",
           display: "flex",
           alignItems: "center",
@@ -104,7 +103,7 @@ const AdminEditProduct = () => {
           id="modal-modal-title"
           variant="h6"
           component="h4"
-          sx={{ ml: 3, color: "#fff" }}
+          sx={{ ml: 3 }}
         >
           Edit Product
         </Typography>
@@ -134,10 +133,7 @@ const AdminEditProduct = () => {
                 variant="raised"
                 component="span"
                 sx={{
-                  bgcolor: "green",
                   height: 50,
-                  color: "white",
-                  "&:hover": { bgcolor: "green", color: "black" },
                 }}
               >
                 Choose File
@@ -244,11 +240,8 @@ const AdminEditProduct = () => {
         <ButtonBox component="form" onSubmit={handleProductEditSubmit} >
           <Button
             sx={{
-              bgcolor: "red",
-              color: "white",
               width: "100px",
               my: 2,
-              "&:hover": { color: "black", bgcolor: "red" },
             }}
             onClick={() => navigate("/admin/dashboard")}
           >
@@ -256,12 +249,10 @@ const AdminEditProduct = () => {
           </Button>
           <Button
             sx={{
-              bgcolor: "secondary.main",
-              color: "white",
+
               width: "100px",
               mx: 4,
               my: 2,
-              "&:hover": { color: "black", bgcolor: "secondary.main" },
             }}
             type="submit"
           >

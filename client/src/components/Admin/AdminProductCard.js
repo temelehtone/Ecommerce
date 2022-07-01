@@ -82,7 +82,7 @@ const AdminProductCard = ({ p }) => {
             <EditIcon />
             Edit
           </Button>
-          <Button sx={{ color: "red" }} onClick={() =>dispatch(deleteProduct(p._id))}>
+          <Button onClick={() =>dispatch(deleteProduct(p._id))}>
             <DeleteIcon />
             Delete
           </Button>

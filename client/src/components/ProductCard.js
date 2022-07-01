@@ -14,7 +14,6 @@ import {
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 const ProductCard = ({ p }) => {
-
   const navigate = useNavigate();
   return (
     <>
@@ -64,13 +63,7 @@ const ProductCard = ({ p }) => {
                 currency: "USD",
               })}
             </Typography>
-            <Button
-              sx={{
-                bgcolor: "secondary.blue",
-                color: "white",
-                "&:hover": { bgcolor: "blue" },
-              }}
-            >
+            <Button>
               <AddShoppingCartIcon />
             </Button>
           </CardActions>

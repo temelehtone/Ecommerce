@@ -10,33 +10,20 @@ const AdminActionBtns = ({ handleOpenCategory, handleOpenProduct, handleOpenOrde
   return (
     <>
     <StyledButton
-          sx={{
-            color: "secondary.green",
-            borderColor: "secondary.green",
-            "&:hover": { bgcolor: "secondary.greenHover" },
-          }}
           onClick={handleOpenCategory}
         >
           <AddIcon />
           Add Category
         </StyledButton>
         <StyledButton
-          sx={{
-            color: "secondary.blue",
-            borderColor: "secondary.blue",
-            "&:hover": { bgcolor: "secondary.blueHover" },
-          }}
+    
           onClick={handleOpenProduct}
         >
           <AddIcon />
           Add Product
         </StyledButton>
         <StyledButton
-          sx={{
-            color: "secondary.red",
-            borderColor: "secondary.red",
-            "&:hover": { bgcolor: "secondary.redHover" },
-          }}
+     
           onClick={handleOpenOrders}
         >
           <CreditCardIcon />

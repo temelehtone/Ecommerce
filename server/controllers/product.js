@@ -120,12 +120,20 @@ export const editProduct = async (req, res) => {
   try {
     
     const productId = req.params.productId;
-    req.body.fileName = req.file.filename;
+
+    if (req.file !== undefined) {
+      req.body.fileName = req.file.filename;
+    }
+
+    
     const oldProduct = await Product.findByIdAndUpdate(productId, req.body)
-    fs.unlink(`uploads/${oldProduct.fileName}`, (err) => {
-      if (err) throw err;
-      
-    })
+    if (req.file !== undefined) {
+      fs.unlink(`uploads/${oldProduct.fileName}`, (err) => {
+        if (err) throw err;
+        
+      })
+    }
+    
        
     res
       .status(200)

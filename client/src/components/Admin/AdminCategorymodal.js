@@ -51,14 +51,12 @@ const AdminCategorymodal = ({ openCategory, setOpenCategory }) => {
         sx={{
           display: "flex",
           width: "100%",
-          bgcolor: "white",
           flexDirection: "column",
         }}
         
       >
           <ButtonBox
             sx={{
-              bgcolor: "secondary.green",
               width: "100%",
               display: "flex",
               alignItems: "center",
@@ -69,7 +67,7 @@ const AdminCategorymodal = ({ openCategory, setOpenCategory }) => {
               id="modal-modal-title"
               variant="h6"
               component="h4"
-              sx={{ ml: 3, color: "#fff" }}
+              sx={{ ml: 3 }}
             >
               Add Category
             </Typography>
@@ -92,11 +90,9 @@ const AdminCategorymodal = ({ openCategory, setOpenCategory }) => {
         component="form">
               <Button
                 sx={{
-                  bgcolor: "#8E8E8E",
-                  color: "white",
+  
                   width: "100px",
                   my: 2,
-                  "&:hover": { bgcolor: "red" },
                 }}
                 onClick={handleCategoryClose}
               >
@@ -104,11 +100,8 @@ const AdminCategorymodal = ({ openCategory, setOpenCategory }) => {
               </Button>
               <Button
                 sx={{
-                  bgcolor: "secondary.green",
-                  color: "white",
                   width: "100px",
                   my: 2,
-                  "&:hover": { bgcolor: "secondary.greenHover" },
                 }}
                 type="submit"
               >

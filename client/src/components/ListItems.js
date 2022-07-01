@@ -46,11 +46,11 @@ export const MainListItems = ({ setCategoryOpen, categoryOpen }) => {
             <CategoryIcon />
           </ListItemIcon>    
           <ListItemText primary="Categories" />
-          {categoryOpen ? <ArrowLeftIcon /> : <ArrowRightIcon />}
+          {categoryOpen ? <ArrowLeftIcon/> : <ArrowRightIcon/>}
         </ListItemButton>
         <ListItemButton onClick={() => navigate("/")}>
           <ListItemIcon>
-            <HomeIcon />
+            <HomeIcon/>
           </ListItemIcon>
           <ListItemText primary="Home" />
         </ListItemButton>
@@ -106,12 +106,12 @@ export const MainListItems = ({ setCategoryOpen, categoryOpen }) => {
   }
   return (
     <>
-    <ListItemButton onClick={() => console.log("k")}>
+    <ListItemButton onClick={handleCategoriesClick}>
           <ListItemIcon>
-            <CategoryIcon />     
-          </ListItemIcon>
+            <CategoryIcon />
+          </ListItemIcon>    
           <ListItemText primary="Categories" />
-          <ArrowRightIcon />
+          {categoryOpen ? <ArrowLeftIcon/> : <ArrowRightIcon/>}
         </ListItemButton>
       <ListItemButton onClick={() => navigate("/")}>
         <ListItemIcon>

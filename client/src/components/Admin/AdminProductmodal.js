@@ -82,14 +82,12 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
         sx={{
           display: "flex",
           width: "100%",
-          bgcolor: "white",
           flexDirection: "column",
         }}
       >
         
           <ButtonBox
             sx={{
-              bgcolor: "secondary.blue",
               width: "100%",
               display: "flex",
               alignItems: "center",
@@ -99,7 +97,7 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
               id="modal-modal-title"
               variant="h6"
               component="h4"
-              sx={{ ml: 3, color: "#fff" }}
+              sx={{ ml: 3 }}
             >
               Add Product
             </Typography>
@@ -129,7 +127,7 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
                     display: "flex",
                     justifyContent: "space-between",
                     border: "1px solid",
-                    backgroundColor: "#F2F2F2",
+
                   }}
                 >
                   <p style={{ fontSize: "12px" }}>
@@ -138,10 +136,6 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
                   <Button
                     variant="raised"
                     component="span"
-                    sx={{
-                      bgcolor: "secondary.blue",
-                      "&:hover": { bgcolor: "secondary.blueHover" },
-                    }}
                   >
                     Browse
                   </Button>
@@ -235,11 +229,8 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
             <ButtonBox component="form" onSubmit={handleProductSubmit}>
               <Button
                 sx={{
-                  bgcolor: "#8E8E8E",
-                  color: "white",
                   width: "100px",
                   my: 2,
-                  "&:hover": { bgcolor: "red" },
                 }}
                 onClick={handleProductClose}
               >
@@ -247,12 +238,9 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
               </Button>
               <Button
                 sx={{
-                  bgcolor: "secondary.blue",
-                  color: "white",
                   width: "100px",
                   mx: 4,
                   my: 2,
-                  "&:hover": { bgcolor: "secondary.blueHover" },
                 }}
                 type="submit"
               >
