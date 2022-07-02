@@ -38,8 +38,8 @@ export const productFormValidator = (productData, setClientsideErrorMsg) => {
     setClientsideErrorMsg("Please select a quantity.");
     return false;
   }
-  if (parseInt(productData.productQuantity) <= 0) {
-    setClientsideErrorMsg("Quantity must be greater than 0.");
+  if (parseInt(productData.productQuantity) < 0) {
+    setClientsideErrorMsg("Quantity must be a positive number.");
     return false;
   }
 

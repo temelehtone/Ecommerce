@@ -4,13 +4,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getTranslatedText as t } from "../translations";
 // Styles
 
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, Button, Badge } from "@mui/material";
 // Redux
 import { useDispatch, useSelector } from "react-redux";
 import { getProduct } from "../redux/actions/productActions";
 import { FlexBox } from "./styles";
 import RouteToProduct from "./RouteToProduct";
-import RouteToCategory from "./RouteToCategory";
+import { style } from "@mui/system";
 
 const ProductPage = () => {
   const { productId } = useParams();
@@ -20,17 +20,61 @@ const ProductPage = () => {
 
   const { product } = useSelector((state) => state.products);
 
-
   useEffect(() => {
-    dispatch(getProduct(productId))
-  }, [dispatch, productId])
+    dispatch(getProduct(productId));
+  }, [dispatch, productId]);
 
   return (
     <>
       {product ? (
         <>
-        <RouteToProduct product={product}/>
-          <FlexBox></FlexBox>{" "}
+          <RouteToProduct product={product} />
+          <Box sx={{ p: 1 }}>
+            <Typography variant="h6">{product.productName}</Typography>
+            <Box sx={{ display: { md: "flex" } }}>
+              <Box sx={{ textAlign: "center", flexGrow: 1, mx: 3 }}>
+                <img
+                  src={`http://localhost:5000/uploads/${product.fileName}`}
+                  alt="product img"
+                  style={{ maxWidth: "100%" }}
+                />
+              </Box>
+              <Box
+                sx={{
+                  maxWidth: { md: "300px" },
+                  textAlign: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Typography variant="h4" sx={{ color: "red", my: 2 }}>
+                  {product.productPrice.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                  })}
+                </Typography>
+                <Typography variant="body2" sx={{ my: 2 }}>
+                  {product.productDescription}
+                </Typography>
+
+                {product.productQuantity == 0 ? (
+                  <Typography variant="h6" sx={{ color: "red" }}>
+                    {t("OUT_OF_STOCK")}
+                  </Typography>
+                ) : (
+                  <Typography variant="h6" sx={{ color: "green" }}>
+                    {t("IN_STORAGE")}:{" "}
+                    {product.productQuantity > 10
+                      ? "+10"
+                      : product.productQuantity}
+                  </Typography>
+                )}
+
+                <Badge badgeContent={2} color="error">
+                  <Button disabled={product.productQuantity == 0 ? true : false}>{t("ADD_TO_CART")}</Button>
+                </Badge>
+              </Box>
+            </Box>
+          </Box>
         </>
       ) : (
         <Box sx={{ textAlign: "center" }}>

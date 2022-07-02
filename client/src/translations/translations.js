@@ -82,9 +82,21 @@ const translations = {
         'fi': 'Tässä kategoriassa ei ole tuotteita.'
     },
     "PRODUCT_NOT_FOUND" : {
-        'en': 'This category do not contain any products.',
+        'en': 'Product not found.',
         'fi': 'Tuotetta ei löytynyt.'
     },
+    "ADD_TO_CART" : {
+        'en': 'Add to cart',
+        'fi': 'Lisää ostoskoriin'
+    },
+    "OUT_OF_STOCK": {
+        'en': 'Out of stock.',
+        'fi': "Tuote loppunut."
+    },
+    "IN_STORAGE": {
+        'en': 'In storage',
+        'fi': "Varastossa"
+    }
 
 
 }

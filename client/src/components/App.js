@@ -20,7 +20,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ display: "flex" }}>
+      <Box sx={{ display: "flex", bgcolor: "lightgrey" }}>
         <NavBar />
         <ThemeProvider theme={componentStyles}>
         <RouteComponents />

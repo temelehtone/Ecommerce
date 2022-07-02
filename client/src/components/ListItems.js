@@ -21,7 +21,6 @@ import { isAuthenticated } from "../helpers/auth";
 import { logout } from "../redux/actions/authActions"
 // Redux
 import { useDispatch } from "react-redux";
-import { theme } from "./styles";
 
 
 export const MainListItems = ({ setCategoryOpen, categoryOpen }) => {
