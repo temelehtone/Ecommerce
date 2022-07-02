@@ -63,11 +63,14 @@ export const getProduct = async (req, res) => {
   try {
     
     const productId = req.params.productId;
-    
+    if (productId.match(/^[0-9a-fA-F]{24}$/)) {
     const product = await Product.findById(productId)
     res
       .status(200)
       .json({ product });
+    } else {
+      res.status(404).json({ errorMessage: "Product not found." }); 
+    }
   } catch (error) {
     console.log("Product get error:", error);
     res.status(500).json({
@@ -80,12 +83,18 @@ export const getProductsByCategory = async (req, res) => {
   try {
     
     const categoryId = req.params.categoryId;
-
-
-    const products = await Product.find({ productCategory: categoryId })
+    if (categoryId.match(/^[0-9a-fA-F]{24}$/)) {
+      const products = await Product.find({ productCategory: categoryId })
+    
     res
       .status(200)
       .json({ products });
+    }
+    else {
+      res.status(404).json({ errorMessage: "Product category not found." });
+    }
+
+    
   } catch (error) {
     console.log("Product getProductsByCategory error:", error);
     res.status(500).json({

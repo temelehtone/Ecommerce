@@ -7,6 +7,7 @@ import {
 import * as api from "../../api";
 import { SHOW_ERROR_MESSAGE } from "../constants/messageConstants";
 
+
 export const loadCategories = () => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });

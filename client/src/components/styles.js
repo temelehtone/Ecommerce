@@ -41,7 +41,7 @@ export const theme = createTheme({
       color9: blue[900],
     },
     custom: {
-      buttonColor: "red",
+      buttonColor: "#338BA8",
       editButton: "green",
       adminActionButton: "blue",
     }

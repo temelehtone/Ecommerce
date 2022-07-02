@@ -110,13 +110,15 @@ export const MainListItems = ({ setCategoryOpen, categoryOpen }) => {
   }
   return (
     <>
-    <ListItemButton onClick={handleCategoriesClick} sx={{ color: "white" }}>
+    <Slide in={!categoryOpen} direction="left" style={{transitionDelay: categoryOpen ?"0.3s" : 0}}>
+        <ListItemButton onClick={handleCategoriesClick} >
           <ListItemIcon>
             <CategoryIcon sx={{ color: "white" }}/>
           </ListItemIcon>    
           <ListItemText primary="Categories" />
-          {categoryOpen ? <ArrowLeftIcon/> : <ArrowRightIcon/>}
+          {categoryOpen ? <ArrowLeftIcon sx={{ color: "white" }}/> : <ArrowRightIcon sx={{ color: "white" }}/>}
         </ListItemButton>
+        </Slide>
       <ListItemButton onClick={() => navigate("/")}>
         <ListItemIcon>
           <HomeIcon sx={{ color: "white" }}/>

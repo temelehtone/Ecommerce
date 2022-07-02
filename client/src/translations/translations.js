@@ -77,6 +77,14 @@ const translations = {
         'en': "Already account? Sign in.",
         'fi': 'Onko sinulla jo käyttäjä? Kirjaudu sisään',
     },
+    "NO_PRODUCTS_FOUND" : {
+        'en': 'This category do not contain any products.',
+        'fi': 'Tässä kategoriassa ei ole tuotteita.'
+    },
+    "PRODUCT_NOT_FOUND" : {
+        'en': 'This category do not contain any products.',
+        'fi': 'Tuotetta ei löytynyt.'
+    },
 
 
 }

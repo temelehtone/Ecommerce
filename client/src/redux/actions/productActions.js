@@ -38,7 +38,7 @@ export const getProductsByCategory = (categoryId) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
     const response = await api.getProductsByCategory(categoryId);
-    console.log(response)
+
     dispatch({ type: STOP_LOADING });
     dispatch({ type: GET_PRODUCT_BY_CATEGORY, payload: response.data.products });
   } catch (err) {

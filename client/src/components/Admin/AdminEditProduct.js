@@ -98,7 +98,7 @@ const AdminEditProduct = () => {
           alignItems: "center",
           textAlign: "center",
           height: "200px",
-          backgroundColor: theme.palette.primary.main,
+          backgroundColor: theme.palette.primary.color7,
         }}
       >
         <Typography
