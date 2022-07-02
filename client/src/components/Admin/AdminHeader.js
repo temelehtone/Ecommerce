@@ -8,7 +8,7 @@ const AdminHeader = ({ handleOpenCategory, handleOpenProduct, handleOpenOrders }
 
   return (
       <>
-    <FlexBox sx={{ backgroundColor: theme.palette.primary.main }}>
+    <FlexBox sx={{ backgroundColor: theme.palette.primary.color7 }}>
         <DashboardIcon sx={{ mr: 3, fontSize: 50 }} />
         <h1>Dashboard</h1>
       </FlexBox>

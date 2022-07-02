@@ -15,6 +15,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import CategoryIcon from '@mui/icons-material/Category';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
+import { Slide } from "@mui/material";
 
 import { isAuthenticated } from "../helpers/auth";
 import { logout } from "../redux/actions/authActions"
@@ -42,6 +43,7 @@ export const MainListItems = ({ setCategoryOpen, categoryOpen }) => {
   if (isAuthenticated()) {
     return (
       <>
+      <Slide in={!categoryOpen} direction="left" style={{transitionDelay: categoryOpen ?"0.3s" : 0}}>
         <ListItemButton onClick={handleCategoriesClick} >
           <ListItemIcon>
             <CategoryIcon sx={{ color: "white" }}/>
@@ -49,6 +51,7 @@ export const MainListItems = ({ setCategoryOpen, categoryOpen }) => {
           <ListItemText primary="Categories" />
           {categoryOpen ? <ArrowLeftIcon sx={{ color: "white" }}/> : <ArrowRightIcon sx={{ color: "white" }}/>}
         </ListItemButton>
+        </Slide>
         <ListItemButton onClick={() => navigate("/")}>
           <ListItemIcon>
             <HomeIcon sx={{ color: "white" }}/>

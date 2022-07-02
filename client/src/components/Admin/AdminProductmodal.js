@@ -10,8 +10,9 @@ import {
     Select,
     InputLabel,
     MenuItem,
+    Modal,
   } from "@mui/material";
-import { CustomProductModal, ButtonBox } from '../styles';
+import { CustomProductModal, ButtonBox, theme } from '../styles';
 // Helpers
 import { SuccessAlert, ErrorAlert } from "../../helpers/message";
 import { productFormValidator } from "../../helpers/productFormValidator";
@@ -72,7 +73,7 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
       };
 
   return (
-    <CustomProductModal
+    <Modal
       open={openProduct}
       onClose={handleProductClose}
       aria-labelledby="modal-modal-title"
@@ -83,25 +84,20 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
           display: "flex",
           width: "100%",
           flexDirection: "column",
+          backgroundColor: "white",
+          height: "fit-content"
         }}
       >
         
-          <ButtonBox
-            sx={{
-              width: "100%",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
+
             <Typography
               id="modal-modal-title"
               variant="h6"
               component="h4"
-              sx={{ ml: 3 }}
+              sx={{ backgroundColor: theme.palette.secondary.color5, textAlign: "center", padding: 2 }}
             >
               Add Product
             </Typography>
-          </ButtonBox>
           {clientSideErrorMsg && <ErrorAlert message={clientSideErrorMsg}/>}
           {errorMessage && <ErrorAlert message={errorMessage}/>}
           {successMessage && <SuccessAlert message={successMessage}/>}
@@ -121,7 +117,7 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
                   onChange={handleProductImageChange}
                   type="file"
                 />
-                <label
+                <InputLabel
                   htmlFor="productImage"
                   style={{
                     display: "flex",
@@ -139,7 +135,7 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
                   >
                     Browse
                   </Button>
-                </label>
+                </InputLabel>
               </Grid>
               <Grid item xs={11} sx={{ ml: 1 }}>
                 <InputLabel htmlFor="productName">Name</InputLabel>
@@ -229,8 +225,8 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
             <ButtonBox component="form" onSubmit={handleProductSubmit}>
               <Button
                 sx={{
-                  width: "100px",
-                  my: 2,
+                  m: 2,
+               
                 }}
                 onClick={handleProductClose}
               >
@@ -238,9 +234,7 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
               </Button>
               <Button
                 sx={{
-                  width: "100px",
-                  mx: 4,
-                  my: 2,
+                  m: 2,
                 }}
                 type="submit"
               >
@@ -250,7 +244,7 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
           </>
         )}
       </Box>
-    </CustomProductModal>
+    </Modal>
   )
 }
 

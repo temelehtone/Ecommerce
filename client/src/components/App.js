@@ -9,6 +9,7 @@ import Footer from "./Footer";
 // Redux imports
 import { useDispatch } from "react-redux";
 import { loadCategories } from "../redux/actions/categoryActions";
+import { componentStyles } from "./componentStyles";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <Box sx={{ display: "flex" }}>
         <NavBar />
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={componentStyles}>
         <RouteComponents />
         </ThemeProvider>
       </Box>

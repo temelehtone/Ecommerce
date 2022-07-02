@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import isEmpty from "validator/lib/isEmpty";
 // Styles
-import { Box, Typography, Button } from "@mui/material"
-import { CustomModal, ButtonBox, StyledTextField } from '../styles'
+import { Box, Typography, Button, Modal } from "@mui/material"
+import {  ButtonBox, StyledTextField, theme } from '../styles'
 // Helpers
 import { ErrorAlert, SuccessAlert } from '../../helpers/message'
 import { showLoading } from "../../helpers/loading";
@@ -41,7 +41,7 @@ const AdminCategorymodal = ({ openCategory, setOpenCategory }) => {
         setCategory("")
       };
   return (
-    <CustomModal
+    <Modal
       open={openCategory}
       onClose={handleCategoryClose}
       aria-labelledby="modal-modal-title"
@@ -52,26 +52,18 @@ const AdminCategorymodal = ({ openCategory, setOpenCategory }) => {
           display: "flex",
           width: "100%",
           flexDirection: "column",
+          backgroundColor: "white",
         }}
         
       >
-          <ButtonBox
-            sx={{
-              width: "100%",
-              display: "flex",
-              alignItems: "center",
-              height: "100px",
-            }}
-          >
             <Typography
               id="modal-modal-title"
               variant="h6"
               component="h4"
-              sx={{ ml: 3 }}
+              sx={{ textAlign: "center", padding: 2, backgroundColor: theme.palette.secondary.color5 }}
             >
               Add Category
             </Typography>
-          </ButtonBox>
         {clientSideErrorMsg && <ErrorAlert message={clientSideErrorMsg}/>}
         {errorMessage && <ErrorAlert message={errorMessage}/>}
         {successMessage && <SuccessAlert message={successMessage}/>}
@@ -92,7 +84,7 @@ const AdminCategorymodal = ({ openCategory, setOpenCategory }) => {
                 sx={{
   
                   width: "100px",
-                  my: 2,
+                  m: 2,
                 }}
                 onClick={handleCategoryClose}
               >
@@ -101,7 +93,7 @@ const AdminCategorymodal = ({ openCategory, setOpenCategory }) => {
               <Button
                 sx={{
                   width: "100px",
-                  my: 2,
+                  m: 2,
                 }}
                 type="submit"
               >
@@ -111,7 +103,7 @@ const AdminCategorymodal = ({ openCategory, setOpenCategory }) => {
           </>
         )}
       </Box>
-    </CustomModal>
+    </Modal>
   )
 }
 

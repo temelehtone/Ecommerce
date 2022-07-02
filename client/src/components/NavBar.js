@@ -16,6 +16,7 @@ import {
   SearchIconWrapper,
   StyledInputBase,
   FlexBox,
+  theme,
 } from "./styles";
 // Components
 import { MainListItems } from "./ListItems";
@@ -104,6 +105,7 @@ export const NavBar = () => {
             alignItems: "center",
             justifyContent: "flex-end",
             px: [1],
+            backgroundColor: theme.palette.primary.color6,
           }}
         >
           
@@ -112,7 +114,7 @@ export const NavBar = () => {
           </IconButton>
         </Toolbar>
        
-        <List component="nav">{<MainListItems categoryOpen={categoryOpen} setCategoryOpen={setCategoryOpen} />}</List>
+        <List component="nav" sx={{ padding: 0, }}>{<MainListItems categoryOpen={categoryOpen} setCategoryOpen={setCategoryOpen} />}</List>
         
       </MenuDrawer>
       <CategoriesDiv categoryOpen={categoryOpen} setCategoryOpen={setCategoryOpen} />
