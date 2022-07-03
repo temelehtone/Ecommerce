@@ -15,6 +15,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { ExpandMore } from "../styles/styles";
+import { getTranslatedText as t} from "../../translations";
 
 // Redux
 import { useDispatch } from "react-redux"
@@ -80,11 +81,11 @@ const AdminProductCard = ({ p }) => {
         <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
           <Button onClick={() => navigate(`/admin/edit/product/${p._id}`)}>
             <EditIcon />
-            Edit
+            {t('EDIT')}
           </Button>
           <Button onClick={() =>dispatch(deleteProduct(p._id))}>
             <DeleteIcon />
-            Delete
+            {t('DELETE')}
           </Button>
         </CardActions>
       </Card>

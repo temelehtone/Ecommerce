@@ -37,7 +37,6 @@ const ProductCard = ({ p }) => {
           transition: "box-shadow 125ms ease-in-out 0s",
         }}
       >
-        <a href="#!" style={{ all: "unset", cursor: "pointer" }}>
           <CardMedia
             component="img"
             height="400"
@@ -73,7 +72,7 @@ const ProductCard = ({ p }) => {
             }}
           >
             
-            <ButtonBox >
+            <ButtonBox sx={{ m: 0, p: 0, width: "100%", justifyContent: "space-between"}}>
             <Button onClick={() => navigate(`/shop/product/${p._id}`)} sx={{ bgcolor: theme.palette.primary.color2 }}>
               {t('VIEW_PRODUCT')}
             </Button>
@@ -82,7 +81,6 @@ const ProductCard = ({ p }) => {
             </Button>
             </ButtonBox>
           </CardActions>
-        </a>
       </Card>
     </>
   );

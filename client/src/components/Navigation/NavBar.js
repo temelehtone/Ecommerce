@@ -18,6 +18,8 @@ import {
   FlexBox,
   theme,
 } from "../styles/styles";
+
+import { getTranslatedText as t } from "../../translations";
 // Components
 import { MainListItems } from "./ListItems";
 
@@ -81,7 +83,7 @@ export const NavBar = () => {
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
-                placeholder="Search…"
+                placeholder={t('SEARCH')}
                 inputProps={{ "aria-label": "search" }}
               />
             </Search>

@@ -16,6 +16,7 @@ import { CustomProductModal, ButtonBox, theme } from '../styles/styles';
 import { SuccessAlert, ErrorAlert } from "../../helpers/message";
 import { productFormValidator } from "../../helpers/productFormValidator";
 import { showLoading } from "../../helpers/loading";
+import { getTranslatedText as t } from '../../translations';
 // Redux
 import { useSelector, useDispatch } from "react-redux";
 import { createProduct } from '../../redux/actions/productActions';
@@ -95,7 +96,7 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
               component="h4"
               sx={{ backgroundColor: theme.palette.secondary.color5, textAlign: "center", padding: 2 }}
             >
-              Add Product
+              {t('ADD_PRODUCT')}
             </Typography>
           {clientSideErrorMsg && <ErrorAlert message={clientSideErrorMsg}/>}
           {errorMessage && <ErrorAlert message={errorMessage}/>}
@@ -107,7 +108,7 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
           <>
             <Grid container spacing={2} sx={{ mb: 2, mt: 1, justifyContent: "center" }} >
               <Grid item xs={11} sm={11} sx={{ ml: 1 }}>
-                <InputLabel htmlFor="productImage">Image</InputLabel>
+                <InputLabel htmlFor="productImage">{t('IMAGE')}</InputLabel>
                 <Input
                   accept="image/*"
                   style={{ display: "none" }}
@@ -132,12 +133,12 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
                     variant="raised"
                     component="span"
                   >
-                    Browse
+                    {t('BROWSE')}
                   </Button>
                 </InputLabel>
               </Grid>
               <Grid item xs={11} sx={{ ml: 1 }}>
-                <InputLabel htmlFor="productName">Name</InputLabel>
+                <InputLabel htmlFor="productName">{t('NAME')}</InputLabel>
                 <TextField
                   onChange={handleProductChange}
                   fullWidth
@@ -151,7 +152,7 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
                 sx={{ display: "flex", flexDirection: "column", ml: 1 }}
               >
                 <InputLabel htmlFor="productDescription">
-                  Description
+                {t('DESCRIPTION')}
                 </InputLabel>
                 <textarea
                   onChange={handleProductChange}
@@ -161,7 +162,7 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
                 />
               </Grid>
               <Grid item xs={11} sx={{ ml: 1 }}>
-                <InputLabel htmlFor="productPrice">Price</InputLabel>
+                <InputLabel htmlFor="productPrice">{t('PRICE')}</InputLabel>
                 <TextField
                   onChange={handleProductChange}
                   fullWidth
@@ -171,7 +172,7 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
                 />
               </Grid>
               <Grid item xs={11} sm={6} sx={{ ml: 1 }}>
-                <InputLabel htmlFor="productCategory">Category</InputLabel>
+                <InputLabel htmlFor="productCategory">{t('CATEGORY')}</InputLabel>
                 <Select
                   labelId="productCategory"
                   id="productCategory"
@@ -181,8 +182,8 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
                   name="productCategory"
                   displayEmpty
                 >
-                  <MenuItem disabled value="Choose One...">
-                    Choose One...
+                  <MenuItem disabled value={t('CHOOSE_ONE')}>
+                  {t('CHOOSE_ONE')}
                   </MenuItem>
                   {categories &&
                     categories.map((c) => (
@@ -204,7 +205,7 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
                   }),
                 ]}
               >
-                <InputLabel htmlFor="productQuantity">Quantity</InputLabel>
+                <InputLabel htmlFor="productQuantity">{t('QUANTITY')}</InputLabel>
                 <TextField
                   onChange={handleProductChange}
                   id="productQuantity"
@@ -229,7 +230,7 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
                 }}
                 onClick={handleProductClose}
               >
-                Close
+                {t('CLOSE')}
               </Button>
               <Button
                 sx={{
@@ -237,7 +238,7 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
                 }}
                 type="submit"
               >
-                Submit
+                {t('SUBMIT')}
               </Button>
             </ButtonBox>
           </>

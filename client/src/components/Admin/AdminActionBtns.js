@@ -3,6 +3,7 @@ import React from "react";
 import AddIcon from "@mui/icons-material/Add";
 import { Button } from "@mui/material";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
+import { getTranslatedText as t } from "../../translations";
 
 const AdminActionBtns = ({
   handleOpenCategory,
@@ -13,15 +14,15 @@ const AdminActionBtns = ({
     <>
       <Button onClick={handleOpenCategory} sx={{ mx: 2 }}>
         <AddIcon />
-        Add Category
+        {t('ADD_CATEGORY')}
       </Button>
       <Button sx={{ mx: 2 }} onClick={handleOpenProduct}>
         <AddIcon />
-        Add Product
+        {t('ADD_PRODUCT')}
       </Button>
       <Button sx={{ mx: 2 }} onClick={handleOpenOrders}>
         <CreditCardIcon />
-        View Orders
+        {t('VIEW_ORDERS')}
       </Button>
     </>
   );

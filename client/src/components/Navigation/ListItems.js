@@ -12,19 +12,19 @@ import ExitToApp from "@mui/icons-material/ExitToApp";
 import LoginIcon from "@mui/icons-material/Login";
 import SettingsIcon from "@mui/icons-material/Settings";
 import HomeIcon from "@mui/icons-material/Home";
-import CategoryIcon from '@mui/icons-material/Category';
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
+import CategoryIcon from "@mui/icons-material/Category";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import { Slide } from "@mui/material";
 
 import { isAuthenticated } from "../../helpers/auth";
-import { logout } from "../../redux/actions/authActions"
+import { logout } from "../../redux/actions/authActions";
+import { getTranslatedText as t } from "../../translations";
 // Redux
 import { useDispatch } from "react-redux";
 
-
 export const MainListItems = ({ setCategoryOpen, categoryOpen }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const navigateDashboard = () => {
@@ -36,62 +36,65 @@ export const MainListItems = ({ setCategoryOpen, categoryOpen }) => {
   };
 
   const handleCategoriesClick = () => {
-    setCategoryOpen(!categoryOpen)
-  }
+    setCategoryOpen(!categoryOpen);
+  };
 
   if (isAuthenticated()) {
     return (
       <>
-      <Slide in={!categoryOpen} direction="left" style={{transitionDelay: categoryOpen ?"0.3s" : 0}}>
-        <ListItemButton onClick={handleCategoriesClick} >
-          <ListItemIcon>
-            <CategoryIcon sx={{ color: "white" }}/>
-          </ListItemIcon>    
-          <ListItemText primary="Categories" />
-          {categoryOpen ? <ArrowLeftIcon sx={{ color: "white" }}/> : <ArrowRightIcon sx={{ color: "white" }}/>}
-        </ListItemButton>
+        <Slide
+          in={!categoryOpen}
+          direction="left"
+          style={{ transitionDelay: categoryOpen ? "0.3s" : 0 }}
+        >
+          <ListItemButton onClick={handleCategoriesClick}>
+            <ListItemIcon>
+              <CategoryIcon sx={{ color: "white" }} />
+            </ListItemIcon>
+            <ListItemText primary={t("CATEGORIES")} />
+            {categoryOpen ? (
+              <ArrowLeftIcon sx={{ color: "white" }} />
+            ) : (
+              <ArrowRightIcon sx={{ color: "white" }} />
+            )}
+          </ListItemButton>
         </Slide>
         <ListItemButton onClick={() => navigate("/")}>
           <ListItemIcon>
-            <HomeIcon sx={{ color: "white" }}/>
+            <HomeIcon sx={{ color: "white" }} />
           </ListItemIcon>
-          <ListItemText primary="Home" />
+          <ListItemText primary={t('HOME')} />
         </ListItemButton>
         <ListItemButton onClick={navigateDashboard}>
           <ListItemIcon>
-            <DashboardIcon sx={{ color: "white" }}/>
+            <DashboardIcon sx={{ color: "white" }} />
           </ListItemIcon>
-          <ListItemText primary="Dashboard" />
+          <ListItemText primary={t('DASHBOARD')} />
         </ListItemButton>
         <ListItemButton>
           <ListItemIcon>
-            <ShoppingCartIcon sx={{ color: "white" }}/>
+            <ShoppingCartIcon sx={{ color: "white" }} />
           </ListItemIcon>
-          <ListItemText primary="Orders" />
+          <ListItemText primary={t('ORDERS')} />
         </ListItemButton>
         <ListItemButton>
           <ListItemIcon>
-            <PeopleIcon sx={{ color: "white" }}/>
+            <PeopleIcon sx={{ color: "white" }} />
           </ListItemIcon>
-          <ListItemText primary="Customers" />
+          <ListItemText primary={t('CUSTOMERS')} />
         </ListItemButton>
-        <ListItemButton>
-          <ListItemIcon>
-            <BarChartIcon sx={{ color: "white" }}/>
-          </ListItemIcon>
-          <ListItemText primary="Reports" />
-        </ListItemButton>
+    
         <ListItemButton onClick={() => navigate("/shop")}>
           <ListItemIcon>
-            <LayersIcon sx={{ color: "white" }}/>
+            <LayersIcon sx={{ color: "white" }} />
           </ListItemIcon>
-          <ListItemText primary="Integrations" />
+          <ListItemText primary={t('SHOP')} />
         </ListItemButton>
         <ListItemButton onClick={() => navigate("/settings")}>
           <ListItemIcon>
-            <SettingsIcon sx={{ color: "white" }}/>
+            <SettingsIcon sx={{ color: "white" }} />
           </ListItemIcon>
-          <ListItemText primary="Settings" />
+          <ListItemText primary={t('SETTINGS')} />
         </ListItemButton>
         <ListItemButton
           onClick={() => {
@@ -99,38 +102,43 @@ export const MainListItems = ({ setCategoryOpen, categoryOpen }) => {
           }}
         >
           <ListItemIcon>
-            <ExitToApp sx={{ color: "white" }}/>
+            <ExitToApp sx={{ color: "white" }} />
           </ListItemIcon>
-          <ListItemText primary="Sign out" />
+          <ListItemText primary={t('SIGN_OUT')} />
         </ListItemButton>
-        
       </>
     );
   }
   return (
     <>
-    <Slide in={!categoryOpen} direction="left" style={{transitionDelay: categoryOpen ?"0.3s" : 0}}>
-        <ListItemButton onClick={handleCategoriesClick} >
+      <Slide
+        in={!categoryOpen}
+        direction="left"
+        style={{ transitionDelay: categoryOpen ? "0.3s" : 0 }}
+      >
+        <ListItemButton onClick={handleCategoriesClick}>
           <ListItemIcon>
-            <CategoryIcon sx={{ color: "white" }}/>
-          </ListItemIcon>    
-          <ListItemText primary="Categories" />
-          {categoryOpen ? <ArrowLeftIcon sx={{ color: "white" }}/> : <ArrowRightIcon sx={{ color: "white" }}/>}
+            <CategoryIcon sx={{ color: "white" }} />
+          </ListItemIcon>
+          <ListItemText primary={t('CATEGORIES')} />
+          {categoryOpen ? (
+            <ArrowLeftIcon sx={{ color: "white" }} />
+          ) : (
+            <ArrowRightIcon sx={{ color: "white" }} />
+          )}
         </ListItemButton>
-        </Slide>
+      </Slide>
       <ListItemButton onClick={() => navigate("/")}>
         <ListItemIcon>
-          <HomeIcon sx={{ color: "white" }}/>
+          <HomeIcon sx={{ color: "white" }} />
         </ListItemIcon>
-        <ListItemText primary="Home" />
+        <ListItemText primary={t('HOME')} />
       </ListItemButton>
-      <ListItemButton
-        onClick={() => navigate("/sign-in")}
-      >
+      <ListItemButton onClick={() => navigate("/sign-in")}>
         <ListItemIcon>
-          <LoginIcon sx={{ color: "white" }}/>
+          <LoginIcon sx={{ color: "white" }} />
         </ListItemIcon>
-        <ListItemText primary="Sign in" />
+        <ListItemText primary={t('SIGN_IN')} />
       </ListItemButton>
     </>
   );
