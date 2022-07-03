@@ -17,8 +17,8 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import { Slide } from "@mui/material";
 
-import { isAuthenticated } from "../helpers/auth";
-import { logout } from "../redux/actions/authActions"
+import { isAuthenticated } from "../../helpers/auth";
+import { logout } from "../../redux/actions/authActions"
 // Redux
 import { useDispatch } from "react-redux";
 

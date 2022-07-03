@@ -7,10 +7,9 @@ import {
   ListItem,
   ListItemText,
   IconButton,
-  Zoom,
  Slide,
 } from "@mui/material";
-import { CategoryDrawer, theme } from "./styles";
+import { CategoryDrawer, theme } from "../styles/styles";
 
 // Redux
 import { useSelector } from "react-redux";

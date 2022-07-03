@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import React from 'react'
-import { theme } from './styles'
+import { theme } from '../styles/styles'
 
 const Footer = () => {
   return (

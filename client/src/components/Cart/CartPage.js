@@ -4,8 +4,8 @@ import { getTranslatedText as t} from '../../translations'
 
 // Styles
 import { Box, Typography } from '@mui/material'
-import { FlexBox } from '../styles'
-import { theme } from '../styles'
+import { FlexBox } from '../styles/styles'
+import { theme } from '../styles/styles'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import CartTable from './CartTable'
 //Redux

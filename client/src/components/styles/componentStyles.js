@@ -28,12 +28,5 @@ export const componentStyles = createTheme({
         },
       },
     },
-    MuiContainer: {
-      styleOverrides: {
-        root: {
-          padding: 0,
-        }
-      }
-    }
   },
 });

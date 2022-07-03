@@ -13,7 +13,7 @@ import {
   Input,
   TextareaAutosize,
 } from "@mui/material";
-import { ButtonBox, theme } from "../styles";
+import { ButtonBox, theme } from "../styles/styles";
 // Helpers
 import { productFormValidator } from "../../helpers/productFormValidator";
 import { ErrorAlert } from "../../helpers/message";

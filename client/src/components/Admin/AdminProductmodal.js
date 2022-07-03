@@ -11,7 +11,7 @@ import {
     InputLabel,
     MenuItem,
   } from "@mui/material";
-import { CustomProductModal, ButtonBox, theme } from '../styles';
+import { CustomProductModal, ButtonBox, theme } from '../styles/styles';
 // Helpers
 import { SuccessAlert, ErrorAlert } from "../../helpers/message";
 import { productFormValidator } from "../../helpers/productFormValidator";

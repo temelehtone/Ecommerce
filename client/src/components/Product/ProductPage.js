@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-import { getTranslatedText as t } from "../translations";
+import { getTranslatedText as t } from "../../translations";
 // Styles
 
 import { Typography, Box, Button, Badge } from "@mui/material";
 // Redux
 import { useDispatch, useSelector } from "react-redux";
-import { getProduct } from "../redux/actions/productActions";
-import { addToCart } from "../redux/actions/cartActions";
+import { getProduct } from "../../redux/actions/productActions";
+import { addToCart } from "../../redux/actions/cartActions";
 
 import RouteToProduct from "./RouteToProduct";
 
@@ -16,8 +16,6 @@ import RouteToProduct from "./RouteToProduct";
 const ProductPage = () => {
   const { productId } = useParams();
   const dispatch = useDispatch();
-
-  const navigate = useNavigate();
 
   const { product } = useSelector((state) => state.products);
 

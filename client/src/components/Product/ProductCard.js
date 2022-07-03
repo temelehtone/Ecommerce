@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { getTranslatedText as t } from "../translations";
+import { getTranslatedText as t } from "../../translations";
 // Styles
 import {
   Card,
@@ -16,8 +16,8 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 // Redux
 import { useDispatch } from "react-redux";
-import { addToCart } from "../redux/actions/cartActions";
-import { ButtonBox, theme } from "./styles";
+import { addToCart } from "../../redux/actions/cartActions";
+import { ButtonBox, theme } from "../styles/styles";
 
 const ProductCard = ({ p }) => {
   const navigate = useNavigate();

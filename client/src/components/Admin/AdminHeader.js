@@ -1,7 +1,7 @@
 import React from 'react'
 // Styles
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import { FlexBox, theme } from "../styles"
+import { FlexBox, theme } from "../styles/styles"
 import AdminActionBtns from './AdminActionBtns';
 
 const AdminHeader = ({ handleOpenCategory, handleOpenProduct, handleOpenOrders }) => {

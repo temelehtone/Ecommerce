@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import isEmpty from "validator/lib/isEmpty";
 // Styles
 import { Box, Typography, Button, Modal } from "@mui/material"
-import {  ButtonBox, StyledTextField, theme } from '../styles'
+import {  ButtonBox, StyledTextField, theme } from '../styles/styles'
 // Helpers
 import { ErrorAlert, SuccessAlert } from '../../helpers/message'
 import { showLoading } from "../../helpers/loading";

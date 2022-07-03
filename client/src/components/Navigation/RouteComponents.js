@@ -3,25 +3,25 @@ import {Routes, Route} from "react-router-dom"
 // Styles
 import { Box, Toolbar, Container } from "@mui/material"
 // Components
-import HomePage from "./HomePage";
-import Login from "./Login";
-import SignUp from "./SignUp";
-import NotFound from "./NotFound";
-import AdminDashboard from "./Admin/AdminDashboard";
-import UserDashboard from "./UserDashboard";
-import SettingPage from "./SettingPage";
-import AdminRoute from "./Admin/AdminRoute";
-import AdminEditProduct from "./Admin/AdminEditProduct";
-import CategoryProductsPage from "./CategoryProductsPage";
+import HomePage from "../Pages/HomePage";
+import Login from "../Auth/Login";
+import SignUp from "../Auth/SignUp";
+import NotFound from "../Pages/NotFound";
+import AdminDashboard from "../Admin/AdminDashboard";
+import UserDashboard from "../User/UserDashboard";
+import SettingPage from "../Pages/SettingPage";
+import AdminRoute from "./AdminRoute";
+import AdminEditProduct from "../Admin/AdminEditProduct";
+import CategoryProductsPage from "../Category/CategoryProductsPage";
 import UserRoute from "./UserRoute";
-import { ErrorAlert, SuccessAlert } from "../helpers/message";
-import ProductPage from "./ProductPage";
-import CartPage from "./Cart/CartPage";
-import ShippingPage from "./Shipping/ShippingPage";
+import { ErrorAlert, SuccessAlert } from "../../helpers/message";
+import ProductPage from "../Product/ProductPage";
+import CartPage from "../Cart/CartPage";
+import ShippingPage from "../Shipping/ShippingPage";
 
 // Redux
 import { useSelector } from "react-redux"
-import Shop from "./Shop";
+import Shop from "../Pages/ShopPage";
 
 export const RouteComponents = () => {
 
@@ -35,7 +35,7 @@ export const RouteComponents = () => {
       }}
     >
       <Toolbar />
-      <Container sx={{ mt: 4, mb: 4, minHeight: "80vh", bgcolor: 'white' }}>
+      <Container sx={{ my: 4, minHeight: "80vh", bgcolor: 'white' }}>
         
         {successMsg && <SuccessAlert message={successMsg}/>}
         {errorMsg && <ErrorAlert message={errorMsg}/>}

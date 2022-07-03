@@ -14,14 +14,14 @@ import Container from "@mui/material/Container";
 import isEmpty from "validator/lib/isEmpty";
 
 
-import { login } from "../redux/actions/authActions"
-import { isAuthenticated } from "../helpers/auth";
-import { ErrorAlert } from "../helpers/message";
+import { login } from "../../redux/actions/authActions"
+import { isAuthenticated } from "../../helpers/auth";
+import { ErrorAlert } from "../../helpers/message";
 
 // Redux
 import { useDispatch } from "react-redux";
 // Translations
-import { getTranslatedText as t } from "../translations";
+import { getTranslatedText as t } from "../../translations";
 
 const Login = () => {
   const dispatch = useDispatch();

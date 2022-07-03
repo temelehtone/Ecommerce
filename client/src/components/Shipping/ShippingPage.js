@@ -1,7 +1,5 @@
 
 import React from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
-import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
@@ -15,8 +13,8 @@ import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
-import { theme } from '../styles';
-import { FlexBox } from '../styles';
+import { theme } from '../styles/styles';
+import { FlexBox } from '../styles/styles';
 import { getTranslatedText as t} from '../../translations';
 
 

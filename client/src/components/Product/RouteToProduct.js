@@ -6,7 +6,7 @@ import HomeIcon from '@mui/icons-material/Home'
 import { Box } from '@mui/system'
 
 // Redux
-import { getCategory } from "../redux/actions/categoryActions";
+import { getCategory } from "../../redux/actions/categoryActions";
 import { useDispatch, useSelector } from "react-redux";
 
 const RouteToProduct = ({ product }) => {

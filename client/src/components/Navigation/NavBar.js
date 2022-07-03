@@ -17,13 +17,13 @@ import {
   StyledInputBase,
   FlexBox,
   theme,
-} from "./styles";
+} from "../styles/styles";
 // Components
 import { MainListItems } from "./ListItems";
 
 // Redux
 import { useSelector } from "react-redux";
-import { showLoading } from "../helpers/loading";
+import { showLoading } from "../../helpers/loading";
 import CategoriesDiv from "./CategoriesDiv";
 import { useNavigate } from "react-router-dom";
 

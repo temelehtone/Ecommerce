@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import ProductCard from "./ProductCard";
-import NotFound from "./NotFound";
+import ProductCard from "../Product/ProductCard";
+import NotFound from "../Pages/NotFound";
 // Styles
-import { FlexBox, GridBox } from "./styles";
+import { FlexBox, GridBox } from "../styles/styles";
 // Redux
 import { useDispatch, useSelector } from "react-redux";
-import { getCategory } from "../redux/actions/categoryActions";
-import { getProductsByCategory } from "../redux/actions/productActions";
+import { getCategory } from "../../redux/actions/categoryActions";
+import { getProductsByCategory } from "../../redux/actions/productActions";
 import { Typography } from "@mui/material";
 
-import { getTranslatedText as t } from "../translations";
+import { getTranslatedText as t } from "../../translations";
 import RouteToCategory from "./RouteToCategory";
 
 const CategoryProductsPage = () => {

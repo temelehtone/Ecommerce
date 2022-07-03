@@ -12,14 +12,14 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
-import { createAccount } from "../redux/actions/authActions";
-import { isAuthenticated } from "../helpers/auth";
-import { ErrorAlert } from "../helpers/message";
+import { createAccount } from "../../redux/actions/authActions";
+import { isAuthenticated } from "../../helpers/auth";
+import { ErrorAlert } from "../../helpers/message";
 
 // Redux
 import { useDispatch } from "react-redux"
 // Translations
-import { getTranslatedText as t } from "../translations";
+import { getTranslatedText as t } from "../../translations";
 
 
 

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-import { isAuthenticated } from "../helpers/auth";
+import { isAuthenticated } from "../../helpers/auth";
 
 const UserDashboard = () => {
     const navigate = useNavigate()

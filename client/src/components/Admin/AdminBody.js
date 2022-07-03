@@ -1,6 +1,6 @@
 import React from "react";
 // Styles
-import { GridBox, FlexBox } from "../styles";
+import { GridBox, FlexBox } from "../styles/styles";
 // Redux
 import { useSelector } from "react-redux";
 

@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 // Styles
-import { FlexBox, GridBox } from './styles'
+import { FlexBox, GridBox } from '../styles/styles'
 // Components
-import ProductCard from './ProductCard'
+import ProductCard from '../Product/ProductCard'
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
-import { getNewArrivals } from '../redux/actions/filterActions'
-import {getProducts} from "../redux/actions/productActions"
+import { getNewArrivals } from '../../redux/actions/filterActions'
+import {getProducts} from "../../redux/actions/productActions"
 
 const HomePage = () => {
 

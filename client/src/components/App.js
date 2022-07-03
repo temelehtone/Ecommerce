@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
-import { NavBar } from "./NavBar";
+import { NavBar } from "./Navigation/NavBar";
 import { ThemeProvider } from "@emotion/react";
-import { RouteComponents } from "./RouteComponents";
-import { theme } from "./styles";
+import { RouteComponents } from "./Navigation/RouteComponents";
+import { theme } from "./styles/styles";
 import Box from "@mui/material/Box";
-import Footer from "./Footer";
+import Footer from "./Utils/Footer";
 
 // Redux imports
 import { useDispatch } from "react-redux";
 import { loadCategories } from "../redux/actions/categoryActions";
-import { componentStyles } from "./componentStyles";
+import { componentStyles } from "./styles/componentStyles";
 
 const App = () => {
   const dispatch = useDispatch();
