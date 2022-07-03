@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -33,7 +33,10 @@ const Login = () => {
   const [formData, setFormData] = useState(initialState);
   const [clientSideErrorMsg, setClientsideErrorMsg] = useState('')
 
+  const location = useLocation();
+
   useEffect(() => {
+
     if (isAuthenticated()) {
       if(isAuthenticated().role === 1) {
         navigate("/admin/dashboard")
@@ -66,7 +69,7 @@ const Login = () => {
 
     const { email, password } = formData;
     const data = { email, password };
-    dispatch(login(data, navigate));
+    dispatch(login(data, navigate, location));
   };
 
   return (

@@ -24,7 +24,7 @@ export const createAccount = (formData, navigate) => async dispatch => {
     });
 }
 
-export const login = (formData, navigate) => async dispatch => {
+export const login = (formData, navigate, location) => async dispatch => {
   try {
     dispatch({ type: START_LOADING })
     const { data } = await api.login(formData);
@@ -33,8 +33,13 @@ export const login = (formData, navigate) => async dispatch => {
 
     if (isAuthenticated() && isAuthenticated().role === 1) {
       navigate("/admin/dashboard")
-    } else {
-      navigate("/user/dashboard");
+    } else if (isAuthenticated() && isAuthenticated().role === 0) {
+      
+      if (location.search.split("=")[1] === "shipping") {
+        navigate("/shop/shipping")
+      } else {
+        navigate("/user/dashboard");
+      }
     }
     dispatch({ type: STOP_LOADING })
   } catch (err) {

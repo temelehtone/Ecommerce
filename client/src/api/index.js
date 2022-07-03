@@ -25,3 +25,4 @@ export const editProduct = (productId, formData) => API.put(`/product/editProduc
 export const getNewArrivals = (sortBy, limit) => API.get(`/filter/getNewArrivals?sortBy=${sortBy}&limit=${limit}`);
 
 
+

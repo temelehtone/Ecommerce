@@ -11,6 +11,7 @@ import { getTranslatedText as t } from "../../translations";
 import { useSelector, useDispatch } from "react-redux";
 import { ADD_TO_CART } from "../../redux/constants/cartConstants";
 import { useNavigate } from "react-router-dom";
+import { isAuthenticated } from "../../helpers/auth";
 
 const CartTable = () => {
   const { cart } = useSelector((state) => state.cart);
@@ -48,6 +49,15 @@ const navigate = useNavigate()
     });
   };
 
+  const handleCheckoutClick = () => {
+    if (isAuthenticated()) {
+        navigate("/shop/shipping")
+
+    } else {
+        navigate("/sign-in?redirect=shipping")
+    }
+  }
+
   const handleAddClick = (e, product) => {};
   const handleRemoveClick = (e, product) => {};
 
@@ -81,6 +91,7 @@ const navigate = useNavigate()
                 borderRadius: "10px",
                 height: { md: "100px" },
               }}
+              key={p._id}
             >
               <Box sx={{ display: "flex", width: { sx: "100%", md: "50%" } }}>
                 <img
@@ -194,7 +205,7 @@ const navigate = useNavigate()
             </Typography>
             </Box>
             <Box>
-                <Button>{t('PROCEED_TO_CHECKOUT')}</Button>
+                <Button onClick={handleCheckoutClick}>{t('PROCEED_TO_CHECKOUT')}</Button>
             </Box>
           </Box>
         </Box>
