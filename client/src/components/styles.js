@@ -64,6 +64,13 @@ export const theme = createTheme({
   
 });
 
+export const DeleteButton = styled(Button)(({ theme }) => ({
+  color: "white",
+  backgroundColor: "red",
+  "&:hover": {
+    backgroundColor: "red",
+  }
+}));
 
 export const StyledCardButton = styled(Button)(({ theme }) => ({
   border: "1px solid",

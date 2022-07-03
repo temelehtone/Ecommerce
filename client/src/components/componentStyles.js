@@ -28,19 +28,19 @@ export const componentStyles = createTheme({
         },
       },
     },
-    MuiModal: {
-      styleOverrides: {
-        root: {
-          maxHeight: "80vh",
-          maxWidth: "60vw",
-          left: "50%",
-          top: "40%",
-          transform: `translate(-${50}%, -${50}%)`,
-          border: "2px solid black",
-          overFlowY: "auto",
-          height: "fit-content",
-        },
-      },
-    },
+    // MuiModal: {
+    //   styleOverrides: {
+    //     root: {
+    //       maxHeight: "80vh",
+    //       maxWidth: "60vw",
+    //       left: "50%",
+    //       top: "40%",
+    //       transform: `translate(-${50}%, -${50}%)`,
+    //       border: "2px solid black",
+    //       overFlowY: "auto",
+    //       height: "fit-content",
+    //     },
+    //   },
+    // },
   },
 });

@@ -8,9 +8,10 @@ import { Typography, Box, Button, Badge } from "@mui/material";
 // Redux
 import { useDispatch, useSelector } from "react-redux";
 import { getProduct } from "../redux/actions/productActions";
-import { FlexBox } from "./styles";
+import { addToCart } from "../redux/actions/cartActions";
+
 import RouteToProduct from "./RouteToProduct";
-import { style } from "@mui/system";
+
 
 const ProductPage = () => {
   const { productId } = useParams();
@@ -24,6 +25,10 @@ const ProductPage = () => {
     dispatch(getProduct(productId));
   }, [dispatch, productId]);
 
+  const handleAddToCart = () => {
+    dispatch(addToCart(product))
+  }
+
   return (
     <>
       {product ? (
@@ -36,7 +41,7 @@ const ProductPage = () => {
                 <img
                   src={`http://localhost:5000/uploads/${product.fileName}`}
                   alt="product img"
-                  style={{ maxWidth: "100%" }}
+                  style={{ maxWidth: "100%", maxHeight: "400px" }}
                 />
               </Box>
               <Box
@@ -56,7 +61,7 @@ const ProductPage = () => {
                   {product.productDescription}
                 </Typography>
 
-                {product.productQuantity == 0 ? (
+                {product.productQuantity === 0 ? (
                   <Typography variant="h6" sx={{ color: "red" }}>
                     {t("OUT_OF_STOCK")}
                   </Typography>
@@ -70,7 +75,7 @@ const ProductPage = () => {
                 )}
 
                 <Badge badgeContent={2} color="error">
-                  <Button disabled={product.productQuantity == 0 ? true : false}>{t("ADD_TO_CART")}</Button>
+                  <Button disabled={product.productQuantity === 0 ? true : false} onClick={handleAddToCart}>{t("ADD_TO_CART")}</Button>
                 </Badge>
               </Box>
             </Box>

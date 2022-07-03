@@ -25,12 +25,16 @@ import { MainListItems } from "./ListItems";
 import { useSelector } from "react-redux";
 import { showLoading } from "../helpers/loading";
 import CategoriesDiv from "./CategoriesDiv";
+import { useNavigate } from "react-router-dom";
 
 export const NavBar = () => {
   const { loading } = useSelector((state) => state.loading);
+  const { cart } = useSelector((state) => state.cart);
 
   const [open, setOpen] = useState(false);
   const [categoryOpen, setCategoryOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   const toggleDrawer = () => {
     if (open) {
@@ -86,10 +90,10 @@ export const NavBar = () => {
             <Box sx={{ display: "flex" }}>
               <IconButton
                 size="large"
-
+                onClick={() => navigate("/shop/cart")}
                 color="inherit"
               >
-                <Badge badgeContent={1} color="error">
+                <Badge badgeContent={cart.length} color="error">
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>

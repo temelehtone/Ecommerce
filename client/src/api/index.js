@@ -21,5 +21,7 @@ export const getProducts = () => API.get("/product/getProducts");
 export const getProductsByCategory = (categoryId) => API.get(`/product/getProductsByCategory/${categoryId}`);
 export const deleteProduct = (productId) => API.delete(`/product/deleteProduct/${productId}`);
 export const editProduct = (productId, formData) => API.put(`/product/editProduct/${productId}`, formData)
-// New Arrivals
+// Filters
 export const getNewArrivals = (sortBy, limit) => API.get(`/filter/getNewArrivals?sortBy=${sortBy}&limit=${limit}`);
+
+

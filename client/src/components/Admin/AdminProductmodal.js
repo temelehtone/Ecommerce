@@ -10,7 +10,6 @@ import {
     Select,
     InputLabel,
     MenuItem,
-    Modal,
   } from "@mui/material";
 import { CustomProductModal, ButtonBox, theme } from '../styles';
 // Helpers
@@ -73,7 +72,7 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
       };
 
   return (
-    <Modal
+    <CustomProductModal
       open={openProduct}
       onClose={handleProductClose}
       aria-labelledby="modal-modal-title"
@@ -244,7 +243,7 @@ const AdminProductmodal = ({openProduct, setOpenProduct}) => {
           </>
         )}
       </Box>
-    </Modal>
+    </CustomProductModal>
   )
 }
 
