@@ -9,6 +9,7 @@ import {
   InputBase,
   Drawer,
   AppBar,
+  Select,
 } from "@mui/material";
 import { purple, blue } from "@mui/material/colors";
 
@@ -206,6 +207,7 @@ export const StyledAppBar = styled(AppBar, {
 })(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
   backgroundColor: theme.palette.primary.color7,
+  overflow: "hidden",
   transition: theme.transitions.create(["width", "margin"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -281,6 +283,15 @@ export const CategoryDrawer = styled(Drawer, {
       display: "none",
     }),
   },
+}));
+
+export const LanguageSelect = styled(Select)(({ theme }) => ({
+  color: "white",
+  border: "1px solid white",
+  "&:focused": {
+    border: "1px solid white",
+    
+  }
 }));
 
 

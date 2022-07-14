@@ -7,6 +7,7 @@ import messageReducer from "./reducers/messageReducers";
 import productReducer from "./reducers/productReducers";
 import filterReducer from "./reducers/filterReducers";
 import cartReducer from "./reducers/cartReducers";
+import languageReducer from "./reducers/languageReducers";
 
 const reducer = combineReducers({
   loading: loadingReducer,
@@ -15,6 +16,7 @@ const reducer = combineReducers({
   products: productReducer,
   filters: filterReducer,
   cart: cartReducer,
+  language: languageReducer,
 });
 
 const initialState = {};

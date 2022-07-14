@@ -1,9 +1,12 @@
 
 
 import translations from "./translations";
+import store from "../redux/store";
 
+ export const getTranslatedText = (key) => {
 
- export const getTranslatedText = (key, locale='fi') => {
+   const state = store.getState();
+   const locale = state.language.language;
    if (translations[key] === undefined) {
       return key;
    }

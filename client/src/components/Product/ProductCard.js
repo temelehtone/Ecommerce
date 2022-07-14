@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { getTranslatedText as t } from "../../translations";
 // Styles
 import {
   Card,
@@ -10,21 +9,20 @@ import {
   Typography,
   Button,
   CardActions,
-  Box,
 } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 // Redux
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/actions/cartActions";
-import { ButtonBox, theme } from "../styles/styles";
 
 const ProductCard = ({ p }) => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (e) => {
+    e.stopPropagation();
     dispatch(addToCart(p))
   }
   return (
@@ -35,8 +33,14 @@ const ProductCard = ({ p }) => {
           maxWidth: 345,
           textAlign: "center",
           transition: "box-shadow 125ms ease-in-out 0s",
+          "&:hover": {
+            boxShadow: "rgba(0, 0, 0, 0.36) 0px 8px 16px",
+            transform: "scale(1.03)",
+          },
         }}
+        onClick={() => navigate(`/shop/product/${p._id}`)}
       >
+        <a href="#!" style={{ all: "unset", cursor: "pointer" }}>
           <CardMedia
             component="img"
             height="400"
@@ -55,14 +59,6 @@ const ProductCard = ({ p }) => {
             )}
           </CardContent>
           <hr />
-          <Box sx= {{ textAlign: "center" }}>
-            <Typography variant="h4" sx={{ color: "red" }}>
-              {p.productPrice.toLocaleString("en-US", {
-                style: "currency",
-                currency: "USD",
-              })}
-            </Typography>
-            </Box>
           <CardActions
             sx={{
               display: "flex",
@@ -71,18 +67,27 @@ const ProductCard = ({ p }) => {
               mx: 3,
             }}
           >
-            
-            <ButtonBox sx={{ m: 0, p: 0, width: "100%", justifyContent: "space-between"}}>
-            <Button onClick={() => navigate(`/shop/product/${p._id}`)} sx={{ bgcolor: theme.palette.primary.color2 }}>
-              {t('VIEW_PRODUCT')}
-            </Button>
-            <Button onClick={handleAddToCart}>
+            <Typography variant="h4" sx={{ color: "red" }}>
+              {p.productPrice.toLocaleString("en-US", {
+                style: "currency",
+                currency: "USD",
+              })}
+            </Typography>
+            <Button
+              sx={{
+                bgcolor: "secondary.blue",
+                color: "white",
+                "&:hover": { bgcolor: "blue" },
+              }}
+              onClick={handleAddToCart}
+            >
               <AddShoppingCartIcon />
             </Button>
-            </ButtonBox>
           </CardActions>
+        </a>
       </Card>
     </>
+    
   );
 };
 

@@ -8,8 +8,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { List, Typography, Menu, MenuItem, Popover } from "@mui/material";
+
+import { List, Typography, MenuItem, Select } from "@mui/material";
 import {
   MenuDrawer,
   StyledAppBar,
@@ -18,6 +18,7 @@ import {
   StyledInputBase,
   FlexBox,
   theme,
+  LanguageSelect,
 } from "../styles/styles";
 
 import { getTranslatedText as t } from "../../translations";
@@ -25,17 +26,20 @@ import { getTranslatedText as t } from "../../translations";
 import { MainListItems } from "./ListItems";
 
 // Redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { showLoading } from "../../helpers/loading";
 import CategoriesDiv from "./CategoriesDiv";
 import { useNavigate } from "react-router-dom";
+import { changeLanguage } from "../../redux/actions/languageActions";
 
 export const NavBar = () => {
   const { loading } = useSelector((state) => state.loading);
   const { cart } = useSelector((state) => state.cart);
+  const { language } = useSelector((state) => state.language);
+
+  const dispatch = useDispatch();
 
   const [open, setOpen] = useState(false);
-  const [languageOpen, setLanguageOpen] = useState(false);
   const [categoryOpen, setCategoryOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -47,10 +51,8 @@ export const NavBar = () => {
     setOpen(!open);
   };
 
-  const languages = ["FI", "EN", "SV"];
-
-  const openLanguageMenu = () => {
-    setLanguageOpen(!languageOpen);
+  const handleLanguageChange = (e) => {
+    dispatch(changeLanguage(e.target.value))
   };
 
   return (
@@ -99,19 +101,16 @@ export const NavBar = () => {
                 inputProps={{ "aria-label": "search" }}
               />
             </Search>
-            <Box
-              sx={{ display: "flex", cursor: "pointer" }}
-              onClick={openLanguageMenu}
-            >
-              <Typography>FI</Typography>
-              <KeyboardArrowDownIcon />
-              <Menu id="language-appbar" open={languageOpen}>
-                {languages.map((language) => (
-                  <MenuItem key={language} onClick={openLanguageMenu}>
-                    <Typography textAlign="center">{language}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
+            <Box sx={{ display: "flex", cursor: "pointer" }}>
+              <LanguageSelect
+                value={language}
+                onChange={handleLanguageChange}
+                displayEmpty
+              >
+                <MenuItem value="fi">FI</MenuItem>
+                <MenuItem value="en">EN</MenuItem>
+                <MenuItem value="sv">SV</MenuItem>
+              </LanguageSelect>
             </Box>
           </FlexBox>
 
