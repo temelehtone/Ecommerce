@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken"
 import express from 'express';
 
 import { JWT_SECRET_KEY, JWT_EXPIRE } from '../config/keys.js'
-import User from "../models/user.js"
+import User from "../models/User.js"
 
 const router = express.Router();
 

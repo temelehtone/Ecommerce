@@ -11,6 +11,8 @@ import {
 } from "@mui/material";
 import { CategoryDrawer, theme } from "../styles/styles";
 
+import { getTranslatedText as t } from "../../translations/"
+
 // Redux
 import { useSelector } from "react-redux";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
@@ -45,7 +47,7 @@ const CategoriesDiv = ({ categoryOpen, setCategoryOpen }) => {
             />
           </IconButton>
 
-          <ListItemText sx={{ flexGrow: 1 }}>Categories</ListItemText>
+          <ListItemText sx={{ flexGrow: 1 }}>{t('CATEGORIES')}</ListItemText>
         </ListItem>
         </Slide>
         {categories &&
