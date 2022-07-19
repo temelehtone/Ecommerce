@@ -9,7 +9,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
-import { List, Typography, MenuItem, Select } from "@mui/material";
+import { List, MenuItem } from "@mui/material";
 import {
   MenuDrawer,
   StyledAppBar,

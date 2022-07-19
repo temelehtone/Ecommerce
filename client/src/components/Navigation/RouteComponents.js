@@ -26,6 +26,7 @@ import Shop from "../Pages/ShopPage";
 export const RouteComponents = () => {
 
     const { successMsg, errorMsg } = useSelector(state => state.messages);
+    
 
   return (
     <Box
