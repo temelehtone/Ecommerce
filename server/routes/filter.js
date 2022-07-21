@@ -1,11 +1,11 @@
 import express from "express";
 
-import { getNewArrivals } from "../controllers/filter.js"
-import { authenticateJWT } from "../middleware/authenticator.js";
+import { getNewArrivals, searchProducts } from "../controllers/filter.js"
 
 const router = express.Router();
 
 
 router.get('/getNewArrivals', getNewArrivals)
+router.get('/searchProducts', searchProducts)
 
 export default router

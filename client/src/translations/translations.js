@@ -221,7 +221,15 @@ const translations = {
   SIGN_IN: {
     en: 'Sign in',
     fi: 'Kirjaudu'
-  }
+  },
+  NEW_ARRIVALS: {
+    en: 'New Arrivals',
+    fi: 'Uudet tuotteet'
+  },
+  PRODUCTS: {
+    en: 'Products',
+    fi: 'Tuotteet'
+  },
 
 
 };

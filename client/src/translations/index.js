@@ -7,7 +7,8 @@ import store from "../redux/store";
 
    const state = store.getState();
    const locale = state.language.language;
-   if (translations[key] === undefined) {
+  
+   if (translations[key] === undefined || translations[key][locale] === undefined) {
       return key;
    }
     let translatedText = translations[key][locale]

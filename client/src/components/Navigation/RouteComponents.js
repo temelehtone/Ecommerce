@@ -19,6 +19,7 @@ import ProductPage from "../Product/ProductPage";
 import CartPage from "../Cart/CartPage";
 import ShippingPage from "../Shipping/ShippingPage";
 
+
 // Redux
 import { useSelector } from "react-redux"
 import Shop from "../Pages/ShopPage";
@@ -35,6 +36,7 @@ export const RouteComponents = () => {
         flexGrow: 1,
       }}
     >
+      
       <Toolbar />
       <Container sx={{ my: 4, minHeight: "80vh", bgcolor: 'white' }}>
         

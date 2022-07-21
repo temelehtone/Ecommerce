@@ -7,7 +7,7 @@ export const changeLanguage = (language) => async dispatch => {
         dispatch({ type: START_LOADING });
 
         localStorage.setItem("language", language);
-        console.log(localStorage.getItem("language"));
+
         // Add language to redux
         dispatch({ type: CHANGE_LANGUAGE, payload: language })
 

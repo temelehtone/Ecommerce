@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { FlexBox, GridBox } from '../styles/styles'
 // Components
 import ProductCard from '../Product/ProductCard'
+import { getTranslatedText as t } from "../../translations/index"
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
 import { getNewArrivals } from '../../redux/actions/filterActions'
@@ -27,7 +28,7 @@ const HomePage = () => {
       <div style={{ backgroundImage: "url(/images/canaria2.jpg)", height: '500px', backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }}></div>
       <hr />
       <>
-      <h1>New Products</h1>
+      <h1>{t("NEW_ARRIVALS")}</h1>
       <FlexBox>
       
         <GridBox>
@@ -39,7 +40,7 @@ const HomePage = () => {
         </>
         <hr />
         <>
-      <h1>Products</h1>
+      <h1>{t("PRODUCTS")}</h1>
       <FlexBox>
         <GridBox>
             {products && products.map(p => (

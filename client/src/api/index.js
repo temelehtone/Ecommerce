@@ -23,6 +23,7 @@ export const deleteProduct = (productId) => API.delete(`/product/deleteProduct/$
 export const editProduct = (productId, formData) => API.put(`/product/editProduct/${productId}`, formData)
 // Filters
 export const getNewArrivals = (sortBy, limit) => API.get(`/filter/getNewArrivals?sortBy=${sortBy}&limit=${limit}`);
+export const searchProducts = (searchTerm, sortBy, limit) => API.get(`/filter/searchProducts?sortBy=${sortBy}&limit=${limit}&searchTerm=${searchTerm}`);
 
 
 

@@ -173,14 +173,15 @@ export const Search = styled("div")(({ theme }) => ({
   },
 }));
 
-export const SearchIconWrapper = styled("div")(({ theme }) => ({
+export const SearchIconWrapper = styled(IconButton)(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: "100%",
   position: "absolute",
-  pointerEvents: "none",
   display: "flex",
+  pointerEvents: "none",
   alignItems: "center",
   justifyContent: "center",
+  color: "white",
 }));
 
 export const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -291,7 +292,8 @@ export const LanguageSelect = styled(Select)(({ theme }) => ({
   "&:focused": {
     border: "1px solid white",
     
-  }
+  },
+  height: "50px",
 }));
 
 

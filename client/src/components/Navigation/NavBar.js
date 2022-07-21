@@ -16,7 +16,6 @@ import {
   Search,
   SearchIconWrapper,
   StyledInputBase,
-  FlexBox,
   theme,
   LanguageSelect,
 } from "../styles/styles";
@@ -31,6 +30,7 @@ import { showLoading } from "../../helpers/loading";
 import CategoriesDiv from "./CategoriesDiv";
 import { useNavigate } from "react-router-dom";
 import { changeLanguage } from "../../redux/actions/languageActions";
+import { searchProducts } from "../../redux/actions/filterActions";
 
 export const NavBar = () => {
   const { loading } = useSelector((state) => state.loading);
@@ -52,12 +52,18 @@ export const NavBar = () => {
   };
 
   const handleLanguageChange = (e) => {
-    dispatch(changeLanguage(e.target.value))
+    dispatch(changeLanguage(e.target.value));
+  };
+
+  const onSearch = (e) => {
+    const newText = e.target.value;
+    dispatch(searchProducts(newText));
   };
 
   return (
     <>
       <StyledAppBar position="absolute" open={open}>
+        
         <Toolbar
           sx={{
             pr: "24px", // keep right padding when drawer closed
@@ -77,7 +83,14 @@ export const NavBar = () => {
             <MenuIcon />
           </IconButton>
 
-          <FlexBox>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexGrow: 1,
+            }}
+          >
             <Box
               sx={{
                 display: { xs: "none", sm: "flex" },
@@ -99,8 +112,10 @@ export const NavBar = () => {
               <StyledInputBase
                 placeholder={t("SEARCH")}
                 inputProps={{ "aria-label": "search" }}
+                onChange={onSearch}
               />
             </Search>
+            
             <Box sx={{ display: "flex", cursor: "pointer" }}>
               <LanguageSelect
                 value={language}
@@ -112,7 +127,7 @@ export const NavBar = () => {
                 <MenuItem value="sv">SV</MenuItem>
               </LanguageSelect>
             </Box>
-          </FlexBox>
+          </Box>
 
           <Box sx={{ display: "flex" }}>
             <IconButton
@@ -125,17 +140,18 @@ export const NavBar = () => {
               </Badge>
             </IconButton>
           </Box>
+          
         </Toolbar>
         {loading && showLoading()}
       </StyledAppBar>
 
-      <MenuDrawer variant="permanent" open={open}>
+      <MenuDrawer variant="permanent" open={open} hideBackdrop>
         <Toolbar
           sx={{
             display: "flex",
             alignItems: "center",
             justifyContent: "flex-end",
-            px: [1],
+            height: { sx: "68px", md: "54px" },
             backgroundColor: theme.palette.primary.color6,
           }}
         >

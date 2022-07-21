@@ -1,1 +1,2 @@
 export const GET_NEW_ARRIVALS = 'GET_NEW_ARRIVALS';
+export const SEARCH_PRODUCTS = 'SEARCH_PRODUCTS';

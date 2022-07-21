@@ -1,4 +1,4 @@
-import { GET_NEW_ARRIVALS } from "../constants/filterConstants"
+import { GET_NEW_ARRIVALS, SEARCH_PRODUCTS } from "../constants/filterConstants"
 
 const INITIAL_STATE = {
     newArrivals: []
@@ -10,6 +10,11 @@ const filterReducer = (state=INITIAL_STATE, action) => {
             return {
                 newArrivals: [...action.payload]
             }
+        case SEARCH_PRODUCTS:
+            return {
+                ...state,
+                search: action.payload,
+              };
         
         default:
             return state;
