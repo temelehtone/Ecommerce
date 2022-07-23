@@ -15,7 +15,7 @@ export const createCategory = async (req, res) => {
     } catch (error) {
         console.log("Category create error:", error);
         res.status(500).json({
-            errorMessage: "Something went wrong, please try again later."
+            errorMessage: "SOMETHING_WENT_WRONG"
         })
     }
     
@@ -28,7 +28,7 @@ export const getCategories = async (req, res) => {
     } catch (error) {
         console.log("Categories get error:", error);
         res.status(500).json({
-            errorMessage: "Something went wrong, please try again later."
+            errorMessage: "SOMETHING_WENT_WRONG"
         })
     }
 }
@@ -43,7 +43,7 @@ export const getCategory = async (req, res) => {
     } catch (error) {
         console.log("Category get error:", error);
         res.status(500).json({
-            errorMessage: "Something went wrong, please try again later."
+            errorMessage: "SOMETHING_WENT_WRONG"
         })
     }
 }

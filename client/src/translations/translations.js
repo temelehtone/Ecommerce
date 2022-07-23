@@ -129,6 +129,10 @@ const translations = {
     en: 'Edit',
     fi: 'Muokkaa'
   },
+  EDIT_PRODUCT: {
+    en: 'Edit product',
+    fi: 'Muokkaa tuotetta'
+  },
   DELETE: {
     en: 'Delete',
     fi: 'Poista'
@@ -229,6 +233,10 @@ const translations = {
   PRODUCTS: {
     en: 'Products',
     fi: 'Tuotteet'
+  },
+  GO_BACK: {
+    en: 'Go back',
+    fi: 'Mene takaisin'
   },
 
 

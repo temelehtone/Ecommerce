@@ -37,7 +37,7 @@ export const createProduct = async (req, res) => {
   } catch (error) {
     console.log("Product create error:", error);
     res.status(500).json({
-      errorMessage: "Something went wrong, please try again later.",
+      errorMessage: "SOMETHING_WENT_WRONG",
     });
   }
 };
@@ -54,7 +54,7 @@ export const getProducts = async (req, res) => {
   } catch (error) {
     console.log("Product get error:", error);
     res.status(500).json({
-      errorMessage: "Something went wrong, please try again later.",
+      errorMessage: "SOMETHING_WENT_WRONG",
     });
   }
 };
@@ -74,7 +74,7 @@ export const getProduct = async (req, res) => {
   } catch (error) {
     console.log("Product get error:", error);
     res.status(500).json({
-      errorMessage: "Something went wrong, please try again later.",
+      errorMessage: "SOMETHING_WENT_WRONG",
     });
   }
 };
@@ -98,7 +98,7 @@ export const getProductsByCategory = async (req, res) => {
   } catch (error) {
     console.log("Product getProductsByCategory error:", error);
     res.status(500).json({
-      errorMessage: "Something went wrong, please try again later.",
+      errorMessage: "SOMETHING_WENT_WRONG",
     });
   }
 };
@@ -120,7 +120,7 @@ export const deleteProduct = async (req, res) => {
   } catch (error) {
     console.log("Delete product error:", error);
     res.status(500).json({
-      errorMessage: "Something went wrong, please try again later.",
+      errorMessage: "SOMETHING_WENT_WRONG",
     });
   }
 };
@@ -151,7 +151,7 @@ export const editProduct = async (req, res) => {
   } catch (error) {
     console.log("Product edit error:", error);
     res.status(500).json({
-      errorMessage: "Something went wrong, please try again later.",
+      errorMessage: "SOMETHING_WENT_WRONG",
     });
   }
 }

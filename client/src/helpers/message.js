@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import { Alert } from "@mui/material";
 
 import { clearMessages } from "../redux/actions/messageActions"
+import { getTranslatedText as t } from "../translations/index"
 // Redux
 import { useDispatch } from "react-redux"
 
@@ -31,7 +32,7 @@ export const ErrorAlert = ({ message }) => {
           dispatch(clearMessages())
         }}
       >
-        {message}
+        {t(message)}
       </Alert>
     );
   }
@@ -64,7 +65,7 @@ export const SuccessAlert = ({ message }) => {
           dispatch(clearMessages())
         }}
       >
-        {message}
+        {t(message)}
       </Alert>
     );
   }

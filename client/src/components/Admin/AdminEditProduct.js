@@ -17,7 +17,7 @@ import { ButtonBox, theme } from "../styles/styles";
 // Helpers
 import { productFormValidator } from "../../helpers/productFormValidator";
 import { ErrorAlert } from "../../helpers/message";
-
+import { getTranslatedText as t } from "../../translations";
 // Redux
 import { useDispatch, useSelector } from "react-redux";
 import { editProduct, getProduct } from "../../redux/actions/productActions";
@@ -105,15 +105,15 @@ const AdminEditProduct = () => {
           id="modal-modal-title"
           variant="h4"
           component="h4"
-          sx={{ ml: 3, width: "100%",}}
+          sx={{ ml: 3, width: "100%", color: "white"}}
         >
-          Edit Product
+          {t('EDIT_PRODUCT')}
         </Typography>
       </Box>
       <>
         <Grid container spacing={2} sx={{ mb: 2, mt: 1, justifyContent: "center" }} >
           <Grid item xs={11} sm={11} sx={{ ml: 1 }}>
-            <InputLabel htmlFor="productImage">Image</InputLabel>
+            <InputLabel htmlFor="productImage">{t('IMAGE')}</InputLabel>
             <Input
               accept="image/*"
               style={{ display: "none" }}
@@ -138,7 +138,7 @@ const AdminEditProduct = () => {
                   height: 50,
                 }}
               >
-                Choose File
+                {t('BROWSE')}
               </Button>
               {productData.productImage && productData.productImage.name ? (
                 <p style={{ fontSize: "12px" }}>
@@ -158,7 +158,7 @@ const AdminEditProduct = () => {
             </label>
           </Grid>
           <Grid item xs={11} sx={{ ml: 1 }}>
-            <InputLabel htmlFor="productName">Name</InputLabel>
+            <InputLabel htmlFor="productName">{t('NAME')}</InputLabel>
             <TextField
               onChange={handleProductChange}
               fullWidth
@@ -172,7 +172,7 @@ const AdminEditProduct = () => {
             xs={11}
             sx={{ display: "flex", flexDirection: "column", ml: 1 }}
           >
-            <InputLabel htmlFor="productDescription">Description</InputLabel>
+            <InputLabel htmlFor="productDescription">{t('DESCRIPTION')}</InputLabel>
             <TextareaAutosize
               onChange={handleProductChange}
               id="productDescription"
@@ -182,7 +182,7 @@ const AdminEditProduct = () => {
             />
           </Grid>
           <Grid item xs={11} sx={{ ml: 1 }}>
-            <InputLabel htmlFor="productPrice">Price</InputLabel>
+            <InputLabel htmlFor="productPrice">{t('PRICE')}</InputLabel>
             <TextField
               onChange={handleProductChange}
               fullWidth
@@ -193,7 +193,7 @@ const AdminEditProduct = () => {
             />
           </Grid>
           <Grid item xs={11} sm={6} sx={{ ml: 1 }}>
-            <InputLabel htmlFor="productCategory">Category</InputLabel>
+            <InputLabel htmlFor="productCategory">{t('CATEGORY')}</InputLabel>
             <Select
               labelId="productCategory"
               id="productCategory"
@@ -204,7 +204,7 @@ const AdminEditProduct = () => {
               displayEmpty
             >
               <MenuItem disabled value="Choose One...">
-                Choose One...
+              {t('CHOOSE_ONE')}
               </MenuItem>
               {categories &&
                 categories.map((c) => (
@@ -226,7 +226,7 @@ const AdminEditProduct = () => {
               }),
             ]}
           >
-            <InputLabel htmlFor="productQuantity">Quantity</InputLabel>
+            <InputLabel htmlFor="productQuantity">{t('QUANTITY')}</InputLabel>
             <TextField
               onChange={handleProductChange}
               id="productQuantity"
@@ -247,7 +247,7 @@ const AdminEditProduct = () => {
             }}
             onClick={() => navigate("/admin/dashboard")}
           >
-            Go Back
+            {t('GO_BACK')}
           </Button>
           <Button
             sx={{
@@ -256,7 +256,7 @@ const AdminEditProduct = () => {
             }}
             type="submit"
           >
-            Submit
+            {t('SUBMIT')}
           </Button>
         </ButtonBox>
       </>

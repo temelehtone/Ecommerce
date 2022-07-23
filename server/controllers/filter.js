@@ -18,7 +18,7 @@ export const getNewArrivals = async (req, res) => {
   } catch (error) {
     console.log("GetNewArrivals error:", error);
     res.status(500).json({
-      errorMessage: "Something went wrong, please try again later.",
+      errorMessage: "SOMETHING_WENT_WRONG",
     });
   }
 };
@@ -47,7 +47,7 @@ export const searchProducts = async (req, res) => {
   } catch (error) {
     console.log("SearchProducts error:", error);
     res.status(500).json({
-      errorMessage: "Something went wrong, please try again later.",
+      errorMessage: "SOMETHING_WENT_WRONG",
     });
   }
 };
