@@ -31,7 +31,7 @@ export const searchProducts = async (req, res) => {
   if (searchTerm === "")
     return res
       .status(204)
-      .json({ searchResults: {}, successMessage: "No Content." });
+      .json({ searchResults: {}, successMessage: "NO_CONTENT" });
 
   try {
   const searchResults = await Product.find({ "productName": { $regex: searchTerm, $options: 'i' } })

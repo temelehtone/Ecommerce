@@ -238,6 +238,42 @@ const translations = {
     en: 'Go back',
     fi: 'Mene takaisin'
   },
+  USER_ALREADY_EXISTS: {
+    en: 'User already exists with this email address.',
+    fi: "Käyttäjä on jo olemassa tällä sähköpostiosoitteella."
+  },
+  PASSWORDS_DONT_MATCH: {
+    en: "Passwords don't match.",
+    fi: "Salasanat eivät täsmää."
+  },
+  SIGNED_UP_SUCCESSFULLY: {
+    en: "Signed up successfully.",
+    fi: "Rekisteröityminen onnistui." 
+  },
+  LOGGED_IN_SUCCESSFULLY: {
+    en: "You logged in successfully!",
+    fi: "Kirjautuminen onnistui!" 
+  },
+  SOMETHING_WENT_WRONG: {
+    en: "Something went wrong, please try again later.",
+    fi: "Jotain meni vikaan, yritä uudelleen myöhemmin."
+  },
+  INVALID_CREDENTIALS: {
+    en: "Invalid credentials.",
+    fi: "Väärä salasana tai sähköpostiosoite."
+  },
+  NO_CONTENT: {
+    en: "No content.",
+    fi: "Ei sisältöä."
+  },
+  PRODUCT_DELETED: {
+    en: "Product deleted successfully.",
+    fi: "Tuote poistettu onnistuneesti."
+  },
+  PRDODUCT_EDITED: {
+    en: "Product edited successfully.",
+    fi: "Tuotetta muokattu onnistuneesti."
+  }
 
 
 };

@@ -69,7 +69,7 @@ export const getProduct = async (req, res) => {
       .status(200)
       .json({ product });
     } else {
-      res.status(404).json({ errorMessage: "Product not found." }); 
+      res.status(404).json({ errorMessage: "PRODUCT_NOT_FOUND" }); 
     }
   } catch (error) {
     console.log("Product get error:", error);
@@ -115,7 +115,7 @@ export const deleteProduct = async (req, res) => {
 
     res.status(200).json({
       deletedProduct,
-      successMessage: "Product deleted successfully.",
+      successMessage: "PRODUCT_DELETED",
     });
   } catch (error) {
     console.log("Delete product error:", error);
@@ -146,7 +146,7 @@ export const editProduct = async (req, res) => {
        
     res
       .status(200)
-      .json({ successMessage: "Product edited successfully." });
+      .json({ successMessage: "PRODUCT_EDITED" });
 
   } catch (error) {
     console.log("Product edit error:", error);
